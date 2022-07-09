@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 
 const Setting = {
-  FILM_CARD_COUNT: 3,
+  FILM_CARD_COUNT: 9,
 };
 
 const root = ReactDOM.createRoot(

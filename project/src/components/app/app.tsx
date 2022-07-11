@@ -5,23 +5,23 @@ type AppProps = {
   filmCardGenre: string;
   filmCardYear: number;
   filmCardCount: number;
-  smallFilmCardCount: number;
+  filmsList: string[];
 }
 
 function App (
   {filmCardCount,
-    smallFilmCardCount,
     filmCardTitle,
     filmCardGenre,
-    filmCardYear
+    filmCardYear,
+    filmsList
   }: AppProps): JSX.Element {
 
   return (
     <Main filmCardCount={filmCardCount}
-      smallFilmCardCount={smallFilmCardCount}
       filmCardTitle={filmCardTitle}
       filmCardGenre={filmCardGenre }
       filmCardYear={filmCardYear}
+      filmsList={filmsList}
     />
   );
 }

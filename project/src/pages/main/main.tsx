@@ -1,15 +1,15 @@
-import SmallFilmCard from '../../components/small-film-card';
+import SmallFilmCard from '../../components/small-film-card/small-film-card';
 
 type MainProps = {
   filmCardTitle: string;
   filmCardGenre: string;
   filmCardYear: number;
   filmCardCount: number;
-  smallFilmCardCount: number;
+  filmsList: string[];
 }
 
-function Main({ filmCardTitle, filmCardGenre, filmCardYear, filmCardCount, smallFilmCardCount }: MainProps): JSX.Element {
-  const smallFilmCards = [...Array(smallFilmCardCount)].map((_e, index: number) => <SmallFilmCard key={index} />);
+function Main({ filmCardTitle, filmCardGenre, filmCardYear, filmCardCount, filmsList }: MainProps): JSX.Element {
+  const smallFilmCards = [...filmsList].map((item: string, index: number) => <SmallFilmCard key={item} />);
 
   return (
     <>

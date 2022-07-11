@@ -1,4 +1,4 @@
-export const FilmsList = [
+export const filmsList = [
   'Fantastic Beasts: The Crimes of Grindelwald',
   'Bohemian Rhapsody',
   'Macbeth',

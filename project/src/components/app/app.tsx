@@ -5,7 +5,6 @@ type AppProps = {
   filmCardGenre: string;
   filmCardYear: number;
   filmCardCount: number;
-  filmsList: string[];
 }
 
 function App (
@@ -13,7 +12,6 @@ function App (
     filmCardTitle,
     filmCardGenre,
     filmCardYear,
-    filmsList
   }: AppProps): JSX.Element {
 
   return (
@@ -21,7 +19,6 @@ function App (
       filmCardTitle={filmCardTitle}
       filmCardGenre={filmCardGenre }
       filmCardYear={filmCardYear}
-      filmsList={filmsList}
     />
   );
 }

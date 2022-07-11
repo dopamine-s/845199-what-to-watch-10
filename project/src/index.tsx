@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { FilmsList } from './components/small-film-card/small-film-card-info';
 
 const CountSetting = {
   FILM_CARD_COUNT: 9,
@@ -24,7 +23,6 @@ root.render(
       filmCardTitle={FilmInfo.FILM_CARD_TITLE}
       filmCardGenre={FilmInfo.FILM_CARD_GENRE}
       filmCardYear={FilmInfo.FILM_CARD_YEAR}
-      filmsList={FilmsList}
     />
   </React.StrictMode>,
 );

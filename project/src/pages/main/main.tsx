@@ -1,14 +1,14 @@
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
+import { filmsList } from './data';
 
 type MainProps = {
   filmCardTitle: string;
   filmCardGenre: string;
   filmCardYear: number;
   filmCardCount: number;
-  filmsList: string[];
 }
 
-function Main({ filmCardTitle, filmCardGenre, filmCardYear, filmCardCount, filmsList }: MainProps): JSX.Element {
+function Main({ filmCardTitle, filmCardGenre, filmCardYear, filmCardCount }: MainProps): JSX.Element {
   const smallFilmCards = [...filmsList].map((item: string, index: number) => <SmallFilmCard key={item} />);
 
   return (

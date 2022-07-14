@@ -1,6 +1,12 @@
 import Logo from '../../components/logo/logo';
+import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 export default function Film(): JSX.Element {
+  const params = useParams();
+  // eslint-disable-next-line no-console
+  console.log(params);
+
   return (
     <>
       <section className="film-card film-card--full">
@@ -48,7 +54,7 @@ export default function Film(): JSX.Element {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <a href="add-review.html" className="btn film-card__button">Add review</a>
+                <Link className="btn film-card__button" to="review">Add review</Link>
               </div>
             </div>
           </div>

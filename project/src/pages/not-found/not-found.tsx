@@ -21,7 +21,7 @@ export default function NotFound(): JSX.Element {
             marginLeft: 'auto',
             marginRight: 'auto',
             marginTop: '300px',
-            padding: '60px',
+            padding: '50px 80px',
           }}
 
         >

@@ -7,6 +7,7 @@ import Film from '../../pages/film/film';
 import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import NotFound from '../../pages/not-found/not-found';
+import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {
   filmCardTitle: string;
@@ -25,6 +26,7 @@ function App (
   return (
     <BrowserRouter>
       <Routes>
+
         <Route
           path={AppRoute.Main}
           element={
@@ -36,42 +38,59 @@ function App (
             />
           }
         />
+
         <Route
           path={AppRoute.SignIn}
           element={
             <SignIn />
           }
         />
+
         <Route
           path={AppRoute.MyList}
           element={
-            <MyList />
+            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+              <MyList />
+            </PrivateRoute>
           }
         />
+
         <Route
           path={AppRoute.Film}
-          element={
-            <Film />
-          }
-        />
-        <Route
-          path={AppRoute.AddReview}
-          element={
-            <AddReview />
-          }
-        />
+        >
+          <Route
+            path=':id'
+          >
+            <Route
+              index element={<Film />}
+            />
+            <Route
+              path={AppRoute.AddReview}
+              element={
+                <AddReview />
+              }
+            />
+          </Route>
+        </Route>
+
         <Route
           path={AppRoute.Player}
-          element={
-            <Player />
-          }
-        />
+        >
+          <Route
+            path=':id'
+            element={
+              <Player />
+            }
+          />
+        </Route>
+
         <Route
           path='*'
           element={
             <NotFound />
           }
         />
+
       </Routes>
     </BrowserRouter>
   );

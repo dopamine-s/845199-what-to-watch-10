@@ -18,5 +18,4 @@ export const filmsList = [
   'Dardjeeling Limited',
   'Orlando',
   'Mindhunter',
-  'Midnight Special',
 ];

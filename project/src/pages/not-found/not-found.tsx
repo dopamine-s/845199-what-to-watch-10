@@ -5,7 +5,7 @@ export default function NotFound(): JSX.Element {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
-        <Logo light={false} isNotMain />
+        <Logo light={false} />
       </header>
 
       <div className="user-page__content">
@@ -30,7 +30,7 @@ export default function NotFound(): JSX.Element {
       </div>
 
       <footer className="page-footer">
-        <Logo light isNotMain />
+        <Logo light />
 
         <div className="copyright">
           <p>© 2019 What to watch Ltd.</p>

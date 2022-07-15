@@ -4,7 +4,7 @@ export default function MyList(): JSX.Element {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
-        <Logo light={false} isNotMain />
+        <Logo light={false} />
 
         <h1 className="page-title user-page__title">My list <span className="user-page__film-count">9</span></h1>
         <ul className="user-block">
@@ -109,7 +109,7 @@ export default function MyList(): JSX.Element {
       </section>
 
       <footer className="page-footer">
-        <Logo light isNotMain />
+        <Logo light />
 
         <div className="copyright">
           <p>© 2019 What to watch Ltd.</p>

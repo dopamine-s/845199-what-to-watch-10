@@ -22,7 +22,7 @@ function Main({ filmCardTitle, filmCardGenre, filmCardYear, filmCardCount }: Mai
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header film-card__head">
-          <Logo light={false} isNotMain={false} />
+          <Logo light={false} />
 
           <ul className="user-block">
             <li className="user-block__item">
@@ -116,7 +116,7 @@ function Main({ filmCardTitle, filmCardGenre, filmCardYear, filmCardCount }: Mai
         </section>
 
         <footer className="page-footer">
-          <Logo light isNotMain={false} />
+          <Logo light />
 
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>

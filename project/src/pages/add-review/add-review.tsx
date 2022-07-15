@@ -11,7 +11,7 @@ export default function AddReview(): JSX.Element {
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header">
-          <Logo light={false} isNotMain />
+          <Logo light={false} />
 
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">

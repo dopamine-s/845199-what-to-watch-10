@@ -1,12 +1,7 @@
 import Logo from '../../components/logo/logo';
 import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
 
 export default function Film(): JSX.Element {
-  const params = useParams();
-  // eslint-disable-next-line no-console
-  console.log(params);
-
   return (
     <>
       <section className="film-card film-card--full">
@@ -18,7 +13,7 @@ export default function Film(): JSX.Element {
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header film-card__head">
-            <Logo light={false} isNotMain />
+            <Logo light={false} />
 
             <ul className="user-block">
               <li className="user-block__item">
@@ -147,7 +142,7 @@ export default function Film(): JSX.Element {
         </section>
 
         <footer className="page-footer">
-          <Logo light isNotMain />
+          <Logo light />
 
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>

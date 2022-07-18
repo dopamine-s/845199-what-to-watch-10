@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
+import { films } from './mocks/films';
 
 const CountSetting = {
   FILM_CARD_COUNT: 9,
@@ -23,6 +24,7 @@ root.render(
       filmCardTitle={FilmInfo.FILM_CARD_TITLE}
       filmCardGenre={FilmInfo.FILM_CARD_GENRE}
       filmCardYear={FilmInfo.FILM_CARD_YEAR}
+      films={films}
     />
   </React.StrictMode>,
 );

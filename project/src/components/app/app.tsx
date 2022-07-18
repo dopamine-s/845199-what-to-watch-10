@@ -8,12 +8,14 @@ import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
+import { Films } from '../../types/films';
 
 type AppProps = {
   filmCardTitle: string;
   filmCardGenre: string;
   filmCardYear: number;
   filmCardCount: number;
+  films: Films;
 }
 
 function App (
@@ -21,6 +23,7 @@ function App (
     filmCardTitle,
     filmCardGenre,
     filmCardYear,
+    films,
   }: AppProps): JSX.Element {
 
   return (

@@ -10,6 +10,8 @@ import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 import { Films } from '../../types/films';
 import FilmOverview from '../film-overview/film-overview';
+import FilmDetails from '../film-details/film-details';
+import FilmReviews from '../film-reviews/film-reviews';
 
 type AppProps = {
   filmCardTitle: string;
@@ -71,18 +73,29 @@ function App (
             element={<Film />}
           >
             <Route
-              path='overview'
-              element={
+              index element={
                 <FilmOverview />
               }
             />
             <Route
-              path={AppRoute.AddReview}
+              path='details'
               element={
-                <AddReview />
+                <FilmDetails />
+              }
+            />
+            <Route
+              path='comments'
+              element={
+                <FilmReviews />
               }
             />
           </Route>
+          <Route
+            path=':id/review'
+            element={
+              <AddReview />
+            }
+          />
         </Route>
 
         <Route

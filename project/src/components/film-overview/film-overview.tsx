@@ -1,7 +1,5 @@
 export default function FilmOverview(): JSX.Element {
   return (
-
-
     <div className="film-card__desc">
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
@@ -35,6 +33,5 @@ export default function FilmOverview(): JSX.Element {
         <p className="film-card__starring"><strong>Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other</strong></p>
       </div>
     </div>
-
   );
 }

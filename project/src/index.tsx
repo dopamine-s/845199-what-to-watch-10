@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import { films } from './mocks/films';
 
-const CountSetting = {
-  FILM_CARD_COUNT: 9,
-};
+const CountSetting = films.length;
 
 const FilmInfo = {
   FILM_CARD_TITLE: 'The Grand Budapest Hotel',
@@ -20,7 +18,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App
-      filmCardCount={CountSetting.FILM_CARD_COUNT}
+      filmCardCount={CountSetting}
       filmCardTitle={FilmInfo.FILM_CARD_TITLE}
       filmCardGenre={FilmInfo.FILM_CARD_GENRE}
       filmCardYear={FilmInfo.FILM_CARD_YEAR}

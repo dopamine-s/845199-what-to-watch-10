@@ -9,6 +9,7 @@ import Player from '../../pages/player/player';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 import { Films } from '../../types/films';
+import FilmOverview from '../film-overview/film-overview';
 
 type AppProps = {
   filmCardTitle: string;
@@ -38,6 +39,7 @@ function App (
               filmCardTitle={filmCardTitle}
               filmCardGenre={filmCardGenre}
               filmCardYear={filmCardYear}
+              films={films}
             />
           }
         />
@@ -52,8 +54,11 @@ function App (
         <Route
           path={AppRoute.MyList}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <MyList />
+            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <MyList
+                filmCardCount={filmCardCount}
+                films={films}
+              />
             </PrivateRoute>
           }
         />
@@ -63,9 +68,13 @@ function App (
         >
           <Route
             path=':id'
+            element={<Film />}
           >
             <Route
-              index element={<Film />}
+              path='overview'
+              element={
+                <FilmOverview />
+              }
             />
             <Route
               path={AppRoute.AddReview}
@@ -82,7 +91,9 @@ function App (
           <Route
             path=':id'
             element={
-              <Player />
+              <Player
+                films={films}
+              />
             }
           />
         </Route>

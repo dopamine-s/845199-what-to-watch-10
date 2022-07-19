@@ -1,17 +1,16 @@
-import SmallFilmCard from '../../components/small-film-card/small-film-card';
+import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
-import { filmsList } from './data';
+import { Films } from '../../types/films';
 
 type MainProps = {
   filmCardTitle: string;
   filmCardGenre: string;
   filmCardYear: number;
   filmCardCount: number;
+  films: Films;
 }
 
-function Main({ filmCardTitle, filmCardGenre, filmCardYear, filmCardCount }: MainProps): JSX.Element {
-  const smallFilmCards = filmsList.map((item: string, index: number) => <SmallFilmCard key={item} />);
-
+export default function Main({ filmCardTitle, filmCardGenre, filmCardYear, filmCardCount, films }: MainProps): JSX.Element {
   return (
     <>
       <section className="film-card">
@@ -106,9 +105,7 @@ function Main({ filmCardTitle, filmCardGenre, filmCardYear, filmCardCount }: Mai
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {smallFilmCards}
-          </div>
+          <FilmsList films={films}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -126,5 +123,3 @@ function Main({ filmCardTitle, filmCardGenre, filmCardYear, filmCardCount }: Mai
     </>
   );
 }
-
-export default Main;

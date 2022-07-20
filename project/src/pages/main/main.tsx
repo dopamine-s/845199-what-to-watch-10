@@ -1,16 +1,19 @@
 import FilmsList from '../../components/films-list/films-list';
+import { useNavigate } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import { Films } from '../../types/films';
+import { AppRoute } from '../../constants';
 
 type MainProps = {
   filmCardTitle: string;
   filmCardGenre: string;
   filmCardYear: number;
-  filmCardCount: number;
   films: Films;
 }
 
-export default function Main({ filmCardTitle, filmCardGenre, filmCardYear, filmCardCount, films }: MainProps): JSX.Element {
+export default function Main({ filmCardTitle, filmCardGenre, filmCardYear, films }: MainProps): JSX.Element {
+  const navigate = useNavigate();
+
   return (
     <>
       <section className="film-card">
@@ -25,7 +28,7 @@ export default function Main({ filmCardTitle, filmCardGenre, filmCardYear, filmC
 
           <ul className="user-block">
             <li className="user-block__item">
-              <div className="user-block__avatar">
+              <div className="user-block__avatar" onClick={() => navigate(AppRoute.MyList)}>
                 <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
               </div>
             </li>
@@ -60,7 +63,7 @@ export default function Main({ filmCardTitle, filmCardGenre, filmCardYear, filmC
                     <use xlinkHref="#add"></use>
                   </svg>
                   <span>My list</span>
-                  <span className="film-card__count">{filmCardCount}</span>
+                  <span className="film-card__count">9</span>
                 </button>
               </div>
             </div>

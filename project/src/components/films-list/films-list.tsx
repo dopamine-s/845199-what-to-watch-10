@@ -5,7 +5,7 @@ type FilmsListProps = {
   films: Films
 }
 
-export default function FilmsList({films}: FilmsListProps): JSX.Element {
+export default function FilmsList({ films }: FilmsListProps): JSX.Element {
   const filmCards = films.map((film) => <FilmCard key={film.id} film={film} />);
 
   return (

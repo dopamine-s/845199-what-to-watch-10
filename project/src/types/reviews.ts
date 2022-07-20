@@ -7,5 +7,13 @@ export type FilmReview = {
   comment: string;
   date: string;
   id: number;
+  rating: number;
   user: User;
 }
+
+export type FilmReviews = {
+  filmId: number;
+  reviews: FilmReview[];
+}
+
+export type FilmsReviews = FilmReviews[];

@@ -9,6 +9,7 @@ import Player from '../../pages/player/player';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 import { Films } from '../../types/films';
+import { FilmsReviews } from '../../types/reviews';
 import FilmOverview from '../film-overview/film-overview';
 import FilmDetails from '../film-details/film-details';
 import FilmReviews from '../film-reviews/film-reviews';
@@ -17,16 +18,16 @@ type AppProps = {
   filmCardTitle: string;
   filmCardGenre: string;
   filmCardYear: number;
-  filmCardCount: number;
   films: Films;
+  filmsReviews: FilmsReviews;
 }
 
 function App (
-  {filmCardCount,
-    filmCardTitle,
+  { filmCardTitle,
     filmCardGenre,
     filmCardYear,
     films,
+    filmsReviews
   }: AppProps): JSX.Element {
 
   return (
@@ -37,7 +38,6 @@ function App (
           path={AppRoute.Main}
           element={
             <Main
-              filmCardCount={filmCardCount}
               filmCardTitle={filmCardTitle}
               filmCardGenre={filmCardGenre}
               filmCardYear={filmCardYear}
@@ -58,7 +58,6 @@ function App (
           element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
               <MyList
-                filmCardCount={filmCardCount}
                 films={films}
               />
             </PrivateRoute>
@@ -70,30 +69,42 @@ function App (
         >
           <Route
             path=':id'
-            element={<Film />}
+            element={
+              <Film
+                films={films}
+              />
+            }
           >
             <Route
               index element={
-                <FilmOverview />
+                <FilmOverview
+                  films={films}
+                />
               }
             />
             <Route
               path='details'
               element={
-                <FilmDetails />
+                <FilmDetails
+                  films={films}
+                />
               }
             />
             <Route
-              path='comments'
+              path='reviews'
               element={
-                <FilmReviews />
+                <FilmReviews
+                  filmsReviews={filmsReviews}
+                />
               }
             />
           </Route>
           <Route
             path=':id/review'
             element={
-              <AddReview />
+              <AddReview
+                films={films}
+              />
             }
           />
         </Route>

@@ -3,17 +3,17 @@ import FilmsList from '../../components/films-list/films-list';
 import { Films } from '../../types/films';
 
 type MyListProps = {
-  filmCardCount: number;
   films: Films;
 }
 
-export default function MyList({ filmCardCount, films }: MyListProps): JSX.Element {
+export default function MyList({ films }: MyListProps): JSX.Element {
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
         <Logo light={false} />
 
-        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{filmCardCount}</span></h1>
+        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">9</span></h1>
         <ul className="user-block">
           <li className="user-block__item">
             <div className="user-block__avatar">

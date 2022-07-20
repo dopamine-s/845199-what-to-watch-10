@@ -6,7 +6,7 @@ type PlayerProps = {
   films: Films
 }
 
-export default function Player({films}: PlayerProps): JSX.Element {
+export default function Player({ films }: PlayerProps): JSX.Element {
   const params = useParams();
   const navigate = useNavigate();
   const id = params.id;

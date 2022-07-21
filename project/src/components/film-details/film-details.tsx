@@ -43,7 +43,15 @@ export default function FilmDetails({ films }: FilmDetailsProps): JSX.Element {
           <p className="film-card__details-item">
             <strong className="film-card__details-name">Starring</strong>
             <span className="film-card__details-value">
-              {film.starring.map((actor) => <span key={actor}>{actor}</span>)}
+              {film.starring.map((actor, index) => {
+                const isLastElement = index === film.starring.length - 1;
+
+                return (
+                  <>
+                    <span key={actor}>{actor}</span>{!isLastElement && film.starring.length > 1 ? <>, <br /></> : null}
+                  </>
+                );
+              })}
             </span>
           </p>
         </div>

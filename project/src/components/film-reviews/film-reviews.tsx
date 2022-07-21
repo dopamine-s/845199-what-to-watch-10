@@ -36,11 +36,11 @@ export default function FilmReviews({ filmsReviews }: FilmReviewsProps): JSX.Ele
 
       <div className="film-card__reviews film-card__row">
         <div className="film-card__reviews-col">
-          {filmReviews.reviews.slice(0, 3).map((review) => <Review key={review.id} filmReview={review} />)}
+          {filmReviews.reviews.slice(0, filmReviews.reviews.length / 2).map((review) => <Review key={review.id} filmReview={review} />)}
         </div>
 
         <div className="film-card__reviews-col">
-          {filmReviews.reviews.slice(3, 6).map((review) => <Review key={review.id} filmReview={review} />)}
+          {filmReviews.reviews.slice(filmReviews.reviews.length / 2, ).map((review) => <Review key={review.id} filmReview={review} />)}
         </div>
       </div>
 

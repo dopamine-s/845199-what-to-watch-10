@@ -235,7 +235,7 @@ export const filmsReviews: FilmsReviews = [
         }
       },
       {
-        comment: 'I didn\'t find it amusing, and while I can appreciate the creativity, it\'s an hour and 40 minutes I wish I could take back.',
+        comment: 'I didn\'t find it amusing, and while I can appreciate the creativity, it\'s 2 hours I wish I could take back.',
         date: 'Fri Jul 15 2022 11:33:22 GMT+0300 (Москва, стандартное время)',
         id: 3,
         rating: 6.2,

@@ -47,7 +47,7 @@ export default function FilmOverview({ films }: FilmOverviewProps): JSX.Element 
 
         <p className="film-card__director"><strong>{`Director: ${film.director}`}</strong></p>
 
-        <p className="film-card__starring"><strong>{`Starring: ${film.starring}`}</strong></p>
+        <p className="film-card__starring"><strong>{`Starring: ${film.starring.join(', ')}`}</strong></p>
       </div>
     </div>
   );

@@ -1,11 +1,5 @@
 import { Fragment, useState } from 'react';
 
-type Event = {
-  target: {
-    value: string;
-  }
-}
-
 export default function AddReviewForm() {
   const [userRating, setUserRating] = useState(8);
   const [userReview, setUserReview] = useState('');
@@ -14,9 +8,14 @@ export default function AddReviewForm() {
   // eslint-disable-next-line no-console
   console.log(userRating);
 
-  const textareaChangeHandle = (evt: Event) => {
-    const value = evt.target.value;
-    setUserReview(value);
+  const textChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const reviewText = event.target.value;
+    setUserReview(reviewText);
+  };
+
+  const ratingChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const rating = Number(event.target.value);
+    setUserRating(rating);
   };
 
   return (
@@ -24,7 +23,7 @@ export default function AddReviewForm() {
       <div className="rating">
         <div className="rating__stars">
           {
-            Array.from({ length: 10 }, (item, index) => index + 1)
+            Array.from({ length: 10 }, (_, index) => index + 1)
               .reverse()
               .map((number) => (
                 <Fragment key={number}>
@@ -33,7 +32,7 @@ export default function AddReviewForm() {
                     id={`star-${number}`}
                     type="radio" name="rating"
                     value={number}
-                    onChange={(evt) => setUserRating(Number(evt.target.value))}
+                    onChange= {ratingChangeHandler}
                     defaultChecked={number === userRating}
                   />
                   <label
@@ -50,7 +49,7 @@ export default function AddReviewForm() {
 
       <div className="add-review__text">
         <textarea
-          onChange={textareaChangeHandle}
+          onChange={textChangeHandler}
           value={userReview}
           className="add-review__textarea"
           name="review-text"

@@ -1,12 +1,12 @@
 import Logo from '../../components/logo/logo';
 import AddReviewForm from '../../components/add-review/add-review-form';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { Films } from '../../types/films';
+import { Film } from '../../types/films';
 import NotFound from '../not-found/not-found';
 import { AppRoute } from '../../constants';
 
 type AddReviewProps = {
-  films: Films;
+  films: Film[];
 }
 
 export default function AddReview( { films }: AddReviewProps): JSX.Element {
@@ -36,7 +36,7 @@ export default function AddReview( { films }: AddReviewProps): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link className="breadcrumbs__link" to={`../../films/${id}`}>{film.name}</Link>
+                <Link className="breadcrumbs__link" to={`${AppRoute.Film}/${id}`}>{film.name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <Link className="breadcrumbs__link" to=''>Add review</Link>

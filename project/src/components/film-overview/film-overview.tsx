@@ -1,10 +1,10 @@
-import { Films } from '../../types/films';
+import { Film } from '../../types/films';
 import { useParams, Link } from 'react-router-dom';
 import NotFound from '../../pages/not-found/not-found';
 import { getFilmRateLevel } from '../../utils/utils';
 
 type FilmOverviewProps = {
-  films: Films;
+  films: Film[];
 }
 
 export default function FilmOverview({ films }: FilmOverviewProps): JSX.Element {
@@ -45,7 +45,7 @@ export default function FilmOverview({ films }: FilmOverviewProps): JSX.Element 
       <div className="film-card__text">
         <p>{film.description}</p>
 
-        <p className="film-card__director"><strong>{`Director: ${film.director}`}</strong></p>
+        <p className="film-card__director"><strong>Director: {film.director}</strong></p>
 
         <p className="film-card__starring"><strong>{`Starring: ${film.starring.join(', ')}`}</strong></p>
       </div>

@@ -1,13 +1,13 @@
-import { FilmsReviews } from '../../types/reviews';
+import { FilmReviews } from '../../types/reviews';
 import Review from '../film-review/film-review';
 import { useParams, Link } from 'react-router-dom';
 import NotFound from '../../pages/not-found/not-found';
 
 type FilmReviewsProps = {
-  filmsReviews: FilmsReviews;
+  filmsReviews: FilmReviews[];
 }
 
-export default function FilmReviews({ filmsReviews }: FilmReviewsProps): JSX.Element {
+export default function SingleFilmReviews({ filmsReviews }: FilmReviewsProps): JSX.Element {
   const params = useParams();
   const id = params.id;
   const filmReviews = filmsReviews.find((singleFilmReviews) => String(singleFilmReviews.filmId) === id);

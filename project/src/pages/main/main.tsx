@@ -1,17 +1,17 @@
 import FilmsList from '../../components/films-list/films-list';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
-import { Films } from '../../types/films';
+import { Film } from '../../types/films';
+import { FilmInfo } from '../../types/film-info';
 import { AppRoute } from '../../constants';
 
 type MainProps = {
-  filmCardTitle: string;
-  filmCardGenre: string;
-  filmCardYear: number;
-  films: Films;
+  filmInfo: FilmInfo;
+  films: Film[];
 }
 
-export default function Main({ filmCardTitle, filmCardGenre, filmCardYear, films }: MainProps): JSX.Element {
+export default function Main({ filmInfo, films }: MainProps): JSX.Element {
+  const { filmCardTitle, filmCardYear, filmCardGenre} = filmInfo;
   const navigate = useNavigate();
 
   return (

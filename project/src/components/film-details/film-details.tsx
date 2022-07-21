@@ -1,10 +1,10 @@
-import { Films } from '../../types/films';
+import { Film } from '../../types/films';
 import { useParams, Link } from 'react-router-dom';
 import NotFound from '../../pages/not-found/not-found';
 import { getTimeFromMins } from '../../utils/utils';
 
 type FilmDetailsProps = {
-  films: Films
+  films: Film[]
 }
 
 export default function FilmDetails({ films }: FilmDetailsProps): JSX.Element {

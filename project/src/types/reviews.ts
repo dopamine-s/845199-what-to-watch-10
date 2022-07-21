@@ -15,5 +15,3 @@ export type FilmReviews = {
   filmId: number;
   reviews: FilmReview[];
 }
-
-export type FilmsReviews = FilmReviews[];

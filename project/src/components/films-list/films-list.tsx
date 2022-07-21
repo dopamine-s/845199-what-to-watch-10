@@ -1,17 +1,15 @@
 import FilmCard from '../../components/film-card/film-card';
-import { Films } from '../../types/films';
+import { Film } from '../../types/films';
 import { useState } from 'react';
 
 type FilmsListProps = {
-  films: Films
+  films: Film[]
 }
 
 export default function FilmsList({ films }: FilmsListProps): JSX.Element {
-  const [activeFilm, setActiveFilm] = useState <number | null> (null);
+  const [activeFilm, setActiveFilm] = useState<number | null>(null);
 
   const filmCardMouseOverHandler = (filmId: number): void => setActiveFilm(filmId);
-  // eslint-disable-next-line no-console
-  console.log(activeFilm);
 
   const filmCardMouseOutHandler = (): void => setActiveFilm(null);
 
@@ -20,7 +18,7 @@ export default function FilmsList({ films }: FilmsListProps): JSX.Element {
       <FilmCard
         key={film.id}
         film={film}
-        // activeFilm={activeFilm}
+        activeFilm={activeFilm}
         filmCardMouseOverHandler={filmCardMouseOverHandler}
         filmCardMouseOutHandler={filmCardMouseOutHandler}
       />

@@ -3,29 +3,26 @@ import { AppRoute, AuthorizationStatus } from '../../constants';
 import Main from '../../pages/main/main';
 import SignIn from '../../pages/sign-in/sign-in';
 import MyList from '../../pages/my-list/my-list';
-import Film from '../../pages/film/film';
+import FilmPage from '../../pages/film/film';
 import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
-import { Films } from '../../types/films';
-import { FilmsReviews } from '../../types/reviews';
+import { Film } from '../../types/films';
+import { FilmReviews } from '../../types/reviews';
+import { FilmInfo } from '../../types/film-info';
 import FilmOverview from '../film-overview/film-overview';
 import FilmDetails from '../film-details/film-details';
-import FilmReviews from '../film-reviews/film-reviews';
+import SingleFilmReviews from '../film-reviews/film-reviews';
 
 type AppProps = {
-  filmCardTitle: string;
-  filmCardGenre: string;
-  filmCardYear: number;
-  films: Films;
-  filmsReviews: FilmsReviews;
+  filmInfo: FilmInfo;
+  films: Film[];
+  filmsReviews: FilmReviews[];
 }
 
 function App (
-  { filmCardTitle,
-    filmCardGenre,
-    filmCardYear,
+  { filmInfo,
     films,
     filmsReviews
   }: AppProps): JSX.Element {
@@ -38,9 +35,7 @@ function App (
           path={AppRoute.Main}
           element={
             <Main
-              filmCardTitle={filmCardTitle}
-              filmCardGenre={filmCardGenre}
-              filmCardYear={filmCardYear}
+              filmInfo={filmInfo}
               films={films}
             />
           }
@@ -70,7 +65,7 @@ function App (
           <Route
             path=':id'
             element={
-              <Film
+              <FilmPage
                 films={films}
               />
             }
@@ -93,7 +88,7 @@ function App (
             <Route
               path='reviews'
               element={
-                <FilmReviews
+                <SingleFilmReviews
                   filmsReviews={filmsReviews}
                 />
               }

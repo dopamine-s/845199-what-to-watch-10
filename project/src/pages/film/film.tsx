@@ -1,14 +1,14 @@
 import Logo from '../../components/logo/logo';
 import { Link, Outlet, useParams, useNavigate } from 'react-router-dom';
-import { Films } from '../../types/films';
+import { Film } from '../../types/films';
 import NotFound from '../not-found/not-found';
 import { AppRoute } from '../../constants';
 
 type FilmProps = {
-  films: Films;
+  films: Film[];
 }
 
-export default function Film({ films }: FilmProps): JSX.Element {
+export default function FilmPage({ films }: FilmProps): JSX.Element {
   const navigate = useNavigate();
   const params = useParams();
   const id = params.id;

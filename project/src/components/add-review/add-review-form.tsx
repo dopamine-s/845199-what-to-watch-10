@@ -1,12 +1,10 @@
 import { Fragment, useState } from 'react';
 
 export default function AddReviewForm() {
-  const [userRating, setUserRating] = useState(8);
+  const maxRate = 10;
+  const defaultRate = 8;
+  const [userRating, setUserRating] = useState(defaultRate);
   const [userReview, setUserReview] = useState('');
-  // eslint-disable-next-line no-console
-  console.log(userReview);
-  // eslint-disable-next-line no-console
-  console.log(userRating);
 
   const textChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const reviewText = event.target.value;
@@ -23,16 +21,17 @@ export default function AddReviewForm() {
       <div className="rating">
         <div className="rating__stars">
           {
-            Array.from({ length: 10 }, (_, index) => index + 1)
+            Array.from({ length: maxRate }, (_, index) => index + 1)
               .reverse()
               .map((number) => (
                 <Fragment key={number}>
                   <input
                     className="rating__input"
                     id={`star-${number}`}
-                    type="radio" name="rating"
+                    type="radio"
+                    name="rating"
                     value={number}
-                    onChange= {ratingChangeHandler}
+                    onChange={ratingChangeHandler}
                     defaultChecked={number === userRating}
                   />
                   <label

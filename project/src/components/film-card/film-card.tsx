@@ -3,18 +3,20 @@ import { Film } from '../../types/films';
 
 type FilmCardProps = {
   film: Film;
-  // activeFilm: number | null;
+  activeFilm: number | null;
   filmCardMouseOverHandler: (id: number) => void;
   filmCardMouseOutHandler: () => void;
 }
 
-export default function FilmCard({ film, filmCardMouseOverHandler, filmCardMouseOutHandler }: FilmCardProps): JSX.Element {
+export default function FilmCard({ film, activeFilm, filmCardMouseOverHandler, filmCardMouseOutHandler }: FilmCardProps): JSX.Element {
   const { id, name, previewImage } = film;
   const navigate = useNavigate();
   const mouseOverHandler = (): void => filmCardMouseOverHandler(id);
 
   return (
-    <article className="small-film-card catalog__films-card" style={{ cursor: 'pointer'}} onClick={() => navigate(`/films/${film.id}`)}
+    <article className="small-film-card catalog__films-card"
+      style={{ cursor: 'pointer'}}
+      onClick={() => navigate(`/films/${film.id}`)}
       onMouseOver={mouseOverHandler}
       onMouseOut={filmCardMouseOutHandler}
     >

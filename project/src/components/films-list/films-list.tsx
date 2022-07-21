@@ -9,13 +9,11 @@ type FilmsListProps = {
 export default function FilmsList({ films }: FilmsListProps): JSX.Element {
   const [activeFilm, setActiveFilm] = useState <number | null> (null);
 
-  const handleFilmCardMouseOver = (filmId: number): void =>
-    setActiveFilm(filmId);
-    // eslint-disable-next-line no-console
+  const filmCardMouseOverHandler = (filmId: number): void => setActiveFilm(filmId);
+  // eslint-disable-next-line no-console
   console.log(activeFilm);
 
-  const handleFilmCardMouseOut = (): void =>
-    setActiveFilm(null);
+  const filmCardMouseOutHandler = (): void => setActiveFilm(null);
 
   const filmCards = films.map((film) =>
     (
@@ -23,8 +21,8 @@ export default function FilmsList({ films }: FilmsListProps): JSX.Element {
         key={film.id}
         film={film}
         // activeFilm={activeFilm}
-        handleFilmCardMouseOver={handleFilmCardMouseOver}
-        handleFilmCardMouseOut={handleFilmCardMouseOut}
+        filmCardMouseOverHandler={filmCardMouseOverHandler}
+        filmCardMouseOutHandler={filmCardMouseOutHandler}
       />
     ));
 

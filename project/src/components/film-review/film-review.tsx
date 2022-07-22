@@ -13,7 +13,12 @@ export default function Review({ filmReview }: FilmReviewProps): JSX.Element {
 
         <footer className="review__details">
           <cite className="review__author">{filmReview.user.name}</cite>
-          <time className="review__date" dateTime={getReviewDateTime(filmReview.date)}>{humanizeDayDate(filmReview.date)}</time>
+          <time
+            className="review__date"
+            dateTime={getReviewDateTime(filmReview.date)}
+          >
+            {humanizeDayDate(filmReview.date)}
+          </time>
         </footer>
       </blockquote>
 

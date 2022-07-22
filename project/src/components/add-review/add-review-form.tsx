@@ -1,9 +1,9 @@
 import { Fragment, useState } from 'react';
 
 export default function AddReviewForm() {
-  const maxRate = 10;
-  const defaultRate = 8;
-  const [userRating, setUserRating] = useState(defaultRate);
+  const MAX_RATE = 10;
+  const DEFAULT_RATE = 8;
+  const [userRating, setUserRating] = useState(DEFAULT_RATE);
   const [userReview, setUserReview] = useState('');
 
   const textChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -21,7 +21,7 @@ export default function AddReviewForm() {
       <div className="rating">
         <div className="rating__stars">
           {
-            Array.from({ length: maxRate }, (_, index) => index + 1)
+            Array.from({ length: MAX_RATE }, (_, index) => index + 1)
               .reverse()
               .map((number) => (
                 <Fragment key={number}>

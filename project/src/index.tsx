@@ -1,16 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-
-const CountSetting = {
-  FILM_CARD_COUNT: 9,
-};
-
-const FilmInfo = {
-  FILM_CARD_TITLE: 'The Grand Budapest Hotel',
-  FILM_CARD_GENRE: 'Drama',
-  FILM_CARD_YEAR: 2014,
-};
+import { films } from './mocks/films';
+import { filmsReviews } from './mocks/reviews';
+import { filmInfo } from './mocks/film-info';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -19,10 +12,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App
-      filmCardCount={CountSetting.FILM_CARD_COUNT}
-      filmCardTitle={FilmInfo.FILM_CARD_TITLE}
-      filmCardGenre={FilmInfo.FILM_CARD_GENRE}
-      filmCardYear={FilmInfo.FILM_CARD_YEAR}
+      filmInfo={filmInfo}
+      films={films}
+      filmsReviews={filmsReviews}
     />
   </React.StrictMode>,
 );

@@ -1,16 +1,18 @@
-import SmallFilmCard from '../../components/small-film-card/small-film-card';
+import FilmsList from '../../components/films-list/films-list';
+import { useNavigate } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
-import { filmsList } from './data';
+import { Film } from '../../types/films';
+import { FilmInfo } from '../../types/film-info';
+import { AppRoute } from '../../constants';
 
 type MainProps = {
-  filmCardTitle: string;
-  filmCardGenre: string;
-  filmCardYear: number;
-  filmCardCount: number;
+  filmInfo: FilmInfo;
+  films: Film[];
 }
 
-function Main({ filmCardTitle, filmCardGenre, filmCardYear, filmCardCount }: MainProps): JSX.Element {
-  const smallFilmCards = filmsList.map((item: string, index: number) => <SmallFilmCard key={item} />);
+export default function Main({ filmInfo, films }: MainProps): JSX.Element {
+  const { filmCardTitle, filmCardYear, filmCardGenre} = filmInfo;
+  const navigate = useNavigate();
 
   return (
     <>
@@ -26,7 +28,7 @@ function Main({ filmCardTitle, filmCardGenre, filmCardYear, filmCardCount }: Mai
 
           <ul className="user-block">
             <li className="user-block__item">
-              <div className="user-block__avatar">
+              <div className="user-block__avatar" onClick={() => navigate(AppRoute.MyList)}>
                 <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
               </div>
             </li>
@@ -61,7 +63,7 @@ function Main({ filmCardTitle, filmCardGenre, filmCardYear, filmCardCount }: Mai
                     <use xlinkHref="#add"></use>
                   </svg>
                   <span>My list</span>
-                  <span className="film-card__count">{filmCardCount}</span>
+                  <span className="film-card__count">9</span>
                 </button>
               </div>
             </div>
@@ -106,9 +108,7 @@ function Main({ filmCardTitle, filmCardGenre, filmCardYear, filmCardCount }: Mai
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {smallFilmCards}
-          </div>
+          <FilmsList films={films}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -126,5 +126,3 @@ function Main({ filmCardTitle, filmCardGenre, filmCardYear, filmCardCount }: Mai
     </>
   );
 }
-
-export default Main;

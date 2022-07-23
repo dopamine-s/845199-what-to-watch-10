@@ -36,11 +36,11 @@ export default function SingleFilmReviews({ filmsReviews }: FilmReviewsProps): J
 
       <div className="film-card__reviews film-card__row">
         <div className="film-card__reviews-col">
-          {filmReviews.reviews.slice(0, filmReviews.reviews.length / 2).map((review) => <Review key={review.id} filmReview={review} />)}
+          {filmReviews.reviews.filter((_, index) => index % 2 === 0).map((review) => <Review key={review.id} filmReview={review} />)}
         </div>
 
         <div className="film-card__reviews-col">
-          {filmReviews.reviews.slice(filmReviews.reviews.length / 2, ).map((review) => <Review key={review.id} filmReview={review} />)}
+          {filmReviews.reviews.filter((_, index) => index % 2 !== 0).map((review) => <Review key={review.id} filmReview={review} />)}
         </div>
       </div>
 

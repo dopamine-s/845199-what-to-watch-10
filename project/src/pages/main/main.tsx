@@ -1,9 +1,11 @@
 import FilmsList from '../../components/films-list/films-list';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import { Film } from '../../types/films';
 import { FilmInfo } from '../../types/film-info';
 import { AppRoute } from '../../constants';
+import { MY_LIST_COUNT} from '../../mocks/my-list-info';
 
 type MainProps = {
   filmInfo: FilmInfo;
@@ -13,6 +15,8 @@ type MainProps = {
 export default function Main({ filmInfo, films }: MainProps): JSX.Element {
   const { filmCardTitle, filmCardYear, filmCardGenre} = filmInfo;
   const navigate = useNavigate();
+  const [isAddedToMyList, setAddToMyList] = useState(false);
+  const [myListCount, setMyListCount] = useState(MY_LIST_COUNT);
 
   return (
     <>
@@ -58,12 +62,23 @@ export default function Main({ filmInfo, films }: MainProps): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
+                <button
+                  className="btn btn--list film-card__button"
+                  type="button"
+                  onClick={() => {
+                    setAddToMyList((prevState) => !prevState);
+                    isAddedToMyList ? setMyListCount(myListCount - 1 ) : setMyListCount(myListCount + 1 );
+                  }}
+                >
+                  {isAddedToMyList ?
+                    <svg viewBox="0 0 18 14" width="18" height="14">
+                      <use xlinkHref="#in-list"></use>
+                    </svg> :
+                    <svg viewBox="0 0 19 20" width="19" height="20">
+                      <use xlinkHref="#add"></use>
+                    </svg>}
                   <span>My list</span>
-                  <span className="film-card__count">9</span>
+                  <span className="film-card__count">{myListCount}</span>
                 </button>
               </div>
             </div>

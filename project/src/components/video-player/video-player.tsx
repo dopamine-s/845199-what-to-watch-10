@@ -30,7 +30,6 @@ export default function VideoPlayer({ activeFilm, film }: VideoPlayerProps): JSX
   return (
     <video
       className="player__video"
-      autoPlay
       muted
       loop
       src={film.videoLink}

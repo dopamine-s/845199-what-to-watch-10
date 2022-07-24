@@ -17,6 +17,9 @@ export default function Main({ filmInfo, films }: MainProps): JSX.Element {
   const navigate = useNavigate();
   const [isAddedToMyList, setAddToMyList] = useState(false);
   const [myListCount, setMyListCount] = useState(MY_LIST_COUNT);
+  const changeAddToMyListHandler = (): void => setAddToMyList((prevState) => !prevState);
+  const setMyListCountHandler = (isInMyList: boolean): void =>
+    isInMyList ? setMyListCount(myListCount - 1) : setMyListCount(myListCount + 1);
 
   return (
     <>
@@ -66,17 +69,21 @@ export default function Main({ filmInfo, films }: MainProps): JSX.Element {
                   className="btn btn--list film-card__button"
                   type="button"
                   onClick={() => {
-                    setAddToMyList((prevState) => !prevState);
-                    isAddedToMyList ? setMyListCount(myListCount - 1 ) : setMyListCount(myListCount + 1 );
+                    changeAddToMyListHandler();
+                    setMyListCountHandler(isAddedToMyList);
                   }}
                 >
                   {isAddedToMyList ?
-                    <svg viewBox="0 0 18 14" width="18" height="14">
-                      <use xlinkHref="#in-list"></use>
-                    </svg> :
-                    <svg viewBox="0 0 19 20" width="19" height="20">
-                      <use xlinkHref="#add"></use>
-                    </svg>}
+                    (
+                      <svg viewBox="0 0 18 14" width="18" height="14">
+                        <use xlinkHref="#in-list"></use>
+                      </svg>
+                    ) :
+                    (
+                      <svg viewBox="0 0 19 20" width="19" height="20">
+                        <use xlinkHref="#add"></use>
+                      </svg>
+                    )}
                   <span>My list</span>
                   <span className="film-card__count">{myListCount}</span>
                 </button>

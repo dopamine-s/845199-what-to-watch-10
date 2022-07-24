@@ -218,7 +218,7 @@ export const films: Film[] = [
     previewImage: 'img/white-sun-of-the-desert.jpg',
     backgroundImage: 'img/white-sun-of-the-desert.jpg',
     backgroundColor: '#f8ffce',
-    videoLink: 'https://upload.wikimedia.org/wikipedia/commons/0/06/Sintel_trailer-1080p.ogv',
+    videoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
     previewVideoLink: 'https://www.film.ru/sites/default/files/styles/thumb_1024x450/public/trailers_frame/sc12ale_1200.jpeg',
     description: 'Бесконечная пустыня. Боец Сухов, прикуривающий от динамитной шашки, нескладный Петруха с вечно заклинивающей трехлинейкой, обаятельный Верещагин с надоевшей черной икрой и знаменитыми песнями-балладами, ловкий Саид , злодей Абдулла со своей бандой, любознательная Гульчатай, играющая с черепахой.',
     rating: 8.0,

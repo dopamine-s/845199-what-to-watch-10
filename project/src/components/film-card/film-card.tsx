@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Film } from '../../types/films';
 import { AppRoute } from '../../constants';
+import VideoPlayer from '../../components/video-player/video-player';
 
 type FilmCardProps = {
   film: Film;
@@ -22,7 +23,13 @@ export default function FilmCard({ film, activeFilm, filmCardMouseOverHandler, f
       onMouseOut={filmCardMouseOutHandler}
     >
       <div className="small-film-card__image">
-        <img src={previewImage} alt={name} width="280" height="175" />
+        {activeFilm === id ? (
+          <VideoPlayer film={film}
+            activeFilm={activeFilm}
+          />
+        ) : (
+          <img src={previewImage} alt={name} width="280" height="175" />
+        )}
       </div>
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={`${AppRoute.Film}/${id}`}>{name}</Link>

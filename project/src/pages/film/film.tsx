@@ -17,9 +17,10 @@ export default function FilmPage({ films }: FilmProps): JSX.Element {
   const film = films.find((movie) => String(movie.id) === id);
   const [isAddedToMyList, setAddToMyList] = useState(false);
   const [myListCount, setMyListCount] = useState(MY_LIST_COUNT);
-  const changeAddToMyListHandler = (): void => setAddToMyList((prevState) => !prevState);
-  const setMyListCountHandler = (isInMyList: boolean):void =>
-    isInMyList ? setMyListCount(myListCount - 1) : setMyListCount(myListCount + 1);
+  const handleClick = (): void => {
+    setAddToMyList((prevState) => !prevState);
+    isAddedToMyList ? setMyListCount(myListCount - 1) : setMyListCount(myListCount + 1);
+  };
 
   if (!film) {
     return (
@@ -70,10 +71,7 @@ export default function FilmPage({ films }: FilmProps): JSX.Element {
                 <button
                   className="btn btn--list film-card__button"
                   type="button"
-                  onClick={() => {
-                    changeAddToMyListHandler();
-                    setMyListCountHandler(isAddedToMyList);
-                  }}
+                  onClick={handleClick}
                 >
                   {isAddedToMyList ?
                     (

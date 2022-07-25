@@ -14,10 +14,15 @@ export default function FilmCard({ film, activeFilm, filmCardMouseOverHandler, f
   const { id, name, previewImage } = film;
   const navigate = useNavigate();
   const mouseOverHandler = (): void => filmCardMouseOverHandler(id);
+  const articleStyle = {
+    cursor: 'pointer',
+    width: '280px',
+    height: '175px'
+  };
 
   return (
     <article className="small-film-card catalog__films-card"
-      style={{ cursor: 'pointer'}}
+      style={articleStyle}
       onClick={() => navigate(`${AppRoute.Film}/${id}`)}
       onMouseOver={mouseOverHandler}
       onMouseOut={filmCardMouseOutHandler}

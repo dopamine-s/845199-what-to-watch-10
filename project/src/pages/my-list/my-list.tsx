@@ -7,7 +7,6 @@ type MyListProps = {
 }
 
 export default function MyList({ films }: MyListProps): JSX.Element {
-
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -30,7 +29,9 @@ export default function MyList({ films }: MyListProps): JSX.Element {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__films-list">
-          <FilmsList films={films} />
+          <FilmsList
+            films={films}
+          />
         </div>
       </section>
 

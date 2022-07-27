@@ -9,6 +9,8 @@ import { MY_LIST_COUNT } from '../../mocks/my-list-info';
 import FilmsList from '../../components/films-list/films-list';
 import FilmTabs from '../../components/film-tabs.tsx/film-tabs';
 
+const MAX_GENRE_FILTER_COUNT = 4;
+
 type FilmProps = {
   films: Film[];
   filmsReviews: FilmReviews[];
@@ -24,6 +26,18 @@ export default function FilmPage({ films, filmsReviews }: FilmProps): JSX.Elemen
   const handleClick = (): void => {
     setAddToMyList((prevState) => !prevState);
     isAddedToMyList ? setMyListCount(myListCount - 1) : setMyListCount(myListCount + 1);
+  };
+
+  const getFilteredFilmsByGenre = () => {
+    if (film) {
+      const genre = film.genre;
+      if (genre) {
+        const filmsFilteredByGenreExceptSampleFilm = films.filter((movie) => movie.genre === genre).slice(0, MAX_GENRE_FILTER_COUNT).filter((movie) => movie.id !== film.id);
+        const filteredFilms = filmsFilteredByGenreExceptSampleFilm;
+        return filteredFilms;
+      }
+    }
+    return films;
   };
 
   if (!film) {
@@ -113,9 +127,7 @@ export default function FilmPage({ films, filmsReviews }: FilmProps): JSX.Elemen
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
           <FilmsList
-            id={film.id}
-            films={films}
-            genre={film.genre}
+            films={getFilteredFilmsByGenre()}
           />
         </section>
 

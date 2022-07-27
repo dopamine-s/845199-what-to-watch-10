@@ -1,16 +1,12 @@
 import { Film } from '../../types/films';
-import { useParams, Link } from 'react-router-dom';
 import NotFound from '../../pages/not-found/not-found';
 import { getFilmRateLevel } from '../../utils/utils';
 
 type FilmOverviewProps = {
-  films: Film[];
+  film: Film;
 }
 
-export default function FilmOverview({ films }: FilmOverviewProps): JSX.Element {
-  const params = useParams();
-  const id = params.id;
-  const film = films.find((movie) => String(movie.id) === id);
+export default function FilmOverview({ film }: FilmOverviewProps): JSX.Element {
 
   if (!film) {
     return (
@@ -19,21 +15,7 @@ export default function FilmOverview({ films }: FilmOverviewProps): JSX.Element 
   }
 
   return (
-    <div className="film-card__desc">
-      <nav className="film-nav film-card__nav">
-        <ul className="film-nav__list">
-          <li className="film-nav__item film-nav__item--active">
-            <Link className="film-nav__link" to=''>Overview</Link>
-          </li>
-          <li className="film-nav__item">
-            <Link className="film-nav__link" to='details'>Details</Link>
-          </li>
-          <li className="film-nav__item">
-            <Link className="film-nav__link" to='reviews'>Reviews</Link>
-          </li>
-        </ul>
-      </nav>
-
+    <>
       <div className="film-rating">
         <div className="film-rating__score">{film.rating}</div>
         <p className="film-rating__meta">
@@ -49,6 +31,6 @@ export default function FilmOverview({ films }: FilmOverviewProps): JSX.Element 
 
         <p className="film-card__starring"><strong>{`Starring: ${film.starring.join(', ')}`}</strong></p>
       </div>
-    </div>
+    </>
   );
 }

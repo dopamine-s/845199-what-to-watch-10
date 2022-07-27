@@ -11,9 +11,6 @@ import PrivateRoute from '../private-route/private-route';
 import { Film } from '../../types/films';
 import { FilmReviews } from '../../types/reviews';
 import { FilmInfo } from '../../types/film-info';
-import FilmOverview from '../film-overview/film-overview';
-import FilmDetails from '../film-details/film-details';
-import SingleFilmReviews from '../film-reviews/film-reviews';
 
 type AppProps = {
   filmInfo: FilmInfo;
@@ -67,32 +64,10 @@ function App (
             element={
               <FilmPage
                 films={films}
+                filmsReviews={filmsReviews}
               />
             }
           >
-            <Route
-              index element={
-                <FilmOverview
-                  films={films}
-                />
-              }
-            />
-            <Route
-              path='details'
-              element={
-                <FilmDetails
-                  films={films}
-                />
-              }
-            />
-            <Route
-              path='reviews'
-              element={
-                <SingleFilmReviews
-                  filmsReviews={filmsReviews}
-                />
-              }
-            />
           </Route>
           <Route
             path=':id/review'

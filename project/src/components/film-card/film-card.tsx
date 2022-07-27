@@ -17,7 +17,6 @@ export default function FilmCard({ film, activeFilm, filmCardMouseOverHandler, f
 
   return (
     <article className="small-film-card catalog__films-card"
-      style={{ cursor: 'pointer'}}
       onClick={() => navigate(`${AppRoute.Film}/${id}`)}
       onMouseOver={mouseOverHandler}
       onMouseOut={filmCardMouseOutHandler}

@@ -560,7 +560,8 @@ main {
     margin-bottom: 0; }
 
 .catalog__films-card {
-  width: calc((100% - 30px) / 4);
+  width: 280px;
+  cursor: pointer;
   margin-right: 10px;
   margin-bottom: 55px; }
   .catalog__films-card:nth-child(4n) {
@@ -863,6 +864,7 @@ main {
 
 .film-nav__link {
   display: block;
+  cursor: pointer;
   color: #EEE5B5;
   text-decoration: none;
   position: relative;

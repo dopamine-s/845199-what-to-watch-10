@@ -3,7 +3,7 @@ import { Film } from '../../types/films';
 import { useState } from 'react';
 
 type FilmsListProps = {
-  films: Film[]
+  films: Film[];
 }
 
 export default function FilmsList({ films }: FilmsListProps): JSX.Element {

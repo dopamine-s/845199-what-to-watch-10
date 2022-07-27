@@ -1,16 +1,22 @@
 import Logo from '../../components/logo/logo';
-import { Link, Outlet, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Film } from '../../types/films';
+import { FilmReviews } from '../../types/reviews';
 import NotFound from '../not-found/not-found';
 import { AppRoute } from '../../constants';
 import { MY_LIST_COUNT } from '../../mocks/my-list-info';
+import FilmsList from '../../components/films-list/films-list';
+import FilmTabs from '../../components/film-tabs.tsx/film-tabs';
+
+const MAX_GENRE_FILTER_COUNT = 4;
 
 type FilmProps = {
   films: Film[];
+  filmsReviews: FilmReviews[];
 }
 
-export default function FilmPage({ films }: FilmProps): JSX.Element {
+export default function FilmPage({ films, filmsReviews }: FilmProps): JSX.Element {
   const navigate = useNavigate();
   const params = useParams();
   const id = params.id;
@@ -20,6 +26,17 @@ export default function FilmPage({ films }: FilmProps): JSX.Element {
   const handleClick = (): void => {
     setAddToMyList((prevState) => !prevState);
     isAddedToMyList ? setMyListCount(myListCount - 1) : setMyListCount(myListCount + 1);
+  };
+
+  const getFilteredFilms = () => {
+    if (film && film.genre) {
+      const filteredFilms = films
+        .filter((movie) => movie.genre === film.genre)
+        .slice(0, MAX_GENRE_FILTER_COUNT)
+        .filter((movie) => movie.id !== film.id);
+      return filteredFilms;
+    }
+    return films;
   };
 
   if (!film) {
@@ -97,7 +114,10 @@ export default function FilmPage({ films }: FilmProps): JSX.Element {
             <div className="film-card__poster film-card__poster--big">
               <img src={film.posterImage} alt={film.name} width="218" height="327" />
             </div>
-            <Outlet />
+            <FilmTabs
+              film={film}
+              filmsReviews={filmsReviews}
+            />
           </div>
         </div>
       </section>
@@ -105,44 +125,9 @@ export default function FilmPage({ films }: FilmProps): JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-
-          <div className="catalog__films-list">
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Bohemian Rhapsody</a>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Macbeth</a>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Aviator</a>
-              </h3>
-            </article>
-          </div>
+          <FilmsList
+            films={getFilteredFilms()}
+          />
         </section>
 
         <footer className="page-footer">

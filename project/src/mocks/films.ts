@@ -177,7 +177,7 @@ export const films: Film[] = [
       'Ральф Нельсон'
     ],
     runTime: 94,
-    genre: 'Комедия',
+    genre: 'Драма',
     released: 1963,
     isFavorite: true
   },
@@ -207,7 +207,7 @@ export const films: Film[] = [
       'Мицуру Миямото'
     ],
     runTime: 82,
-    genre: 'Аниме',
+    genre: 'Фантастика',
     released: 1995,
     isFavorite: true
   },

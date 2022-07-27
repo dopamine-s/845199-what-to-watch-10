@@ -28,14 +28,13 @@ export default function FilmPage({ films, filmsReviews }: FilmProps): JSX.Elemen
     isAddedToMyList ? setMyListCount(myListCount - 1) : setMyListCount(myListCount + 1);
   };
 
-  const getFilteredFilmsByGenre = () => {
-    if (film) {
-      const genre = film.genre;
-      if (genre) {
-        const filmsFilteredByGenreExceptSampleFilm = films.filter((movie) => movie.genre === genre).slice(0, MAX_GENRE_FILTER_COUNT).filter((movie) => movie.id !== film.id);
-        const filteredFilms = filmsFilteredByGenreExceptSampleFilm;
-        return filteredFilms;
-      }
+  const getFilteredFilms = () => {
+    if (film && film.genre) {
+      const filteredFilms = films
+        .filter((movie) => movie.genre === film.genre)
+        .slice(0, MAX_GENRE_FILTER_COUNT)
+        .filter((movie) => movie.id !== film.id);
+      return filteredFilms;
     }
     return films;
   };
@@ -127,7 +126,7 @@ export default function FilmPage({ films, filmsReviews }: FilmProps): JSX.Elemen
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
           <FilmsList
-            films={getFilteredFilmsByGenre()}
+            films={getFilteredFilms()}
           />
         </section>
 

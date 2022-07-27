@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Film } from '../../types/films';
 import { FilmReviews } from '../../types/reviews';
-import { FilmTabName } from '../../constants';
+import { filmTabNames } from '../../constants';
 
 import FilmOverview from '../film-overview/film-overview';
 import FilmDetails from '../film-details/film-details';
@@ -14,17 +14,17 @@ type FilmTabsProps = {
 }
 
 export default function FilmTabs( { film, filmsReviews }: FilmTabsProps): JSX.Element {
-  const FilmTabNames = Object.values(FilmTabName);
-  const [activeTab, setActiveTab] = useState(FilmTabName.Overview);
+  const [activeTab, setActiveTab] = useState(filmTabNames[0]);
 
   const renderTabs = (tab: string): JSX.Element => {
     switch (tab) {
-      case FilmTabName.Overview:
-        return <FilmOverview film={film} />;
-      case FilmTabName.Details:
+      case 'Details':
         return <FilmDetails film={film} />;
-      default:
+      case 'Reviews':
         return <SingleFilmReviews filmsReviews={filmsReviews} />;
+      case 'Overview':
+      default:
+        return <FilmOverview film={film} />;
     }
   };
 
@@ -33,20 +33,19 @@ export default function FilmTabs( { film, filmsReviews }: FilmTabsProps): JSX.El
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
           {
-            Array.from({ length: FilmTabNames.length }, (_, index) => index)
-              .map((number) => (
-                <li key={number}
-                  className={`film-nav__item ${activeTab === FilmTabNames[number] ? 'film-nav__item--active' : ''}`}
+            filmTabNames.map((filmTabName) => (
+              <li key={filmTabName}
+                className={`film-nav__item ${activeTab === filmTabName ? 'film-nav__item--active' : ''}`}
+              >
+                <Link
+                  className="film-nav__link"
+                  onClick={() => setActiveTab(filmTabName)}
+                  to=''
                 >
-                  <Link
-                    className="film-nav__link"
-                    onClick={() => setActiveTab(FilmTabNames[number])}
-                    to=''
-                  >
-                    {`${FilmTabNames[number].slice(0, 1) + FilmTabNames[number].slice(1).toLowerCase()}`}
-                  </Link>
-                </li>
-              ))
+                  {filmTabName}
+                </Link>
+              </li>
+            ))
           }
         </ul>
       </nav>

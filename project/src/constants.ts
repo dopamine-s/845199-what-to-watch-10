@@ -13,8 +13,8 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export enum FilmTabName {
-  Overview = 'OVERVIEW',
-  Details = 'DETAILS',
-  Reviews = 'REVIEWS'
-}
+export const filmTabNames = [
+  'Overview',
+  'Details',
+  'Reviews'
+];

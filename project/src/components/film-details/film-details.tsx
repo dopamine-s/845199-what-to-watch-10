@@ -1,6 +1,7 @@
 import { Film } from '../../types/films';
 import NotFound from '../../pages/not-found/not-found';
 import { getTimeFromMins } from '../../utils/utils';
+import { Fragment } from 'react';
 
 type FilmDetailsProps = {
   film: Film;
@@ -28,9 +29,9 @@ export default function FilmDetails({ film }: FilmDetailsProps): JSX.Element {
               const isLastElement = index === film.starring.length - 1;
 
               return (
-                <>
-                  <span key={actor}>{actor}</span>{!isLastElement && film.starring.length > 1 ? <>, <br /></> : null}
-                </>
+                <Fragment key={actor}>
+                  <span >{actor}</span>{!isLastElement && film.starring.length > 1 ? <>, <br /></> : null}
+                </Fragment>
               );
             })}
           </span>

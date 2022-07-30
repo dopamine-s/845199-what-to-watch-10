@@ -1,26 +1,26 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeGenre, clearGenre, getFilms } from './actions';
+import { setSelectedGenre, clearSelectedGenre, getFilms } from './actions';
 import { Film } from '../types/films';
 
 type initialStateTypes = {
-  genre: string;
+  selectedGenre: string;
   films: Film [];
 }
 
 const initialState: initialStateTypes = {
-  genre: '',
+  selectedGenre: '',
   films: [],
 };
 
 export const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(changeGenre, (state, action) => {
-      state.genre = action.payload;
+    .addCase(setSelectedGenre, (state, action) => {
+      state.selectedGenre = action.payload;
     })
     .addCase(getFilms, (state, action) => {
       state.films = action.payload;
     })
-    .addCase(clearGenre, (state) => {
-      state.genre = '';
+    .addCase(clearSelectedGenre, (state) => {
+      state.selectedGenre = '';
     });
 });

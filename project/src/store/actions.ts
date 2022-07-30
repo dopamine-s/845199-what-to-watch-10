@@ -1,12 +1,12 @@
 import { createAction } from '@reduxjs/toolkit';
 import { films } from '../mocks/films';
 
-export const changeGenre = createAction ('films/changeGenre',
-  (genreName = '') => ({
-    payload: genreName,
+export const setSelectedGenre = createAction ('films/changeGenre',
+  (genre = '') => ({
+    payload: genre,
   }));
 
-export const clearGenre = createAction ('films/clearGenre');
+export const clearSelectedGenre = createAction ('films/clearGenre');
 
 export const getFilms = createAction('films/getFilms',
   () => ({

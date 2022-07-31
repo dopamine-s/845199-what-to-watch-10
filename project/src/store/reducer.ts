@@ -2,12 +2,12 @@ import { createReducer } from '@reduxjs/toolkit';
 import { setSelectedGenre, clearSelectedGenre, getFilms } from './actions';
 import { Film } from '../types/films';
 
-type initialStateTypes = {
+type InitialStateTypes = {
   selectedGenre: string;
   films: Film [];
 }
 
-const initialState: initialStateTypes = {
+const initialState: InitialStateTypes = {
   selectedGenre: '',
   films: [],
 };

@@ -31,7 +31,7 @@ export default function Main({ filmInfo }: MainProps): JSX.Element {
 
   useEffect(() => {
     dispatch(getFilms());
-  }, [dispatch]);
+  });
 
   useEffect(() => {
     if (!selectedGenre) {

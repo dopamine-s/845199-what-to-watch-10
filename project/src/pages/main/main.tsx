@@ -31,7 +31,8 @@ export default function Main({ filmInfo }: MainProps): JSX.Element {
 
   useEffect(() => {
     dispatch(getFilms());
-  });
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     if (!selectedGenre) {

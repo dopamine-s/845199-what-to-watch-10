@@ -411,4 +411,49 @@ export const filmsReviews: FilmReviews[] = [
       },
     ]
   },
+  {
+    filmId: 9,
+    reviews: [
+      {
+        comment: 'Perfect movie. Stunning action. Not so bad indeed. Solid work.',
+        date: ' Tue Jul 19 2022 04:22:55 GMT+0300 (Москва, стандартное время)',
+        id: 1,
+        rating: 9.0,
+        user: {
+          id: 836,
+          name: 'John Jack',
+        }
+      },
+      {
+        comment: 'I\'ve seen much worse. But it could be a little more unpredictable',
+        date: 'Mon Jul 18 2022 14:46:21 GMT+0300 (Москва, стандартное время)',
+        id: 2,
+        rating: 7.2,
+        user: {
+          id: 995,
+          name: 'Pavel Turalski',
+        }
+      },
+      {
+        comment: 'Not so bad. Creative and cute. Good work. Keep it up',
+        date: 'Mon Jul 18 2022 18:49:21 GMT+0300 (Москва, стандартное время)',
+        id: 3,
+        rating: 7.5,
+        user: {
+          id: 694,
+          name: 'Jim Bo',
+        }
+      },
+      {
+        comment: 'Wow. Real Good Movie, it is rare these days. I think I should watch something else like this.',
+        date: 'Fri Jul 15 2022 07:11:55 GMT+0300 (Москва, стандартное время)',
+        id: 4,
+        rating: 8.3,
+        user: {
+          id: 707,
+          name: 'Mark Neuman',
+        }
+      },
+    ]
+  },
 ];

@@ -241,4 +241,32 @@ export const films: Film[] = [
     released: 1969,
     isFavorite: true
   },
+  {
+    id: 9,
+    name: 'Заложница',
+    posterImage: 'img/taken.jpg',
+    previewImage: 'img/taken.jpg',
+    backgroundImage: 'img/taken.jpg',
+    backgroundColor: '#ffffff',
+    videoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
+    previewVideoLink: 'https://www.film.ru/sites/default/files/styles/thumb_1024x450/public/movies/frames/1627584-1371845.jpg',
+    description: 'Молодую девушку похитили во время туристического отдыха. Её отец пускается в опасное приключение-спасение, чтобы вернуть дочь и наказать виновных лично.',
+    rating: 7.9,
+    scoresCount: 212287,
+    director: 'Пьер Морель',
+    starring: [
+      'Лиам Нисон',
+      'Мэгги Грэйс',
+      'Фамке Янссен',
+      'Оливье Рабурден',
+      'Лиленд Орсер',
+      'Ксандер Беркли',
+      'Холли Вэлэнс',
+      'Джон Грайс',
+    ],
+    runTime: 90,
+    genre: 'Боевик',
+    released: 2007,
+    isFavorite: true
+  },
 ];

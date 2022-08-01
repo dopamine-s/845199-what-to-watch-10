@@ -18,3 +18,5 @@ export const filmTabNames = [
   'Details',
   'Reviews'
 ];
+
+export const FILM_SHOWN_COUNT = 8;

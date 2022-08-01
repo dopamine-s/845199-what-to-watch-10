@@ -9,6 +9,7 @@ import { Film } from '../../types/films';
 import { FilmInfo } from '../../types/film-info';
 import { AppRoute } from '../../constants';
 import { MY_LIST_COUNT} from '../../mocks/my-list-info';
+import ShowMoreButton from '../../components/show-more-button/show-more-button';
 
 type MainProps = {
   filmInfo: FilmInfo;
@@ -122,9 +123,8 @@ export default function Main({ filmInfo }: MainProps): JSX.Element {
 
           <FilmsList films={selectedGenre ? filmsByGenre : allFilms}/>
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <ShowMoreButton />
+
         </section>
 
         <footer className="page-footer">

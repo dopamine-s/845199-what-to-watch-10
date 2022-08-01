@@ -34,7 +34,8 @@ export default function FilmTabs( { film, filmsReviews }: FilmTabsProps): JSX.El
         <ul className="film-nav__list">
           {
             filmTabNames.map((filmTabName) => (
-              <li key={filmTabName}
+              <li
+                key={filmTabName}
                 className={`film-nav__item ${activeTab === filmTabName ? 'film-nav__item--active' : ''}`}
               >
                 <Link

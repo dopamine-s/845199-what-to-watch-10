@@ -33,7 +33,6 @@ function App (
           element={
             <Main
               filmInfo={filmInfo}
-              films={films}
             />
           }
         />

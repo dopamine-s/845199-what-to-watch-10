@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { Film } from '../types/films';
 
 export const getFilmRateLevel = (filmRate: number): string => {
   if (filmRate >= 0 && filmRate <= 3) {
@@ -24,3 +25,6 @@ export const getTimeFromMins = (mins: number): string => {
 export const humanizeDayDate = (data: string): string => dayjs(data).format('MMMM D, YYYY');
 
 export const getReviewDateTime = (data: string): string => dayjs(data).format('YYYY-MM-DD');
+
+export const getGenres = (filmList: Film[]): string[] =>
+  [...new Set(filmList.map((film) => film.genre))];

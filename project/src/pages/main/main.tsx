@@ -134,8 +134,8 @@ export default function Main({ filmInfo }: MainProps): JSX.Element {
               : filmsCount < allFilms.length && <ShowMoreButton />
           }
           {
-            filmsByGenre.length < 5 || allFilms.length < 5 ?
-              <div style={{marginBottom: '195px'}}></div>
+            selectedGenre ?
+              filmsByGenre.length < 5 && <div style={{marginBottom: '195px'}}></div>
               : ''
           }
 

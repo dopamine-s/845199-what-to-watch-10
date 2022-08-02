@@ -19,4 +19,4 @@ export const filmTabNames = [
   'Reviews'
 ];
 
-export const FILM_SHOWN_COUNT = 8;
+export const FILMS_SHOWN_COUNT = 8;

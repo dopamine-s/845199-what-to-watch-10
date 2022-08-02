@@ -586,6 +586,9 @@ main {
   .catalog__button:hover {
     border-color: rgba(217, 202, 116, 0.5); }
 
+.catalog_button--hidden {
+  visibility: hidden; }
+
 .copyright {
   text-align: center;
   font-size: 14px;
@@ -825,6 +828,17 @@ main {
   max-width: 380px; }
   .film-card__reviews-col:last-child {
     margin-right: 0; }
+
+.film-card__no-reviews {
+background: #ffffff; }
+
+.film-card__no-reviews-header {
+  font-size: 25px;
+  display: block;
+  font-weight: normal;
+  color: black;
+  margin: 100px auto 100px 55px;
+  padding: 20px; }
 
 .film-card__header {
   position: relative; }

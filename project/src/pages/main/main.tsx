@@ -128,16 +128,7 @@ export default function Main({ filmInfo }: MainProps): JSX.Element {
 
           <FilmsList films={selectedGenre ? filmsByGenre.slice(0, filmsCount) : allFilms.slice(0, filmsCount)}/>
 
-          {
-            selectedGenre ?
-              filmsCount < filmsByGenre.length && <ShowMoreButton />
-              : filmsCount < allFilms.length && <ShowMoreButton />
-          }
-          {
-            selectedGenre ?
-              filmsByGenre.length < 5 && <div style={{marginBottom: '195px'}}></div>
-              : ''
-          }
+          <ShowMoreButton showButton={selectedGenre ? filmsCount < filmsByGenre.length : filmsCount < allFilms.length} />
 
         </section>
 

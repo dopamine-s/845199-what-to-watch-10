@@ -1,13 +1,18 @@
 import { useAppDispatch } from '../../hooks';
 import { showMoreFilms } from '../../store/actions';
 
-export default function ShowMoreButton(): JSX.Element {
+type ShowMoreButtonProps = {
+  showButton: boolean;
+}
+
+export default function ShowMoreButton({ showButton }: ShowMoreButtonProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   return (
     <div className="catalog__more">
       <button
-        className="catalog__button"
+        disabled = {!showButton}
+        className={`catalog__button ${!showButton ? 'catalog_button--hidden' : ''}`}
         type="button"
         onClick={() => dispatch(showMoreFilms())}
       >

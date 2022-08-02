@@ -549,6 +549,10 @@ body {
   border-color: rgba(217, 202, 116, .5)
 }
 
+.catalog_button--hidden {
+  visibility: hidden
+}
+
 .copyright {
   font-size: 14px;
   line-height: 16px;
@@ -837,6 +841,19 @@ body {
   width: calc((100% - 60px)/ 2);
   margin-right: 60px;
   max-width: 380px
+}
+
+.film-card__no-reviews {
+  background: #fff
+}
+
+.film-card__no-reviews-header {
+  font-size: 25px;
+  display: block;
+  font-weight: 400;
+  color: #000;
+  margin: 100px auto 100px 55px;
+  padding: 20px
 }
 
 .film-card__count {

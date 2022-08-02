@@ -1,21 +1,7 @@
 export default function NoReviews(): JSX.Element {
   return (
-    <div
-      className="film-card__reviews film-card__row"
-      style={{
-        background: '#ffffff',
-      }}
-    >
-      <h2
-        style={{
-          fontSize: '25px',
-          display: 'block',
-          fontWeight: 'normal',
-          color: 'black',
-          margin: '100px auto 100px 55px',
-          padding: '20px'
-        }}
-      >
+    <div className="film-card__reviews film-card__row film-card__no-reviews">
+      <h2 className="film-card__no-reviews-header">
          No reviews so far...
       </h2>
     </div>

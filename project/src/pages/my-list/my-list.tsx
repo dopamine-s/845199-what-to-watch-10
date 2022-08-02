@@ -31,6 +31,7 @@ export default function MyList({ films }: MyListProps): JSX.Element {
         <div className="catalog__films-list">
           <FilmsList
             films={films}
+            showButton={false}
           />
         </div>
       </section>

@@ -839,6 +839,19 @@ body {
   max-width: 380px
 }
 
+.film-card__no-reviews {
+  background: #fff
+}
+
+.film-card__no-reviews-header {
+  font-size: 25px;
+  display: block;
+  font-weight: 400;
+  color: #000;
+  margin: 100px auto 100px 55px;
+  padding: 20px
+}
+
 .film-card__count {
   display: inline-block;
   min-width: 40px;

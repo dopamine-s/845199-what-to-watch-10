@@ -3,7 +3,7 @@ import FilmsList from '../../components/films-list/films-list';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getFilms } from '../../store/actions';
+import { getFilms, clearSelectedGenre, resetFilmsShownCount } from '../../store/actions';
 import Logo from '../../components/logo/logo';
 import { Film } from '../../types/films';
 import { FilmInfo } from '../../types/film-info';
@@ -23,6 +23,7 @@ export default function Main({ filmInfo }: MainProps): JSX.Element {
   const [myListCount, setMyListCount] = useState(MY_LIST_COUNT);
   const selectedGenre = useAppSelector((state) => state.selectedGenre);
   const allFilms = useAppSelector((state) => state.films);
+  const filmsCount = useAppSelector((state) => state.filmsShownCount);
 
   const handleClick = ():void => {
     setAddToMyList((prevState) => !prevState);
@@ -31,6 +32,8 @@ export default function Main({ filmInfo }: MainProps): JSX.Element {
 
   useEffect(() => {
     dispatch(getFilms());
+    dispatch(clearSelectedGenre());
+    dispatch(resetFilmsShownCount());
     // eslint-disable-next-line
   }, []);
 
@@ -41,6 +44,8 @@ export default function Main({ filmInfo }: MainProps): JSX.Element {
     setFilmsByGenre(allFilms.filter(
       (film: Film) => film.genre.toLowerCase() === selectedGenre.toLowerCase())
     );
+    dispatch(resetFilmsShownCount());
+    // eslint-disable-next-line
   }, [selectedGenre, allFilms]);
 
   return (
@@ -120,11 +125,11 @@ export default function Main({ filmInfo }: MainProps): JSX.Element {
             <GenreList />
           </ul>
 
-          <FilmsList films={selectedGenre ? filmsByGenre : allFilms}/>
+          <FilmsList
+            films={selectedGenre ? filmsByGenre.slice(0, filmsCount) : allFilms.slice(0, filmsCount)}
+            showButton={selectedGenre ? filmsCount < filmsByGenre.length : filmsCount < allFilms.length}
+          />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
         </section>
 
         <footer className="page-footer">

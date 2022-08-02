@@ -826,6 +826,17 @@ main {
   .film-card__reviews-col:last-child {
     margin-right: 0; }
 
+.film-card__no-reviews {
+background: #ffffff; }
+
+.film-card__no-reviews-header {
+  font-size: 25px;
+  display: block;
+  font-weight: normal;
+  color: black;
+  margin: 100px auto 100px 55px;
+  padding: 20px; }
+
 .film-card__header {
   position: relative; }
 

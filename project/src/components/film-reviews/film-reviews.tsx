@@ -1,7 +1,7 @@
 import { FilmReviews } from '../../types/reviews';
 import Review from '../film-review/film-review';
 import { useParams } from 'react-router-dom';
-import NotFound from '../../pages/not-found/not-found';
+import NoReviews from '../no-reviews/no-reviews';
 
 type FilmReviewsProps = {
   filmsReviews: FilmReviews[];
@@ -14,7 +14,7 @@ export default function SingleFilmReviews({ filmsReviews }: FilmReviewsProps): J
 
   if (!filmReviews) {
     return (
-      <NotFound />
+      <NoReviews />
     );
   }
 

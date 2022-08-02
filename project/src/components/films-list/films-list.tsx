@@ -1,12 +1,14 @@
 import FilmCard from '../../components/film-card/film-card';
+import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import { Film } from '../../types/films';
 import { useState } from 'react';
 
 type FilmsListProps = {
   films: Film[];
+  showButton: boolean;
 }
 
-export default function FilmsList({ films }: FilmsListProps): JSX.Element {
+export default function FilmsList({ films, showButton }: FilmsListProps): JSX.Element {
   const [activeFilm, setActiveFilm] = useState<number | null>(null);
 
   const filmCardMouseOverHandler = (filmId: number): void => setActiveFilm(filmId);
@@ -27,6 +29,7 @@ export default function FilmsList({ films }: FilmsListProps): JSX.Element {
   return (
     <div className="catalog__films-list">
       {filmCards}
+      {showButton && <ShowMoreButton />}
     </div>
   );
 }

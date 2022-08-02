@@ -549,10 +549,6 @@ body {
   border-color: rgba(217, 202, 116, .5)
 }
 
-.catalog_button--hidden {
-  visibility: hidden
-}
-
 .copyright {
   font-size: 14px;
   line-height: 16px;

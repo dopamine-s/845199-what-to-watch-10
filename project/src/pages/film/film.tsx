@@ -127,6 +127,7 @@ export default function FilmPage({ films, filmsReviews }: FilmProps): JSX.Elemen
           <h2 className="catalog__title">More like this</h2>
           <FilmsList
             films={getFilteredFilms()}
+            showButton={false}
           />
         </section>
 

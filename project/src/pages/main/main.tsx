@@ -9,7 +9,6 @@ import { Film } from '../../types/films';
 import { FilmInfo } from '../../types/film-info';
 import { AppRoute } from '../../constants';
 import { MY_LIST_COUNT} from '../../mocks/my-list-info';
-import ShowMoreButton from '../../components/show-more-button/show-more-button';
 
 type MainProps = {
   filmInfo: FilmInfo;
@@ -126,9 +125,10 @@ export default function Main({ filmInfo }: MainProps): JSX.Element {
             <GenreList />
           </ul>
 
-          <FilmsList films={selectedGenre ? filmsByGenre.slice(0, filmsCount) : allFilms.slice(0, filmsCount)}/>
-
-          <ShowMoreButton showButton={selectedGenre ? filmsCount < filmsByGenre.length : filmsCount < allFilms.length} />
+          <FilmsList
+            films={selectedGenre ? filmsByGenre.slice(0, filmsCount) : allFilms.slice(0, filmsCount)}
+            showButton={selectedGenre ? filmsCount < filmsByGenre.length : filmsCount < allFilms.length}
+          />
 
         </section>
 

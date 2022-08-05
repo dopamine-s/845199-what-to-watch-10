@@ -971,10 +971,14 @@ body {
   font-size: 30px
 }
 
-.loader__lds-dual-ring {
-  display: inline-block;
+.loader-dual-ring,
+.page-header {
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto
+}
+
+.loader-dual-ring {
+  display: inline-block;
   margin-top: 50px;
   width: 80px;
   height: 80px
@@ -986,7 +990,7 @@ body {
   font-family: "object-fit:cover"
 }
 
-.loader__lds-dual-ring:after {
+.loader-dual-ring:after {
   content: " ";
   display: block;
   width: 64px;
@@ -995,7 +999,7 @@ body {
   border-radius: 50%;
   border: 6px solid #fff;
   border-color: #fff transparent;
-  animation: 1.2s linear infinite loader__lds-dual-ring
+  animation: 1.2s linear infinite loader-dual-ring
 }
 
 .player__controls-row:last-child,
@@ -1003,7 +1007,7 @@ body {
   margin-bottom: 0
 }
 
-@keyframes loader__lds-dual-ring {
+@keyframes loader-dual-ring {
   0% {
     transform: rotate(0)
   }
@@ -1028,8 +1032,6 @@ body {
   -ms-flex-align: center;
   align-items: center;
   max-width: 1300px;
-  margin-left: auto;
-  margin-right: auto;
   padding: 22px 75px
 }
 
@@ -1560,6 +1562,10 @@ body {
   top: 50%;
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%)
+}
+
+.user-page__title--not-found {
+  font-size: 70px
 }
 
 .user-page__film-count {

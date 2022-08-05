@@ -17,9 +17,20 @@ export default function Player(): JSX.Element {
 
   return (
     <div className="player">
-      <video src={film.videoLink} className="player__video" poster={film.previewImage}></video>
+      <video
+        src={film.videoLink}
+        className="player__video"
+        poster={film.previewImage}
+      >
+      </video>
 
-      <button onClick={() => navigate(-1)} type="button" className="player__exit">Exit</button>
+      <button
+        onClick={() => navigate(-1)}
+        type="button"
+        className="player__exit"
+      >
+        Exit
+      </button>
 
       <div className="player__controls">
         <div className="player__controls-row">

@@ -21,9 +21,8 @@ export default function FilmPage({ filmsReviews }: FilmProps): JSX.Element {
   const id = params.id;
   const film = allFilms.find((movie) => String(movie.id) === id);
   const favoriteFilms = allFilms.filter((item) => item.isFavorite);
-  const favouriteListCount = favoriteFilms.length;
   const [isAddedToMyList, setAddToMyList] = useState(false);
-  const [myListCount, setMyListCount] = useState(favouriteListCount);
+  const [myListCount, setMyListCount] = useState(favoriteFilms.length);
   const handleClick = (): void => {
     setAddToMyList((prevState) => !prevState);
     isAddedToMyList ? setMyListCount(myListCount - 1) : setMyListCount(myListCount + 1);

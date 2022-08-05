@@ -9,12 +9,8 @@ export default function NotFound(): JSX.Element {
       </header>
 
       <div className="user-page__content">
-        <h1 className="page-title user-page__title"
-          style={{
-            fontSize: '70px',
-          }}
-        >
-        404 Not Found
+        <h1 className="page-title user-page__title user-page__title--not-found">
+          404 Not Found
         </h1>
         <Link className="logo__link" to="/"
           style={{

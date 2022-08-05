@@ -953,7 +953,7 @@ background: #ffffff; }
   font-size: 30px
 }
 
-.loader__lds-dual-ring {
+.loader-dual-ring {
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
@@ -962,7 +962,7 @@ background: #ffffff; }
   height: 80px;
 }
 
-.loader__lds-dual-ring:after {
+.loader-dual-ring:after {
   content: " ";
   display: block;
   width: 64px;
@@ -971,10 +971,10 @@ background: #ffffff; }
   border-radius: 50%;
   border: 6px solid #fff;
   border-color: #fff transparent #fff transparent;
-  animation: loader__lds-dual-ring 1.2s linear infinite;
+  animation: loader-dual-ring 1.2s linear infinite;
 }
 
-@keyframes loader__lds-dual-ring {
+@keyframes loader-dual-ring {
   0% {
     transform: rotate(0deg);
   }
@@ -1489,6 +1489,9 @@ background: #ffffff; }
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%); }
+
+.user-page__title--not-found {
+  font-size: 70px; }
 
 .user-page__film-count {
   position: absolute;

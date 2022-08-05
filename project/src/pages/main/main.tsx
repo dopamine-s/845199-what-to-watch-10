@@ -16,8 +16,7 @@ export default function Main(): JSX.Element {
   const [isAddedToMyList, setAddToMyList] = useState(false);
   const [filmsByGenre, setFilmsByGenre] = useState<Film[]>([]);
   const favoriteFilms = allFilms.filter((item) => item.isFavorite);
-  const favouriteListCount = favoriteFilms.length;
-  const [myListCount, setMyListCount] = useState(favouriteListCount);
+  const [myListCount, setMyListCount] = useState(favoriteFilms.length);
   const selectedGenre = useAppSelector((state) => state.selectedGenre);
 
   const filmsCount = useAppSelector((state) => state.filmsShownCount);
@@ -48,7 +47,10 @@ export default function Main(): JSX.Element {
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={promoFilm.backgroundImage} alt={promoFilm.name} />
+          <img
+            src={promoFilm?.backgroundImage}
+            alt={promoFilm?.name}
+          />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -58,7 +60,10 @@ export default function Main(): JSX.Element {
 
           <ul className="user-block">
             <li className="user-block__item">
-              <div className="user-block__avatar" onClick={() => navigate(AppRoute.MyList)}>
+              <div
+                className="user-block__avatar"
+                onClick={() => navigate(AppRoute.MyList)}
+              >
                 <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
               </div>
             </li>
@@ -71,25 +76,30 @@ export default function Main(): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={promoFilm.posterImage} alt={promoFilm.name} width="218" height="327" />
+              <img
+                src={promoFilm?.posterImage}
+                alt={promoFilm?.name}
+                width="218"
+                height="327"
+              />
             </div>
 
             <div className="film-card__desc">
               <h2 className="film-card__title">
-                {promoFilm.name}
+                {promoFilm?.name}
               </h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">
-                  {promoFilm.genre}
+                  {promoFilm?.genre}
                 </span>
                 <span className="film-card__year">
-                  {promoFilm.released}
+                  {promoFilm?.released}
                 </span>
               </p>
 
               <div className="film-card__buttons">
                 <button
-                  onClick={() => navigate(`${AppRoute.Player}/${promoFilm.id}`)}
+                  onClick={() => navigate(`${AppRoute.Player}/${promoFilm?.id}`)}
                   className="btn btn--play film-card__button"
                   type="button"
                 >

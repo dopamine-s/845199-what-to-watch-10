@@ -6,17 +6,17 @@ import { FILMS_SHOWN_COUNT } from '../constants';
 type InitialStateTypes = {
   selectedGenre: string;
   films: Film [];
-  promoFilm: Film;
+  promoFilm: Film | null;
   filmsShownCount: number;
-  isDataLoaded: boolean;
+  isDataLoading: boolean;
 }
 
 const initialState: InitialStateTypes = {
   selectedGenre: '',
   films: [],
-  promoFilm: {} as Film,
+  promoFilm: null,
   filmsShownCount: FILMS_SHOWN_COUNT,
-  isDataLoaded: false,
+  isDataLoading: false,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -25,7 +25,7 @@ export const reducer = createReducer(initialState, (builder) => {
       state.selectedGenre = action.payload;
     })
     .addCase(setDataLoadedStatus, (state, action) => {
-      state.isDataLoaded = action.payload;
+      state.isDataLoading = action.payload;
     })
     .addCase(loadFilms, (state, action) => {
       state.films = action.payload;

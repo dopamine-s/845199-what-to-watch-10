@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../constants';
 import { useAppSelector } from '../../hooks';
-import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import Loader from '../../pages/loading-screen/loading-screen';
 import Main from '../../pages/main/main';
 import SignIn from '../../pages/sign-in/sign-in';
 import MyList from '../../pages/my-list/my-list';
@@ -18,11 +18,11 @@ type AppProps = {
 
 function App (
   { filmsReviews }: AppProps): JSX.Element {
-  const {isDataLoaded} = useAppSelector((state) => state);
+  const {isDataLoading} = useAppSelector((state) => state);
 
-  if (isDataLoaded) {
+  if (isDataLoading) {
     return (
-      <LoadingScreen />
+      <Loader />
     );
   }
 

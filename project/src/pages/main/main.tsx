@@ -71,7 +71,7 @@ export default function Main(): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={promoFilm.posterImage} alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={promoFilm.posterImage} alt={promoFilm.name} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
@@ -88,7 +88,11 @@ export default function Main(): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button
+                  onClick={() => navigate(`${AppRoute.Player}/${promoFilm.id}`)}
+                  className="btn btn--play film-card__button"
+                  type="button"
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>

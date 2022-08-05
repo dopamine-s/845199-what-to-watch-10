@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../constants';
+import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import Main from '../../pages/main/main';
 import SignIn from '../../pages/sign-in/sign-in';
 import MyList from '../../pages/my-list/my-list';
@@ -9,17 +11,20 @@ import Player from '../../pages/player/player';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 import { FilmReviews } from '../../types/reviews';
-import { FilmInfo } from '../../types/film-info';
 
 type AppProps = {
-  filmInfo: FilmInfo;
   filmsReviews: FilmReviews[];
 }
 
 function App (
-  { filmInfo,
-    filmsReviews
-  }: AppProps): JSX.Element {
+  { filmsReviews }: AppProps): JSX.Element {
+  const {isDataLoaded} = useAppSelector((state) => state);
+
+  if (isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <BrowserRouter>
@@ -28,9 +33,7 @@ function App (
         <Route
           path={AppRoute.Main}
           element={
-            <Main
-              filmInfo={filmInfo}
-            />
+            <Main />
           }
         />
 

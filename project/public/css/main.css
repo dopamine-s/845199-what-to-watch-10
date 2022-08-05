@@ -938,6 +938,52 @@ background: #ffffff; }
 .film-rating__count {
   color: #382C2A; }
 
+.loader {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  background-color: #0c0101;
+}
+
+.loader__text {
+  display: block;
+  margin: 400px auto 100px;
+  color: #fff;
+  font-size: 30px
+}
+
+.loader__lds-dual-ring {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  width: 80px;
+  height: 80px;
+}
+
+.loader__lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: loader__lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes loader__lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .page-content {
   background-image: -webkit-gradient(linear, left top, left bottom, from(#180202), to(#000000));
   background-image: linear-gradient(-180deg, #180202 0%, #000000 100%);

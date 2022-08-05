@@ -19,6 +19,11 @@ sup {
   position: relative
 }
 
+.catalog__films-card:nth-last-child(-n+4),
+.catalog__films-list:last-child {
+  margin-bottom: 0
+}
+
 .film-card__bg,
 .film-card__bg::after {
   bottom: 0;
@@ -33,13 +38,6 @@ sup {
 .logo__link,
 .player__exit {
   text-align: center
-}
-
-.catalog__films-card:nth-last-child(-n+4),
-.catalog__films-list:last-child,
-.player__controls-row:last-child,
-.sign-in__field:last-child {
-  margin-bottom: 0
 }
 
 .btn,
@@ -525,7 +523,7 @@ body {
 }
 
 .catalog__films-list-main-wrap {
-  min-height: 255px;
+  min-height: 255px
 }
 
 .catalog__films-card {
@@ -874,18 +872,16 @@ body {
   border-radius: 15px
 }
 
-.player__video,
-.user-block__avatar img {
-  height: 100%;
-  font-family: "object-fit:cover"
+.film-nav__list,
+.film-rating {
+  display: -webkit-box;
+  display: -ms-flexbox
 }
 
 .film-nav__list {
   padding: 0;
   margin: 0;
   list-style: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap
@@ -911,12 +907,6 @@ body {
   color: #eee5b5;
   text-decoration: none;
   padding-bottom: 19px
-}
-
-.film-rating,
-.film-rating__meta {
-  display: -webkit-box;
-  display: -ms-flexbox
 }
 
 .film-nav__link::after {
@@ -950,6 +940,8 @@ body {
   margin: 0;
   font-size: 19px;
   color: rgba(0, 0, 0, .5);
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex
 }
 
@@ -962,6 +954,63 @@ body {
 
 .film-rating__count {
   color: #382c2a
+}
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  background-color: #0c0101
+}
+
+.loader__text {
+  display: block;
+  margin: 400px auto 100px;
+  color: #fff;
+  font-size: 30px
+}
+
+.loader__lds-dual-ring {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  width: 80px;
+  height: 80px
+}
+
+.player__video,
+.user-block__avatar img {
+  height: 100%;
+  font-family: "object-fit:cover"
+}
+
+.loader__lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent;
+  animation: 1.2s linear infinite loader__lds-dual-ring
+}
+
+.player__controls-row:last-child,
+.sign-in__field:last-child {
+  margin-bottom: 0
+}
+
+@keyframes loader__lds-dual-ring {
+  0% {
+    transform: rotate(0)
+  }
+
+  100% {
+    transform: rotate(360deg)
+  }
 }
 
 .page-content {

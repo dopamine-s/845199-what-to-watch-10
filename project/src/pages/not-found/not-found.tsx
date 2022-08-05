@@ -11,7 +11,7 @@ export default function NotFound(): JSX.Element {
       <div className="user-page__content">
         <h1 className="page-title user-page__title"
           style={{
-            fontSize: '100px',
+            fontSize: '70px',
           }}
         >
         404 Not Found
@@ -20,7 +20,7 @@ export default function NotFound(): JSX.Element {
           style={{
             marginLeft: 'auto',
             marginRight: 'auto',
-            marginTop: '300px',
+            marginTop: '200px',
             padding: '50px 80px',
           }}
 

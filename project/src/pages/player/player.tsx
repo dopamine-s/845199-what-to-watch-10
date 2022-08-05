@@ -1,16 +1,13 @@
-import { Film } from '../../types/films';
 import NotFound from '../not-found/not-found';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../hooks';
 
-type PlayerProps = {
-  films: Film[];
-}
-
-export default function Player({ films }: PlayerProps): JSX.Element {
+export default function Player(): JSX.Element {
+  const allFilms = useAppSelector((state) => state.films);
   const params = useParams();
   const navigate = useNavigate();
   const id = params.id;
-  const film = films.find((movie) => String(movie.id) === id);
+  const film = allFilms.find((movie) => String(movie.id) === id);
 
   if (!film) {
     return (
@@ -20,7 +17,7 @@ export default function Player({ films }: PlayerProps): JSX.Element {
 
   return (
     <div className="player">
-      <video src={film.videoLink} className="player__video" poster={film.previewVideoLink}></video>
+      <video src={film.videoLink} className="player__video" poster={film.previewImage}></video>
 
       <button onClick={() => navigate(-1)} type="button" className="player__exit">Exit</button>
 

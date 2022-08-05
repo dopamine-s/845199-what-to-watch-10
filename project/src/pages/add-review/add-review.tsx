@@ -1,18 +1,15 @@
 import Logo from '../../components/logo/logo';
 import AddReviewForm from '../../components/add-review/add-review-form';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { Film } from '../../types/films';
+import { useAppSelector } from '../../hooks';
 import NotFound from '../not-found/not-found';
 import { AppRoute } from '../../constants';
 
-type AddReviewProps = {
-  films: Film[];
-}
-
-export default function AddReview( { films }: AddReviewProps): JSX.Element {
+export default function AddReview(): JSX.Element {
+  const allFilms = useAppSelector((state) => state.films);
   const params = useParams();
   const id = params.id;
-  const film = films.find((movie) => String(movie.id) === id);
+  const film = allFilms.find((movie) => String(movie.id) === id);
   const navigate = useNavigate();
 
   if (!film) {

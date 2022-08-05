@@ -559,6 +559,10 @@ main {
   .catalog__films-list:last-child {
     margin-bottom: 0; }
 
+.catalog__films-list-main-wrap {
+  min-height: 255px
+}
+
 .catalog__films-card {
   width: 280px;
   cursor: pointer;
@@ -568,6 +572,9 @@ main {
     margin-right: 0; }
   .catalog__films-card:nth-last-child(-n + 4) {
     margin-bottom: 0; }
+
+.catalog__more {
+  width: 100%; }
 
 .catalog__button {
   display: block;

@@ -19,4 +19,13 @@ export const filmTabNames = [
   'Reviews'
 ];
 
+export enum APIRoute {
+  Films = '/films',
+  Promo = '/promo'
+}
+
 export const FILMS_SHOWN_COUNT = 8;
+
+export const BACKEND_URL = 'https://10.react.pages.academy/wtw';
+
+export const REQUEST_TIMEOUT = 5000;

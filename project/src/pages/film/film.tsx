@@ -1,28 +1,29 @@
 import Logo from '../../components/logo/logo';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { Film } from '../../types/films';
+import { useAppSelector } from '../../hooks';
 import { FilmReviews } from '../../types/reviews';
 import NotFound from '../not-found/not-found';
 import { AppRoute } from '../../constants';
-import { MY_LIST_COUNT } from '../../mocks/my-list-info';
 import FilmsList from '../../components/films-list/films-list';
 import FilmTabs from '../../components/film-tabs.tsx/film-tabs';
 
 const MAX_GENRE_FILTER_COUNT = 4;
 
 type FilmProps = {
-  films: Film[];
   filmsReviews: FilmReviews[];
 }
 
-export default function FilmPage({ films, filmsReviews }: FilmProps): JSX.Element {
+export default function FilmPage({ filmsReviews }: FilmProps): JSX.Element {
+  const allFilms = useAppSelector((state) => state.films);
   const navigate = useNavigate();
   const params = useParams();
   const id = params.id;
-  const film = films.find((movie) => String(movie.id) === id);
+  const film = allFilms.find((movie) => String(movie.id) === id);
+  const favoriteFilms = allFilms.filter((item) => item.isFavorite);
+  const favouriteListCount = favoriteFilms.length;
   const [isAddedToMyList, setAddToMyList] = useState(false);
-  const [myListCount, setMyListCount] = useState(MY_LIST_COUNT);
+  const [myListCount, setMyListCount] = useState(favouriteListCount);
   const handleClick = (): void => {
     setAddToMyList((prevState) => !prevState);
     isAddedToMyList ? setMyListCount(myListCount - 1) : setMyListCount(myListCount + 1);
@@ -30,13 +31,13 @@ export default function FilmPage({ films, filmsReviews }: FilmProps): JSX.Elemen
 
   const getFilteredFilms = () => {
     if (film && film.genre) {
-      const filteredFilms = films
+      const filteredFilms = allFilms
         .filter((movie) => movie.genre === film.genre)
         .slice(0, MAX_GENRE_FILTER_COUNT)
         .filter((movie) => movie.id !== film.id);
       return filteredFilms;
     }
-    return films;
+    return allFilms;
   };
 
   if (!film) {

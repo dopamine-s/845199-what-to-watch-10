@@ -8,19 +8,16 @@ import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
-import { Film } from '../../types/films';
 import { FilmReviews } from '../../types/reviews';
 import { FilmInfo } from '../../types/film-info';
 
 type AppProps = {
   filmInfo: FilmInfo;
-  films: Film[];
   filmsReviews: FilmReviews[];
 }
 
 function App (
   { filmInfo,
-    films,
     filmsReviews
   }: AppProps): JSX.Element {
 
@@ -48,9 +45,7 @@ function App (
           path={AppRoute.MyList}
           element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-              <MyList
-                films={films}
-              />
+              <MyList />
             </PrivateRoute>
           }
         />
@@ -62,7 +57,6 @@ function App (
             path=':id'
             element={
               <FilmPage
-                films={films}
                 filmsReviews={filmsReviews}
               />
             }
@@ -71,9 +65,7 @@ function App (
           <Route
             path=':id/review'
             element={
-              <AddReview
-                films={films}
-              />
+              <AddReview />
             }
           />
         </Route>
@@ -84,9 +76,7 @@ function App (
           <Route
             path=':id'
             element={
-              <Player
-                films={films}
-              />
+              <Player />
             }
           />
         </Route>

@@ -524,11 +524,19 @@ body {
   margin-bottom: 60px
 }
 
+.catalog__films-list-main-wrap {
+  min-height: 255px;
+}
+
 .catalog__films-card {
   width: 280px;
   cursor: pointer;
   margin-right: 10px;
   margin-bottom: 55px
+}
+
+.catalog__more {
+  width: 100%
 }
 
 .catalog__button {

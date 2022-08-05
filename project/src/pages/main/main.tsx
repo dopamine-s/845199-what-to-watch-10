@@ -3,12 +3,11 @@ import FilmsList from '../../components/films-list/films-list';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getFilms, clearSelectedGenre, resetFilmsShownCount } from '../../store/actions';
+import { clearSelectedGenre, resetFilmsShownCount } from '../../store/actions';
 import Logo from '../../components/logo/logo';
 import { Film } from '../../types/films';
 import { FilmInfo } from '../../types/film-info';
 import { AppRoute } from '../../constants';
-import { MY_LIST_COUNT} from '../../mocks/my-list-info';
 
 type MainProps = {
   filmInfo: FilmInfo;
@@ -16,13 +15,16 @@ type MainProps = {
 
 export default function Main({ filmInfo }: MainProps): JSX.Element {
   const { filmCardTitle, filmCardYear, filmCardGenre} = filmInfo;
+  const allFilms = useAppSelector((state) => state.films);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [isAddedToMyList, setAddToMyList] = useState(false);
   const [filmsByGenre, setFilmsByGenre] = useState<Film[]>([]);
-  const [myListCount, setMyListCount] = useState(MY_LIST_COUNT);
+  const favoriteFilms = allFilms.filter((item) => item.isFavorite);
+  const favouriteListCount = favoriteFilms.length;
+  const [myListCount, setMyListCount] = useState(favouriteListCount);
   const selectedGenre = useAppSelector((state) => state.selectedGenre);
-  const allFilms = useAppSelector((state) => state.films);
+
   const filmsCount = useAppSelector((state) => state.filmsShownCount);
 
   const handleClick = ():void => {
@@ -31,7 +33,6 @@ export default function Main({ filmInfo }: MainProps): JSX.Element {
   };
 
   useEffect(() => {
-    dispatch(getFilms());
     dispatch(clearSelectedGenre());
     dispatch(resetFilmsShownCount());
     // eslint-disable-next-line
@@ -124,12 +125,12 @@ export default function Main({ filmInfo }: MainProps): JSX.Element {
           <ul className="catalog__genres-list">
             <GenreList />
           </ul>
-
-          <FilmsList
-            films={selectedGenre ? filmsByGenre.slice(0, filmsCount) : allFilms.slice(0, filmsCount)}
-            showButton={selectedGenre ? filmsCount < filmsByGenre.length : filmsCount < allFilms.length}
-          />
-
+          <div className="catalog__films-list-main-wrap">
+            <FilmsList
+              films={selectedGenre ? filmsByGenre.slice(0, filmsCount) : allFilms.slice(0, filmsCount)}
+              showButton={selectedGenre ? filmsCount < filmsByGenre.length : filmsCount < allFilms.length}
+            />
+          </div>
         </section>
 
         <footer className="page-footer">

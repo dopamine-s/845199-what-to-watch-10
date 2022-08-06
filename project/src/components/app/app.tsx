@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../constants';
+import { useAppSelector } from '../../hooks';
+import Loader from '../../pages/loader/loader';
 import Main from '../../pages/main/main';
 import SignIn from '../../pages/sign-in/sign-in';
 import MyList from '../../pages/my-list/my-list';
@@ -8,21 +10,21 @@ import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
-import { Film } from '../../types/films';
 import { FilmReviews } from '../../types/reviews';
-import { FilmInfo } from '../../types/film-info';
 
 type AppProps = {
-  filmInfo: FilmInfo;
-  films: Film[];
   filmsReviews: FilmReviews[];
 }
 
 function App (
-  { filmInfo,
-    films,
-    filmsReviews
-  }: AppProps): JSX.Element {
+  { filmsReviews }: AppProps): JSX.Element {
+  const {isDataLoading} = useAppSelector((state) => state);
+
+  if (isDataLoading) {
+    return (
+      <Loader />
+    );
+  }
 
   return (
     <BrowserRouter>
@@ -31,9 +33,7 @@ function App (
         <Route
           path={AppRoute.Main}
           element={
-            <Main
-              filmInfo={filmInfo}
-            />
+            <Main />
           }
         />
 
@@ -48,9 +48,7 @@ function App (
           path={AppRoute.MyList}
           element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-              <MyList
-                films={films}
-              />
+              <MyList />
             </PrivateRoute>
           }
         />
@@ -62,7 +60,6 @@ function App (
             path=':id'
             element={
               <FilmPage
-                films={films}
                 filmsReviews={filmsReviews}
               />
             }
@@ -71,9 +68,7 @@ function App (
           <Route
             path=':id/review'
             element={
-              <AddReview
-                films={films}
-              />
+              <AddReview />
             }
           />
         </Route>
@@ -84,9 +79,7 @@ function App (
           <Route
             path=':id'
             element={
-              <Player
-                films={films}
-              />
+              <Player />
             }
           />
         </Route>

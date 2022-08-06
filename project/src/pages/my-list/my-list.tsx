@@ -1,18 +1,17 @@
 import Logo from '../../components/logo/logo';
 import FilmsList from '../../components/films-list/films-list';
-import { Film } from '../../types/films';
+import { useAppSelector } from '../../hooks';
 
-type MyListProps = {
-  films: Film[];
-}
+export default function MyList(): JSX.Element {
+  const allFilms = useAppSelector((state) => state.films);
+  const favoriteFilms = allFilms.filter((item) => item.isFavorite);
 
-export default function MyList({ films }: MyListProps): JSX.Element {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
         <Logo light={false} />
 
-        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">9</span></h1>
+        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{favoriteFilms.length}</span></h1>
         <ul className="user-block">
           <li className="user-block__item">
             <div className="user-block__avatar">
@@ -30,7 +29,7 @@ export default function MyList({ films }: MyListProps): JSX.Element {
 
         <div className="catalog__films-list">
           <FilmsList
-            films={films}
+            films={favoriteFilms}
             showButton={false}
           />
         </div>

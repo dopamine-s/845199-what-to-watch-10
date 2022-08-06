@@ -3,26 +3,22 @@ import FilmsList from '../../components/films-list/films-list';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getFilms, clearSelectedGenre, resetFilmsShownCount } from '../../store/actions';
+import { clearSelectedGenre, resetFilmsShownCount } from '../../store/actions';
 import Logo from '../../components/logo/logo';
 import { Film } from '../../types/films';
-import { FilmInfo } from '../../types/film-info';
 import { AppRoute } from '../../constants';
-import { MY_LIST_COUNT} from '../../mocks/my-list-info';
 
-type MainProps = {
-  filmInfo: FilmInfo;
-}
-
-export default function Main({ filmInfo }: MainProps): JSX.Element {
-  const { filmCardTitle, filmCardYear, filmCardGenre} = filmInfo;
+export default function Main(): JSX.Element {
+  const allFilms = useAppSelector((state) => state.films);
+  const promoFilm = useAppSelector((state) => state.promoFilm);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [isAddedToMyList, setAddToMyList] = useState(false);
   const [filmsByGenre, setFilmsByGenre] = useState<Film[]>([]);
-  const [myListCount, setMyListCount] = useState(MY_LIST_COUNT);
+  const favoriteFilms = allFilms.filter((item) => item.isFavorite);
+  const [myListCount, setMyListCount] = useState(favoriteFilms.length);
   const selectedGenre = useAppSelector((state) => state.selectedGenre);
-  const allFilms = useAppSelector((state) => state.films);
+
   const filmsCount = useAppSelector((state) => state.filmsShownCount);
 
   const handleClick = ():void => {
@@ -31,7 +27,6 @@ export default function Main({ filmInfo }: MainProps): JSX.Element {
   };
 
   useEffect(() => {
-    dispatch(getFilms());
     dispatch(clearSelectedGenre());
     dispatch(resetFilmsShownCount());
     // eslint-disable-next-line
@@ -52,7 +47,10 @@ export default function Main({ filmInfo }: MainProps): JSX.Element {
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img
+            src={promoFilm?.backgroundImage}
+            alt={promoFilm?.name}
+          />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -62,7 +60,10 @@ export default function Main({ filmInfo }: MainProps): JSX.Element {
 
           <ul className="user-block">
             <li className="user-block__item">
-              <div className="user-block__avatar" onClick={() => navigate(AppRoute.MyList)}>
+              <div
+                className="user-block__avatar"
+                onClick={() => navigate(AppRoute.MyList)}
+              >
                 <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
               </div>
             </li>
@@ -75,18 +76,33 @@ export default function Main({ filmInfo }: MainProps): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img
+                src={promoFilm?.posterImage}
+                alt={promoFilm?.name}
+                width="218"
+                height="327"
+              />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{filmCardTitle}</h2>
+              <h2 className="film-card__title">
+                {promoFilm?.name}
+              </h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{filmCardGenre}</span>
-                <span className="film-card__year">{filmCardYear}</span>
+                <span className="film-card__genre">
+                  {promoFilm?.genre}
+                </span>
+                <span className="film-card__year">
+                  {promoFilm?.released}
+                </span>
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button
+                  onClick={() => navigate(`${AppRoute.Player}/${promoFilm?.id}`)}
+                  className="btn btn--play film-card__button"
+                  type="button"
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -124,12 +140,12 @@ export default function Main({ filmInfo }: MainProps): JSX.Element {
           <ul className="catalog__genres-list">
             <GenreList />
           </ul>
-
-          <FilmsList
-            films={selectedGenre ? filmsByGenre.slice(0, filmsCount) : allFilms.slice(0, filmsCount)}
-            showButton={selectedGenre ? filmsCount < filmsByGenre.length : filmsCount < allFilms.length}
-          />
-
+          <div className="catalog__films-list-main-wrap">
+            <FilmsList
+              films={selectedGenre ? filmsByGenre.slice(0, filmsCount) : allFilms.slice(0, filmsCount)}
+              showButton={selectedGenre ? filmsCount < filmsByGenre.length : filmsCount < allFilms.length}
+            />
+          </div>
         </section>
 
         <footer className="page-footer">

@@ -32,7 +32,7 @@ export default function VideoPlayer({ activeFilm, film }: VideoPlayerProps): JSX
       className="player__video"
       muted
       loop
-      src={film.videoLink}
+      src={film.previewVideoLink}
       poster={film.previewImage}
       ref={videoRef}
     >

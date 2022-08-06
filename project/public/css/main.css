@@ -632,6 +632,12 @@ main {
       border-color: rgba(223, 207, 119, 0.36);
       color: #D9CD8D; }
 
+.logo__link--not-found {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 200px;
+  padding: 50px 80px; }
+
 .logo__letter {
   font-size: 26px; }
   .logo__letter--1 {

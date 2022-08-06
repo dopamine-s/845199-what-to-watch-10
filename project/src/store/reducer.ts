@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { setSelectedGenre, clearSelectedGenre, setDataLoadedStatus, loadFilms, loadPromoFilm, showMoreFilms, resetFilmsShownCount } from './actions';
+import { setSelectedGenre, clearSelectedGenre, setDataLoadingStatus, loadFilms, loadPromoFilm, showMoreFilms, resetFilmsShownCount } from './actions';
 import { Film } from '../types/films';
 import { FILMS_SHOWN_COUNT } from '../constants';
 
@@ -24,7 +24,7 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(setSelectedGenre, (state, action) => {
       state.selectedGenre = action.payload;
     })
-    .addCase(setDataLoadedStatus, (state, action) => {
+    .addCase(setDataLoadingStatus, (state, action) => {
       state.isDataLoading = action.payload;
     })
     .addCase(loadFilms, (state, action) => {

@@ -12,14 +12,9 @@ export default function NotFound(): JSX.Element {
         <h1 className="page-title user-page__title user-page__title--not-found">
           404 Not Found
         </h1>
-        <Link className="logo__link" to="/"
-          style={{
-            marginLeft: 'auto',
-            marginRight: 'auto',
-            marginTop: '200px',
-            padding: '50px 80px',
-          }}
-
+        <Link
+          className="logo__link logo__link--not-found"
+          to="/"
         >
           Вернуться на главную
         </Link>

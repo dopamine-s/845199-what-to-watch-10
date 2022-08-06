@@ -8,7 +8,7 @@ export const setSelectedGenre = createAction('films/changeGenre',
 
 export const clearSelectedGenre = createAction('films/clearGenre');
 
-export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
+export const setDataLoadingStatus = createAction<boolean>('data/setDataLoadingStatus');
 
 export const loadFilms = createAction<Film[]>('films/loadFilms');
 

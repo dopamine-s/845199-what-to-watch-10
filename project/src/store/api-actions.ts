@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
 import { Film } from '../types/films';
-import { setDataLoadedStatus, loadFilms, loadPromoFilm } from './actions';
+import { setDataLoadingStatus, loadFilms, loadPromoFilm } from './actions';
 import { APIRoute } from '../constants';
 
 export const fetchFilmsAction = createAsyncThunk<void, undefined, {
@@ -12,10 +12,10 @@ export const fetchFilmsAction = createAsyncThunk<void, undefined, {
 }>(
   'films/fetchFilms',
   async (_arg, { dispatch, extra: api }) => {
-    dispatch(setDataLoadedStatus(true));
+    dispatch(setDataLoadingStatus(true));
     const { data } = await api.get<Film[]>(APIRoute.Films);
     dispatch(loadFilms(data));
-    dispatch(setDataLoadedStatus(false));
+    dispatch(setDataLoadingStatus(false));
   },
 );
 

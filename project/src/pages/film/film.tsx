@@ -7,6 +7,7 @@ import NotFound from '../not-found/not-found';
 import { AppRoute } from '../../constants';
 import FilmsList from '../../components/films-list/films-list';
 import FilmTabs from '../../components/film-tabs.tsx/film-tabs';
+import UserBlock from '../../components/user-block/user-block';
 
 const MAX_GENRE_FILTER_COUNT = 4;
 
@@ -58,16 +59,8 @@ export default function FilmPage({ filmsReviews }: FilmProps): JSX.Element {
           <header className="page-header film-card__head">
             <Logo light={false} />
 
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar" onClick={() => navigate(AppRoute.MyList)}>
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a href="/" className="user-block__link">Sign out</a>
-              </li>
-            </ul>
+            <UserBlock />
+
           </header>
 
           <div className="film-card__wrap">

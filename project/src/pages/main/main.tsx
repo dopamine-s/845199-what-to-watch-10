@@ -7,6 +7,7 @@ import { clearSelectedGenre, resetFilmsShownCount } from '../../store/actions';
 import Logo from '../../components/logo/logo';
 import { Film } from '../../types/films';
 import { AppRoute } from '../../constants';
+import UserBlock from '../../components/user-block/user-block';
 
 export default function Main(): JSX.Element {
   const allFilms = useAppSelector((state) => state.films);
@@ -56,21 +57,11 @@ export default function Main(): JSX.Element {
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header film-card__head">
+
           <Logo light={false} />
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div
-                className="user-block__avatar"
-                onClick={() => navigate(AppRoute.MyList)}
-              >
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a href="/" className="user-block__link">Sign out</a>
-            </li>
-          </ul>
+          <UserBlock />
+
         </header>
 
         <div className="film-card__wrap">

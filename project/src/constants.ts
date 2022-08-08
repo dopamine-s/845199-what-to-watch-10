@@ -21,7 +21,9 @@ export const filmTabNames = [
 
 export enum APIRoute {
   Films = '/films',
-  Promo = '/promo'
+  Promo = '/promo',
+  Login = '/login',
+  Logout = '/logout',
 }
 
 export const FILMS_SHOWN_COUNT = 8;
@@ -29,3 +31,5 @@ export const FILMS_SHOWN_COUNT = 8;
 export const BACKEND_URL = 'https://10.react.pages.academy/wtw';
 
 export const REQUEST_TIMEOUT = 5000;
+
+export const TIMEOUT_SHOW_ERROR = 2000;

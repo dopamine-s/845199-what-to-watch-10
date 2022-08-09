@@ -9,6 +9,7 @@ export default function UserBlock(): JSX.Element{
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const userData = useAppSelector((state) => state.userData);
 
   const logoutHandler = (evt: FormEvent) => {
     evt.preventDefault();
@@ -25,8 +26,8 @@ export default function UserBlock(): JSX.Element{
             onClick={() => navigate(AppRoute.MyList)}
           >
             <img
-              src="img/avatar.jpg"
-              alt="User avatar"
+              src={userData ? userData.avatarUrl : 'img/avatar.jpg'}
+              alt={`${userData?.name} avatar`}
               width="63"
               height="63"
             />

@@ -31,5 +31,3 @@ export const FILMS_SHOWN_COUNT = 8;
 export const BACKEND_URL = 'https://10.react.pages.academy/wtw';
 
 export const REQUEST_TIMEOUT = 5000;
-
-export const TIMEOUT_SHOW_ERROR = 2000;

@@ -2,12 +2,11 @@ import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
 import { Film } from '../types/films';
-import { setDataLoadingStatus, loadFilms, loadPromoFilm, requireAuthorization, setError, setUserData } from './actions';
+import { setDataLoadingStatus, loadFilms, loadPromoFilm, requireAuthorization, setUserData } from './actions';
 import { saveToken, dropToken } from '../services/token';
-import { APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../constants';
+import { APIRoute, AuthorizationStatus } from '../constants';
 import { AuthorizationData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
-import { store } from './';
 
 export const fetchFilmsAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch,
@@ -77,14 +76,4 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     dropToken();
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   },
-);
-
-export const clearErrorAction = createAsyncThunk(
-  'data/clearError',
-  () => {
-    setTimeout(
-      () => store.dispatch(setError(null)),
-      TIMEOUT_SHOW_ERROR
-    );
-  }
 );

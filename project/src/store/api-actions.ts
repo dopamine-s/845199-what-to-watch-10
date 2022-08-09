@@ -5,7 +5,7 @@ import { Film } from '../types/films';
 import { setDataLoadingStatus, loadFilms, loadPromoFilm, requireAuthorization, setError } from './actions';
 import { saveToken, dropToken } from '../services/token';
 import { APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../constants';
-import { AuthData } from '../types/auth-data';
+import { AuthorizationData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { store } from './';
 
@@ -51,7 +51,7 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export const loginAction = createAsyncThunk<void, AuthData, {
+export const loginAction = createAsyncThunk<void, AuthorizationData, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance

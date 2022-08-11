@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import { Film } from '../types/films';
+import { AuthorizationStatus } from '../constants';
 
 export const getFilmRateLevel = (filmRate: number): string => {
   if (filmRate >= 0 && filmRate <= 3) {
@@ -28,3 +29,6 @@ export const getReviewDateTime = (data: string): string => dayjs(data).format('Y
 
 export const getGenres = (filmList: Film[]): string[] =>
   [...new Set(filmList.map((film) => film.genre))];
+
+export const isAuthorized = (authorizationStatus: AuthorizationStatus): boolean =>
+  authorizationStatus === AuthorizationStatus.Unknown;

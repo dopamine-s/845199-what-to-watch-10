@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../constants';
+import { AppRoute } from '../../constants';
 import { useAppSelector } from '../../hooks';
 import Loader from '../../pages/loader/loader';
 import Main from '../../pages/main/main';
@@ -11,6 +11,7 @@ import Player from '../../pages/player/player';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 import { FilmReviews } from '../../types/reviews';
+import { isAuthorized } from '../../utils/utils';
 
 type AppProps = {
   filmsReviews: FilmReviews[];
@@ -18,9 +19,9 @@ type AppProps = {
 
 function App (
   { filmsReviews }: AppProps): JSX.Element {
-  const {isDataLoading} = useAppSelector((state) => state);
+  const {authorizationStatus, isDataLoading} = useAppSelector((state) => state);
 
-  if (isDataLoading) {
+  if (isAuthorized(authorizationStatus) || isDataLoading) {
     return (
       <Loader />
     );
@@ -47,7 +48,7 @@ function App (
         <Route
           path={AppRoute.MyList}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <PrivateRoute>
               <MyList />
             </PrivateRoute>
           }
@@ -68,7 +69,9 @@ function App (
           <Route
             path=':id/review'
             element={
-              <AddReview />
+              <PrivateRoute>
+                <AddReview />
+              </PrivateRoute>
             }
           />
         </Route>

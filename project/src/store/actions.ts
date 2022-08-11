@@ -1,5 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 import { Film } from '../types/films';
+import { UserData } from '../types/user-data';
+import { AuthorizationStatus } from '../constants';
 
 export const setSelectedGenre = createAction('films/changeGenre',
   (genre = '') => ({
@@ -17,3 +19,7 @@ export const loadPromoFilm = createAction<Film>('films/loadPromoFilm');
 export const showMoreFilms = createAction('films/showMore');
 
 export const resetFilmsShownCount = createAction('films/resetFilmsShownCount');
+
+export const setAuthorizationStatus = createAction<AuthorizationStatus>('user/setAuthorizationStatus');
+
+export const setUserData = createAction<UserData>('user/setUserData');

@@ -21,7 +21,9 @@ export const filmTabNames = [
 
 export enum APIRoute {
   Films = '/films',
-  Promo = '/promo'
+  Promo = '/promo',
+  Login = '/login',
+  Logout = '/logout',
 }
 
 export const FILMS_SHOWN_COUNT = 8;

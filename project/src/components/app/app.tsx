@@ -11,7 +11,7 @@ import Player from '../../pages/player/player';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 import { FilmReviews } from '../../types/reviews';
-import { isCheckedAuthorization } from '../../utils/utils';
+import { isAuthorized } from '../../utils/utils';
 
 type AppProps = {
   filmsReviews: FilmReviews[];
@@ -21,7 +21,7 @@ function App (
   { filmsReviews }: AppProps): JSX.Element {
   const {authorizationStatus, isDataLoading} = useAppSelector((state) => state);
 
-  if (isCheckedAuthorization(authorizationStatus) || isDataLoading) {
+  if (isAuthorized(authorizationStatus) || isDataLoading) {
     return (
       <Loader />
     );
@@ -48,7 +48,7 @@ function App (
         <Route
           path={AppRoute.MyList}
           element={
-            <PrivateRoute authorizationStatus={authorizationStatus}>
+            <PrivateRoute>
               <MyList />
             </PrivateRoute>
           }
@@ -69,7 +69,7 @@ function App (
           <Route
             path=':id/review'
             element={
-              <PrivateRoute authorizationStatus={authorizationStatus}>
+              <PrivateRoute>
                 <AddReview />
               </PrivateRoute>
             }

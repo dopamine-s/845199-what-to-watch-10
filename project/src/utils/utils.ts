@@ -30,5 +30,5 @@ export const getReviewDateTime = (data: string): string => dayjs(data).format('Y
 export const getGenres = (filmList: Film[]): string[] =>
   [...new Set(filmList.map((film) => film.genre))];
 
-export const isCheckedAuthorization = (authorizationStatus: AuthorizationStatus): boolean =>
+export const isAuthorized = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;

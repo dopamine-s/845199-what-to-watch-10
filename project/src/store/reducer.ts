@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { setSelectedGenre, clearSelectedGenre, setDataLoadingStatus, loadFilms, loadPromoFilm, showMoreFilms, resetFilmsShownCount, requireAuthorization, setUserData } from './actions';
+import { setSelectedGenre, clearSelectedGenre, setDataLoadingStatus, loadFilms, loadPromoFilm, showMoreFilms, resetFilmsShownCount, setAuthorizationStatus, setUserData } from './actions';
 import { Film } from '../types/films';
 import { UserData } from '../types/user-data';
 import { FILMS_SHOWN_COUNT, AuthorizationStatus } from '../constants';
@@ -47,7 +47,7 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(resetFilmsShownCount, (state) => {
       state.filmsShownCount = FILMS_SHOWN_COUNT;
     })
-    .addCase(requireAuthorization, (state, action) => {
+    .addCase(setAuthorizationStatus, (state, action) => {
       state.authorizationStatus = action.payload;
     })
     .addCase(setUserData, (state, action) => {

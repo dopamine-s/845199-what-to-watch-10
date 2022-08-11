@@ -6,10 +6,10 @@ import App from './components/app/app';
 import { fetchFilmsAction, fetchPromoFilmAction } from './store/api-actions';
 import { ToastContainer } from 'react-toastify';
 import { filmsReviews } from './mocks/reviews';
-import { checkAuthAction } from './store/api-actions';
+import { getUserDataAction } from './store/api-actions';
 import 'react-toastify/dist/ReactToastify.css';
 
-store.dispatch(checkAuthAction());
+store.dispatch(getUserDataAction());
 
 store.dispatch(fetchFilmsAction());
 

@@ -20,6 +20,6 @@ export const showMoreFilms = createAction('films/showMore');
 
 export const resetFilmsShownCount = createAction('films/resetFilmsShownCount');
 
-export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
+export const setAuthorizationStatus = createAction<AuthorizationStatus>('user/setAuthorizationStatus');
 
 export const setUserData = createAction<UserData>('user/setUserData');

@@ -13,23 +13,17 @@ export default function SignIn(): JSX.Element {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
-  const onSubmit = (authorizationData: AuthorizationData) => {
-
-    dispatch(loginAction(authorizationData));
-  };
-
   const submitHandler = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
-      onSubmit({
+      dispatch(loginAction(({
         login: loginRef.current.value,
         password: passwordRef.current.value,
-      });
-      // console.log('login', loginRef.current.value, 'password', passwordRef.current.value, 'AuthorizationStatus', authorizationStatus);
+      })as AuthorizationData));
     }
   };
-  // console.log('AuthorizationStatus', authorizationStatus);
+
   if (authorizationStatus === AuthorizationStatus.Auth) {
     return <Navigate to={AppRoute.Main} />;
   }
@@ -44,7 +38,6 @@ export default function SignIn(): JSX.Element {
 
       <div className="sign-in user-page__content">
         <form
-          action=""
           className="sign-in__form"
           onSubmit={submitHandler}
         >

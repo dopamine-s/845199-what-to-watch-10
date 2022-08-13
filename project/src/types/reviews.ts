@@ -12,6 +12,7 @@ export type FilmReview = {
 }
 
 export type NewReview = {
+  id: string;
   comment: string;
   rating: number;
 }

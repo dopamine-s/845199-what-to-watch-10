@@ -17,10 +17,14 @@ export default function SignIn(): JSX.Element {
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
-      dispatch(loginAction(({
-        login: loginRef.current.value,
-        password: passwordRef.current.value,
-      })as AuthorizationData));
+      const login = loginRef.current.value;
+      const password = passwordRef.current.value;
+      if (password !== '') {
+        dispatch(loginAction(({
+          login,
+          password,
+        })as AuthorizationData));
+      }
     }
   };
 

@@ -2,22 +2,24 @@ import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
 import { Film } from '../types/films';
-import { FilmReview } from '../types/reviews';
+import { FilmReview, NewReview } from '../types/reviews';
 import { AuthorizationData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import {
   setDataLoadingStatus,
+  setDataUploadingStatus,
   loadFilms,
   loadPromoFilm,
   loadFilm,
   loadSimilarFilms,
   loadFilmReviews,
+  uploadNewReview,
   setAuthorizationStatus,
   setUserData,
-  // redirectToRoute
+  redirectToRoute
 } from './actions';
 import { saveToken, dropToken } from '../services/token';
-import { APIRoute, AuthorizationStatus } from '../constants';
+import { APIRoute, AppRoute, AuthorizationStatus } from '../constants';
 import { filterSimilarMovies } from '../utils/utils';
 
 export const fetchFilmsAction = createAsyncThunk<void, undefined, {
@@ -79,6 +81,25 @@ export const fetchFilmReviewsAction = createAsyncThunk<void, string, {
   async (id, { dispatch, extra: api }) => {
     const { data } = await api.get<FilmReview[]>(`${APIRoute.Comments}/${id}`);
     dispatch(loadFilmReviews((data)));
+  },
+);
+
+export const sendNewReviewAction = createAsyncThunk<void, NewReview, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'films/sendNewReview',
+  async ({ id, comment, rating }, { dispatch, extra: api }) => {
+    dispatch(setDataUploadingStatus(true));
+    try {
+      const { data } = await api.post<NewReview>(`${APIRoute.Comments}/${id}`, { comment, rating });
+      dispatch(uploadNewReview((data)));
+      dispatch(redirectToRoute(`${AppRoute.Film}/${id}`));
+      dispatch(setDataUploadingStatus(false));
+    } catch {
+      dispatch(setDataUploadingStatus(false));
+    }
   },
 );
 

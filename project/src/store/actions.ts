@@ -1,8 +1,9 @@
 import { createAction } from '@reduxjs/toolkit';
 import { Film } from '../types/films';
 import { FilmReview} from '../types/reviews';
+import { NewReview } from '../types/reviews';
 import { UserData } from '../types/user-data';
-import { AuthorizationStatus, AppRoute } from '../constants';
+import { AuthorizationStatus } from '../constants';
 
 export const setSelectedGenre = createAction('films/changeGenre',
   (genre = '') => ({
@@ -12,6 +13,8 @@ export const setSelectedGenre = createAction('films/changeGenre',
 export const clearSelectedGenre = createAction('films/clearGenre');
 
 export const setDataLoadingStatus = createAction<boolean>('data/setDataLoadingStatus');
+
+export const setDataUploadingStatus = createAction<boolean>('data/setDataUploadingStatus');
 
 export const loadFilms = createAction<Film[]>('films/loadFilms');
 
@@ -23,6 +26,8 @@ export const loadSimilarFilms = createAction<Film[]>('films/loadSimilarFilms');
 
 export const loadFilmReviews = createAction<FilmReview[]>('films/loadFilmReviews');
 
+export const uploadNewReview = createAction<NewReview>('films/uploadFilmReview');
+
 export const showMoreFilms = createAction('films/showMore');
 
 export const resetFilmsShownCount = createAction('films/resetFilmsShownCount');
@@ -31,4 +36,4 @@ export const setAuthorizationStatus = createAction<AuthorizationStatus>('user/se
 
 export const setUserData = createAction<UserData>('user/setUserData');
 
-export const redirectToRoute = createAction<AppRoute>('films/redirectToRoute');
+export const redirectToRoute = createAction<string>('films/redirectToRoute');

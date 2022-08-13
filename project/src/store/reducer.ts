@@ -1,9 +1,24 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { setSelectedGenre, clearSelectedGenre, setDataLoadingStatus, loadFilms, loadPromoFilm, loadFilm, loadSimilarFilms, showMoreFilms, resetFilmsShownCount, setAuthorizationStatus, setUserData, loadFilmReviews } from './actions';
+import {
+  setSelectedGenre,
+  clearSelectedGenre,
+  setDataLoadingStatus,
+  setDataUploadingStatus,
+  loadFilms,
+  loadPromoFilm,
+  loadFilm,
+  loadSimilarFilms,
+  loadFilmReviews,
+  uploadNewReview,
+  showMoreFilms,
+  resetFilmsShownCount,
+  setAuthorizationStatus,
+  setUserData
+} from './actions';
 import { Film } from '../types/films';
 import { UserData } from '../types/user-data';
 import { FILMS_SHOWN_COUNT, AuthorizationStatus } from '../constants';
-import { FilmReview } from '../types/reviews';
+import { FilmReview, NewReview } from '../types/reviews';
 
 type InitialStateTypes = {
   selectedGenre: string;
@@ -15,7 +30,9 @@ type InitialStateTypes = {
   filmsShownCount: number;
   authorizationStatus: AuthorizationStatus;
   isDataLoading: boolean;
+  isDataUploading: boolean;
   userData: UserData | null;
+  newReview: NewReview | null;
 }
 
 const initialState: InitialStateTypes = {
@@ -28,7 +45,9 @@ const initialState: InitialStateTypes = {
   filmsShownCount: FILMS_SHOWN_COUNT,
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoading: false,
+  isDataUploading: false,
   userData: null,
+  newReview: null,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -40,6 +59,9 @@ export const reducer = createReducer(initialState, (builder) => {
       state.selectedGenre = '';
     })
     .addCase(setDataLoadingStatus, (state, action) => {
+      state.isDataLoading = action.payload;
+    })
+    .addCase(setDataUploadingStatus, (state, action) => {
       state.isDataLoading = action.payload;
     })
     .addCase(loadFilms, (state, action) => {
@@ -56,6 +78,9 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadFilmReviews, (state, action) => {
       state.filmReviews = action.payload;
+    })
+    .addCase(uploadNewReview, (state, action) => {
+      state.newReview = action.payload;
     })
     .addCase(showMoreFilms, (state) => {
       state.filmsShownCount += FILMS_SHOWN_COUNT;

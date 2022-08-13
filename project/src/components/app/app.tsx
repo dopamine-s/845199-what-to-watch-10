@@ -1,7 +1,8 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { AppRoute } from '../../constants';
 import { useAppSelector } from '../../hooks';
 import Loader from '../../pages/loader/loader';
+import HistoryRouter from '../history-route/history-route';
 import Main from '../../pages/main/main';
 import SignIn from '../../pages/sign-in/sign-in';
 import MyList from '../../pages/my-list/my-list';
@@ -11,6 +12,7 @@ import Player from '../../pages/player/player';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 import { isAuthorized } from '../../utils/utils';
+import browserHistory from '../../browser-history';
 
 function App (): JSX.Element {
   const {authorizationStatus, isDataLoading} = useAppSelector((state) => state);
@@ -22,7 +24,7 @@ function App (): JSX.Element {
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
 
         <Route
@@ -87,7 +89,7 @@ function App (): JSX.Element {
         />
 
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

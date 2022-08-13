@@ -5,7 +5,17 @@ import { Film } from '../types/films';
 import { FilmReview } from '../types/reviews';
 import { AuthorizationData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
-import { setDataLoadingStatus, loadFilms, loadPromoFilm, loadFilm, loadSimilarFilms, loadFilmReviews, setAuthorizationStatus, setUserData } from './actions';
+import {
+  setDataLoadingStatus,
+  loadFilms,
+  loadPromoFilm,
+  loadFilm,
+  loadSimilarFilms,
+  loadFilmReviews,
+  setAuthorizationStatus,
+  setUserData,
+  // redirectToRoute
+} from './actions';
 import { saveToken, dropToken } from '../services/token';
 import { APIRoute, AuthorizationStatus } from '../constants';
 import { filterSimilarMovies } from '../utils/utils';

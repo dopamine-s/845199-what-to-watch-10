@@ -2,7 +2,7 @@ import { createAction } from '@reduxjs/toolkit';
 import { Film } from '../types/films';
 import { FilmReview} from '../types/reviews';
 import { UserData } from '../types/user-data';
-import { AuthorizationStatus } from '../constants';
+import { AuthorizationStatus, AppRoute } from '../constants';
 
 export const setSelectedGenre = createAction('films/changeGenre',
   (genre = '') => ({
@@ -30,3 +30,5 @@ export const resetFilmsShownCount = createAction('films/resetFilmsShownCount');
 export const setAuthorizationStatus = createAction<AuthorizationStatus>('user/setAuthorizationStatus');
 
 export const setUserData = createAction<UserData>('user/setUserData');
+
+export const redirectToRoute = createAction<AppRoute>('films/redirectToRoute');

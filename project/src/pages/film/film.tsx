@@ -1,26 +1,24 @@
 import Logo from '../../components/logo/logo';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { useAppSelector } from '../../hooks';
-import { FilmReviews } from '../../types/reviews';
+import { useState, useEffect } from 'react';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { fetchSimilarFilmsAction, fetchFilmAction, fetchFilmReviewsAction } from '../../store/api-actions';
 import NotFound from '../not-found/not-found';
-import { AppRoute } from '../../constants';
+import { AppRoute, AuthorizationStatus } from '../../constants';
 import FilmsList from '../../components/films-list/films-list';
 import FilmTabs from '../../components/film-tabs.tsx/film-tabs';
 import UserBlock from '../../components/user-block/user-block';
 
-const MAX_GENRE_FILTER_COUNT = 4;
-
-type FilmProps = {
-  filmsReviews: FilmReviews[];
-}
-
-export default function FilmPage({ filmsReviews }: FilmProps): JSX.Element {
+export default function FilmPage(): JSX.Element {
   const allFilms = useAppSelector((state) => state.films);
+  const film = useAppSelector((state) => state.film);
+  const similarFilms = useAppSelector((state) => state.similarFilms);
+  const filmReviews = useAppSelector((state) => state.filmReviews);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const params = useParams();
   const id = params.id;
-  const film = allFilms.find((movie) => String(movie.id) === id);
   const favoriteFilms = allFilms.filter((item) => item.isFavorite);
   const [isAddedToMyList, setAddToMyList] = useState(false);
   const [myListCount, setMyListCount] = useState(favoriteFilms.length);
@@ -29,16 +27,15 @@ export default function FilmPage({ filmsReviews }: FilmProps): JSX.Element {
     isAddedToMyList ? setMyListCount(myListCount - 1) : setMyListCount(myListCount + 1);
   };
 
-  const getFilteredFilms = () => {
-    if (film && film.genre) {
-      const filteredFilms = allFilms
-        .filter((movie) => movie.genre === film.genre)
-        .slice(0, MAX_GENRE_FILTER_COUNT)
-        .filter((movie) => movie.id !== film.id);
-      return filteredFilms;
+  useEffect(() => {
+    if (!id) {
+      return;
     }
-    return allFilms;
-  };
+    dispatch(fetchSimilarFilmsAction(id));
+    dispatch(fetchFilmAction(id));
+    dispatch(fetchFilmReviewsAction(id));
+    // eslint-disable-next-line
+  }, [id]);
 
   if (!film) {
     return (
@@ -101,7 +98,14 @@ export default function FilmPage({ filmsReviews }: FilmProps): JSX.Element {
                   <span>My list</span>
                   <span className="film-card__count">{myListCount}</span>
                 </button>
-                <Link className="btn film-card__button" to="review">Add review</Link>
+                { authorizationStatus === AuthorizationStatus.Auth ? (
+                  <Link
+                    className="btn film-card__button"
+                    to={AppRoute.AddReview}
+                  >
+                  Add review
+                  </Link>
+                ) : ('')}
               </div>
             </div>
           </div>
@@ -113,7 +117,7 @@ export default function FilmPage({ filmsReviews }: FilmProps): JSX.Element {
             </div>
             <FilmTabs
               film={film}
-              filmsReviews={filmsReviews}
+              filmReviews={filmReviews}
             />
           </div>
         </div>
@@ -122,10 +126,16 @@ export default function FilmPage({ filmsReviews }: FilmProps): JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmsList
-            films={getFilteredFilms()}
-            showButton={false}
-          />
+          { similarFilms ?
+            (
+              <FilmsList
+                films={similarFilms}
+                showButton={false}
+              />
+            ) :
+            (
+              ''
+            )}
         </section>
 
         <footer className="page-footer">

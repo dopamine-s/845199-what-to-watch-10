@@ -1,19 +1,18 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Film } from '../../types/films';
-import { FilmReviews } from '../../types/reviews';
+import { FilmReview } from '../../types/reviews';
 import { filmTabNames } from '../../constants';
-
-import FilmOverview from '../film-overview/film-overview';
 import FilmDetails from '../film-details/film-details';
 import SingleFilmReviews from '../film-reviews/film-reviews';
+import FilmOverview from '../film-overview/film-overview';
 
 type FilmTabsProps = {
   film: Film;
-  filmsReviews: FilmReviews[];
+  filmReviews: FilmReview[] | null;
 }
 
-export default function FilmTabs( { film, filmsReviews }: FilmTabsProps): JSX.Element {
+export default function FilmTabs( { film, filmReviews }: FilmTabsProps): JSX.Element {
   const [activeTab, setActiveTab] = useState(filmTabNames[0]);
 
   const renderTabs = (tab: string): JSX.Element => {
@@ -21,7 +20,7 @@ export default function FilmTabs( { film, filmsReviews }: FilmTabsProps): JSX.El
       case 'Details':
         return <FilmDetails film={film} />;
       case 'Reviews':
-        return <SingleFilmReviews filmsReviews={filmsReviews} />;
+        return <SingleFilmReviews filmReviews={filmReviews} />;
       case 'Overview':
       default:
         return <FilmOverview film={film} />;

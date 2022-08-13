@@ -10,8 +10,3 @@ export type FilmReview = {
   rating: number;
   user: User;
 }
-
-export type FilmReviews = {
-  filmId: number;
-  reviews: FilmReview[];
-}

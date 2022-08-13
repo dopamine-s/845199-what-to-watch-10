@@ -24,6 +24,7 @@ export enum APIRoute {
   Promo = '/promo',
   Login = '/login',
   Logout = '/logout',
+  Comments = '/comments'
 }
 
 export const FILMS_SHOWN_COUNT = 8;
@@ -31,3 +32,5 @@ export const FILMS_SHOWN_COUNT = 8;
 export const BACKEND_URL = 'https://10.react.pages.academy/wtw';
 
 export const REQUEST_TIMEOUT = 5000;
+
+export const MAX_GENRE_FILTER_COUNT = 4;

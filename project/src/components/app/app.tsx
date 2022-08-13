@@ -10,15 +10,9 @@ import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
-import { FilmReviews } from '../../types/reviews';
 import { isAuthorized } from '../../utils/utils';
 
-type AppProps = {
-  filmsReviews: FilmReviews[];
-}
-
-function App (
-  { filmsReviews }: AppProps): JSX.Element {
+function App (): JSX.Element {
   const {authorizationStatus, isDataLoading} = useAppSelector((state) => state);
 
   if (isAuthorized(authorizationStatus) || isDataLoading) {
@@ -60,9 +54,7 @@ function App (
           <Route
             path=':id'
             element={
-              <FilmPage
-                filmsReviews={filmsReviews}
-              />
+              <FilmPage />
             }
           >
           </Route>

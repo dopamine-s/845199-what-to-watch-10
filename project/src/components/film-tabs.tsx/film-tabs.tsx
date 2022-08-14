@@ -9,7 +9,7 @@ import FilmOverview from '../film-overview/film-overview';
 
 type FilmTabsProps = {
   film: Film;
-  filmReviews: FilmReview[] | null;
+  filmReviews: FilmReview[];
 }
 
 export default function FilmTabs( { film, filmReviews }: FilmTabsProps): JSX.Element {

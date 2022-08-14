@@ -14,19 +14,19 @@ export const clearSelectedGenre = createAction('films/clearGenre');
 
 export const setDataLoadingStatus = createAction<boolean>('data/setDataLoadingStatus');
 
-export const setDataUploadingStatus = createAction<boolean>('data/setDataUploadingStatus');
+export const setReviewUploadingStatus = createAction<boolean>('data/setReviewUploadingStatus');
 
-export const loadFilms = createAction<Film[]>('films/loadFilms');
+export const setFilms = createAction<Film[]>('films/setFilms');
 
-export const loadPromoFilm = createAction<Film>('films/loadPromoFilm');
+export const setPromoFilm = createAction<Film>('films/setPromoFilm');
 
-export const loadFilm = createAction<Film>('films/loadFilm');
+export const setFilm = createAction<Film>('films/setFilm');
 
-export const loadSimilarFilms = createAction<Film[]>('films/loadSimilarFilms');
+export const setSimilarFilms = createAction<Film[]>('films/setSimilarFilms');
 
-export const loadFilmReviews = createAction<FilmReview[]>('films/loadFilmReviews');
+export const setFilmReviews = createAction<FilmReview[]>('films/setFilmReviews');
 
-export const uploadNewReview = createAction<NewReview>('films/uploadFilmReview');
+export const setNewReview = createAction<NewReview>('films/setNewReview');
 
 export const showMoreFilms = createAction('films/showMore');
 
@@ -37,3 +37,7 @@ export const setAuthorizationStatus = createAction<AuthorizationStatus>('user/se
 export const setUserData = createAction<UserData>('user/setUserData');
 
 export const redirectToRoute = createAction<string>('films/redirectToRoute');
+
+export const setLoginError = createAction('user/setLoginError');
+
+export const clearLoginError = createAction('user/clearLoginError');

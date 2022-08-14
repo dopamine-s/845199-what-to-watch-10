@@ -98,14 +98,15 @@ export default function FilmPage(): JSX.Element {
                   <span>My list</span>
                   <span className="film-card__count">{myListCount}</span>
                 </button>
-                { authorizationStatus === AuthorizationStatus.Auth ? (
-                  <Link
-                    className="btn film-card__button"
-                    to={AppRoute.AddReview}
-                  >
+                {authorizationStatus === AuthorizationStatus.Auth &&
+                  (
+                    <Link
+                      className="btn film-card__button"
+                      to={AppRoute.AddReview}
+                    >
                   Add review
-                  </Link>
-                ) : ('')}
+                    </Link>
+                  )}
               </div>
             </div>
           </div>
@@ -126,16 +127,15 @@ export default function FilmPage(): JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          { similarFilms ?
+          {
+            similarFilms &&
             (
               <FilmsList
                 films={similarFilms}
                 showButton={false}
               />
-            ) :
-            (
-              ''
-            )}
+            )
+          }
         </section>
 
         <footer className="page-footer">

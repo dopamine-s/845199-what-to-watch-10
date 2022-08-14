@@ -3,12 +3,12 @@ import { FilmReview } from '../../types/reviews';
 import NoReviews from '../no-reviews/no-reviews';
 
 type SingleFilmReviewsProps = {
-  filmReviews: FilmReview[] | null;
+  filmReviews: FilmReview[];
 }
 
 export default function SingleFilmReviews( {filmReviews }: SingleFilmReviewsProps): JSX.Element {
 
-  if (!filmReviews || filmReviews.length === 0) {
+  if (filmReviews.length === 0) {
     return (
       <NoReviews />
     );

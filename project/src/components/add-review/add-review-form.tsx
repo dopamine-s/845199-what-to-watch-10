@@ -7,6 +7,8 @@ import { NewReview } from '../../types/reviews';
 export default function AddReviewForm() {
   const MAX_RATE = 10;
   const DEFAULT_RATE = 0;
+  const MIN_USER_REVIEW_LENGTH = 50;
+  const MAX_USER_REVIEW_LENGTH = 400;
   const [userRating, setUserRating] = useState(DEFAULT_RATE);
   const [userReview, setUserReview] = useState('');
   const dispatch = useAppDispatch();
@@ -55,7 +57,6 @@ export default function AddReviewForm() {
                     value={number}
                     onChange={ratingChangeHandler}
                     defaultChecked={number === userRating}
-                    disabled={isDataUploading}
                   />
                   <label
                     className="rating__label"
@@ -77,13 +78,12 @@ export default function AddReviewForm() {
           name="review-text"
           id="review-text"
           placeholder="Review text (50 to 400 symbols)."
-          disabled={isDataUploading}
         />
         <div className="add-review__submit">
           <button
             className="add-review__btn"
             type="submit"
-            disabled={isDataUploading || userRating === DEFAULT_RATE || userReview.length < 50 || userReview.length > 400}
+            disabled={isDataUploading || userRating === DEFAULT_RATE || userReview.length < MIN_USER_REVIEW_LENGTH || userReview.length > MAX_USER_REVIEW_LENGTH}
           >
             Post
           </button>

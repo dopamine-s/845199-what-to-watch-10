@@ -23,7 +23,7 @@ import {
 import { saveToken, dropToken } from '../services/token';
 import { APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../constants';
 import { filterSimilarMovies } from '../utils/utils';
-import { store } from './';
+import { store } from '../store/index';
 
 export const fetchFilmsAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch,
@@ -59,7 +59,7 @@ export const fetchFilmAction = createAsyncThunk<void, string, {
   'films/fetchFilm',
   async (id, { dispatch, extra: api }) => {
     const { data } = await api.get<Film>(`${APIRoute.Films}/${id}`);
-    dispatch(setFilm((data)));
+    dispatch(setFilm(data));
   },
 );
 
@@ -83,7 +83,7 @@ export const fetchFilmReviewsAction = createAsyncThunk<void, string, {
   'films/fetchFilmReviews',
   async (id, { dispatch, extra: api }) => {
     const { data } = await api.get<FilmReview[]>(`${APIRoute.Comments}/${id}`);
-    dispatch(setFilmReviews((data)));
+    dispatch(setFilmReviews(data));
   },
 );
 
@@ -97,7 +97,7 @@ export const sendNewReviewAction = createAsyncThunk<void, NewReview, {
     dispatch(setReviewUploadingStatus(true));
     try {
       const { data } = await api.post<NewReview>(`${APIRoute.Comments}/${id}`, { comment, rating });
-      dispatch(setNewReview((data)));
+      dispatch(setNewReview(data));
       dispatch(setReviewUploadingStatus(false));
       dispatch(redirectToRoute(`${AppRoute.Film}/${id}`));
     } catch {

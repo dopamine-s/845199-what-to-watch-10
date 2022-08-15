@@ -24,11 +24,11 @@ import { FilmReview, NewReview } from '../types/reviews';
 
 type InitialStateTypes = {
   selectedGenre: string;
-  films: Film [];
+  films: Film[];
   promoFilm: Film | null;
   film: Film | null;
-  similarFilms: Film [];
-  filmReviews: FilmReview [];
+  similarFilms: Film[];
+  filmReviews: FilmReview[];
   filmsShownCount: number;
   authorizationStatus: AuthorizationStatus;
   isDataLoading: boolean;

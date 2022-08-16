@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { Film } from '../types/films';
-import { AuthorizationStatus } from '../constants';
+import { AuthorizationStatus, MAX_GENRE_FILTER_COUNT, EMAIL_REGEXP } from '../constants';
 
 export const getFilmRateLevel = (filmRate: number): string => {
   if (filmRate >= 0 && filmRate <= 3) {
@@ -32,3 +32,8 @@ export const getGenres = (filmList: Film[]): string[] =>
 
 export const isAuthorized = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
+
+export const filterSimilarMovies = (data: Film[], id: string): Film[] =>
+  data.slice(0, MAX_GENRE_FILTER_COUNT).filter((movie) => String(movie.id) !== id);
+
+export const isEmailValid = (value: string): boolean => EMAIL_REGEXP.test(value);

@@ -11,7 +11,8 @@ export type FilmReview = {
   user: User;
 }
 
-export type FilmReviews = {
-  filmId: number;
-  reviews: FilmReview[];
+export type NewReview = {
+  id: string;
+  comment: string;
+  rating: number;
 }

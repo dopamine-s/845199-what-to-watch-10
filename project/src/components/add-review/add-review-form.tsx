@@ -1,10 +1,20 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, FormEvent } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { sendNewReviewAction } from '../../store/api-actions';
+import { NewReview } from '../../types/reviews';
 
 export default function AddReviewForm() {
   const MAX_RATE = 10;
-  const DEFAULT_RATE = 8;
+  const DEFAULT_RATE = 0;
+  const MIN_USER_REVIEW_LENGTH = 50;
+  const MAX_USER_REVIEW_LENGTH = 400;
   const [userRating, setUserRating] = useState(DEFAULT_RATE);
   const [userReview, setUserReview] = useState('');
+  const dispatch = useAppDispatch();
+  const params = useParams();
+  const id = params.id;
+  const { isDataUploading } = useAppSelector((state) => state);
 
   const textChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const reviewText = event.target.value;
@@ -16,8 +26,22 @@ export default function AddReviewForm() {
     setUserRating(rating);
   };
 
+  const submitHandler = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    if (id && userReview !== null && userRating !== null) {
+      dispatch(sendNewReviewAction(({
+        id: id,
+        comment: userReview,
+        rating: userRating,
+      }) as NewReview ));
+    }
+  };
+
   return (
-    <form action="#" className="add-review__form">
+    <form
+      className="add-review__form"
+      onSubmit={submitHandler}
+    >
       <div className="rating">
         <div className="rating__stars">
           {
@@ -53,10 +77,16 @@ export default function AddReviewForm() {
           className="add-review__textarea"
           name="review-text"
           id="review-text"
-          placeholder="Review text"
+          placeholder="Review text (50 to 400 symbols)."
         />
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit">Post</button>
+          <button
+            className="add-review__btn"
+            type="submit"
+            disabled={isDataUploading || userRating === DEFAULT_RATE || userReview.length < MIN_USER_REVIEW_LENGTH || userReview.length > MAX_USER_REVIEW_LENGTH}
+          >
+            Post
+          </button>
         </div>
       </div>
     </form>

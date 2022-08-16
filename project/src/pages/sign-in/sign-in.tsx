@@ -1,26 +1,41 @@
 import Logo from '../../components/logo/logo';
-import { useRef, FormEvent } from 'react';
+import { useRef, useState, FormEvent } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { AuthorizationData } from '../../types/auth-data';
 import { AppRoute, AuthorizationStatus } from '../../constants';
+import { isEmailValid } from '../../utils/utils';
 
 export default function SignIn(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const [emailValidationStatus, setEmailStatus] = useState(true);
 
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const loginError = useAppSelector((state) => state.loginError);
 
   const submitHandler = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
-      dispatch(loginAction(({
-        login: loginRef.current.value,
-        password: passwordRef.current.value,
-      })as AuthorizationData));
+      const login = loginRef.current.value;
+      const password = passwordRef.current.value;
+
+      if (password !== '' && isEmailValid(loginRef.current.value)) {
+        dispatch(loginAction(({
+          login,
+          password,
+        })as AuthorizationData));
+
+      } else if (!isEmailValid(loginRef.current.value)) {
+        setEmailStatus(false);
+
+      } else if (isEmailValid(loginRef.current.value)) {
+        setEmailStatus(true);
+      }
+
     }
   };
 
@@ -41,8 +56,17 @@ export default function SignIn(): JSX.Element {
           className="sign-in__form"
           onSubmit={submitHandler}
         >
+          <div className="sign-in__message">
+            {loginError ?
+              (
+                <p>We can&apos;t recognize this email<br></br> and password combination. Please try again.</p>
+              ) : (
+                !emailValidationStatus &&
+                <p>Please enter a valid email address</p>
+              )}
+          </div>
           <div className="sign-in__fields">
-            <div className="sign-in__field">
+            <div className={`sign-in__field ${!emailValidationStatus ? 'sign-in__field--error' : ''}`}>
               <input
                 ref={loginRef}
                 className="sign-in__input"

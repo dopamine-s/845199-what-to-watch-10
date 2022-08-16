@@ -1,7 +1,8 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { AppRoute } from '../../constants';
 import { useAppSelector } from '../../hooks';
 import Loader from '../../pages/loader/loader';
+import HistoryRouter from '../history-route/history-route';
 import Main from '../../pages/main/main';
 import SignIn from '../../pages/sign-in/sign-in';
 import MyList from '../../pages/my-list/my-list';
@@ -10,15 +11,10 @@ import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
-import { FilmReviews } from '../../types/reviews';
 import { isAuthorized } from '../../utils/utils';
+import browserHistory from '../../browser-history';
 
-type AppProps = {
-  filmsReviews: FilmReviews[];
-}
-
-function App (
-  { filmsReviews }: AppProps): JSX.Element {
+function App (): JSX.Element {
   const {authorizationStatus, isDataLoading} = useAppSelector((state) => state);
 
   if (isAuthorized(authorizationStatus) || isDataLoading) {
@@ -28,7 +24,7 @@ function App (
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
 
         <Route
@@ -60,9 +56,7 @@ function App (
           <Route
             path=':id'
             element={
-              <FilmPage
-                filmsReviews={filmsReviews}
-              />
+              <FilmPage />
             }
           >
           </Route>
@@ -95,7 +89,7 @@ function App (
         />
 
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

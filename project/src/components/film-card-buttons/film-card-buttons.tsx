@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector} from '../../hooks';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { AppRoute } from '../../constants';
 import { Film } from '../../types/films';
 

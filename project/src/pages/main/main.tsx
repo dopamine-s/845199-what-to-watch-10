@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { Film } from '../../types/films';
 import { clearSelectedGenre, resetFilmsShownCount } from '../../store/actions';
 import PromoFilm from '../../components/promo-film/promo-film';

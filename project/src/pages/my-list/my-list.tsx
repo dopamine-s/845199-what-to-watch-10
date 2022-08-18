@@ -1,6 +1,6 @@
 import Logo from '../../components/logo/logo';
 import FilmsList from '../../components/films-list/films-list';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import UserBlock from '../../components/user-block/user-block';
 
 export default function MyList(): JSX.Element {

@@ -1,7 +1,8 @@
 import Logo from '../../components/logo/logo';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useAppSelector, useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { fetchSimilarFilmsAction, fetchFilmAction, fetchFilmReviewsAction } from '../../store/api-actions';
 import NotFound from '../not-found/not-found';
 import { AppRoute, AuthorizationStatus } from '../../constants';

@@ -1,6 +1,7 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { AppRoute } from '../../constants';
-import { useAppSelector, useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { AuthorizationStatus } from '../../constants';
 import { logoutAction } from '../../store/api-actions';
 

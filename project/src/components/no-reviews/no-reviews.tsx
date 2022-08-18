@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { useParams } from 'react-router-dom';
 import NotFound from '../../pages/not-found/not-found';
 

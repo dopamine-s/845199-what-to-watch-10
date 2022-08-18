@@ -1,6 +1,7 @@
 import { Fragment, useState, FormEvent } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { sendNewReviewAction } from '../../store/api-actions';
 import { NewReview } from '../../types/reviews';
 

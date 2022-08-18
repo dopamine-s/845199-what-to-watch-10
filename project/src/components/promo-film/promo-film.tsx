@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import FilmCardButtons from '../../components/film-card-buttons/film-card-buttons';

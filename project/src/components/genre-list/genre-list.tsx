@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { getGenres } from '../../utils/utils';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { setSelectedGenre, clearSelectedGenre } from '../../store/actions';
 
 const MAX_GENRES_COUNT = 9;

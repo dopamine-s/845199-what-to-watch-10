@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { AppRoute } from '../../constants';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import Loader from '../../pages/loader/loader';
 import HistoryRouter from '../history-route/history-route';
 import Main from '../../pages/main/main';

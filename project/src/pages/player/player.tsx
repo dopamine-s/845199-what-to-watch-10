@@ -1,6 +1,6 @@
 import NotFound from '../not-found/not-found';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/use-app-selector';
 
 export default function Player(): JSX.Element {
   const allFilms = useAppSelector((state) => state.films);

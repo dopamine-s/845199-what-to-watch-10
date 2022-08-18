@@ -1,4 +1,4 @@
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { showMoreFilms } from '../../store/actions';
 import { memo } from 'react';
 

@@ -1,7 +1,7 @@
 import Logo from '../../components/logo/logo';
 import AddReviewForm from '../../components/add-review/add-review-form';
 import { Link, useParams } from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import NotFound from '../not-found/not-found';
 import { AppRoute } from '../../constants';
 import UserBlock from '../../components/user-block/user-block';

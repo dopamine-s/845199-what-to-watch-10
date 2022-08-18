@@ -1,6 +1,6 @@
 import Logo from '../../components/logo/logo';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { fetchSimilarFilmsAction, fetchFilmAction, fetchFilmReviewsAction } from '../../store/api-actions';
 import NotFound from '../not-found/not-found';
@@ -8,24 +8,16 @@ import { AppRoute, AuthorizationStatus } from '../../constants';
 import FilmsList from '../../components/films-list/films-list';
 import FilmTabs from '../../components/film-tabs.tsx/film-tabs';
 import UserBlock from '../../components/user-block/user-block';
+import FilmCardButtons from '../../components/film-card-buttons/film-card-buttons';
 
 export default function FilmPage(): JSX.Element {
-  const allFilms = useAppSelector((state) => state.films);
   const film = useAppSelector((state) => state.film);
   const similarFilms = useAppSelector((state) => state.similarFilms);
   const filmReviews = useAppSelector((state) => state.filmReviews);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const params = useParams();
   const id = params.id;
-  const favoriteFilms = allFilms.filter((item) => item.isFavorite);
-  const [isAddedToMyList, setAddToMyList] = useState(false);
-  const [myListCount, setMyListCount] = useState(favoriteFilms.length);
-  const handleClick = (): void => {
-    setAddToMyList((prevState) => !prevState);
-    isAddedToMyList ? setMyListCount(myListCount - 1) : setMyListCount(myListCount + 1);
-  };
 
   useEffect(() => {
     if (!id) {
@@ -69,35 +61,9 @@ export default function FilmPage(): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button
-                  onClick={() => navigate(`${AppRoute.Player}/${film.id}`)}
-                  className="btn btn--play film-card__button"
-                  type="button"
-                >
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button
-                  className="btn btn--list film-card__button"
-                  type="button"
-                  onClick={handleClick}
-                >
-                  {isAddedToMyList ?
-                    (
-                      <svg viewBox="0 0 18 14" width="18" height="14">
-                        <use xlinkHref="#in-list"></use>
-                      </svg>
-                    ) :
-                    (
-                      <svg viewBox="0 0 19 20" width="19" height="20">
-                        <use xlinkHref="#add"></use>
-                      </svg>
-                    )}
-                  <span>My list</span>
-                  <span className="film-card__count">{myListCount}</span>
-                </button>
+
+                <FilmCardButtons film={film}/>
+
                 {authorizationStatus === AuthorizationStatus.Auth &&
                   (
                     <Link

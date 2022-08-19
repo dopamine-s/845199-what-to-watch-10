@@ -1,15 +1,16 @@
 import { useNavigate, Link } from 'react-router-dom';
-import { AppRoute } from '../../constants';
+import { AppRoute, AuthorizationStatus } from '../../constants';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { AuthorizationStatus } from '../../constants';
 import { logoutAction } from '../../store/api-actions';
+import { selectAuthorizationStatus, selectUserData } from '../../store/auth-slice/select';
+
 
 export default function UserBlock(): JSX.Element{
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const userData = useAppSelector((state) => state.userData);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+  const userData = useAppSelector(selectUserData);
 
   const logoutHandler = () => {
     dispatch(logoutAction());
@@ -18,7 +19,7 @@ export default function UserBlock(): JSX.Element{
 
   return (
     <ul className="user-block">
-      { authorizationStatus === AuthorizationStatus.Auth ? (
+      {authorizationStatus === AuthorizationStatus.Auth ? (
         <>
           <li className="user-block__item">
             <div

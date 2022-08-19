@@ -2,9 +2,10 @@ import { useAppSelector } from '../../hooks/use-app-selector';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import FilmCardButtons from '../../components/film-card-buttons/film-card-buttons';
+import { selectPromoFilm } from '../../store/promo-slice/select';
 
 export default function PromoFilm(): JSX.Element {
-  const promoFilm = useAppSelector((state) => state.promoFilm);
+  const promoFilm = useAppSelector(selectPromoFilm);
 
   return (
     <section className="film-card">

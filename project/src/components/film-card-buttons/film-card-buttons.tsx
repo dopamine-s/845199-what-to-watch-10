@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/use-app-selector';
+import { selectFilms } from '../../store/films-slice/select';
 import { AppRoute } from '../../constants';
 import { Film } from '../../types/films';
 
@@ -9,7 +10,7 @@ type FilmCardButtonsProps = {
 }
 
 function FilmCardButtons({ film }: FilmCardButtonsProps): JSX.Element {
-  const allFilms = useAppSelector((state) => state.films);
+  const allFilms = useAppSelector(selectFilms);
   const favoriteFilms = allFilms.filter((item) => item.isFavorite);
   const navigate = useNavigate();
   const [isAddedToMyList, setAddToMyList] = useState(false);

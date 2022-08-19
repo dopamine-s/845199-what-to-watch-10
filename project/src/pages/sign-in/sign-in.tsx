@@ -7,6 +7,7 @@ import { loginAction } from '../../store/api-actions';
 import { AuthorizationData } from '../../types/auth-data';
 import { AppRoute, AuthorizationStatus } from '../../constants';
 import { isEmailValid } from '../../utils/utils';
+import { selectAuthorizationStatus, selectLoginError } from '../../store/auth-slice/select';
 
 export default function SignIn(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -14,8 +15,8 @@ export default function SignIn(): JSX.Element {
   const [emailValidationStatus, setEmailStatus] = useState(true);
 
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const loginError = useAppSelector((state) => state.loginError);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+  const loginError = useAppSelector(selectLoginError);
 
   const submitHandler = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();

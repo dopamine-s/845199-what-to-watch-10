@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { Film } from '../../types/films';
-import { clearSelectedGenre, resetFilmsShownCount } from '../../store/actions';
+import { clearSelectedGenre, resetFilmsShownCount } from '../../store/films-slice/films-slice';
+import { selectFilms, selectActiveGenre, selectFilmsShownCount } from '../../store/films-slice/select';
 import PromoFilm from '../../components/promo-film/promo-film';
 import Logo from '../../components/logo/logo';
 import GenreList from '../../components/genre-list/genre-list';
@@ -10,10 +11,10 @@ import FilmsList from '../../components/films-list/films-list';
 
 export default function Main(): JSX.Element {
   const dispatch = useAppDispatch();
-  const allFilms = useAppSelector((state) => state.films);
+  const allFilms = useAppSelector(selectFilms);
   const [filmsByGenre, setFilmsByGenre] = useState<Film[]>([]);
-  const selectedGenre = useAppSelector((state) => state.selectedGenre);
-  const filmsCount = useAppSelector((state) => state.filmsShownCount);
+  const selectedGenre = useAppSelector(selectActiveGenre);
+  const filmsCount = useAppSelector(selectFilmsShownCount);
 
   useEffect(() => {
     dispatch(clearSelectedGenre());

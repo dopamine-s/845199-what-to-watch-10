@@ -10,15 +10,17 @@ import FilmsList from '../../components/films-list/films-list';
 import FilmTabs from '../../components/film-tabs.tsx/film-tabs';
 import UserBlock from '../../components/user-block/user-block';
 import FilmCardButtons from '../../components/film-card-buttons/film-card-buttons';
+import { selectAuthorizationStatus } from '../../store/auth-slice/select';
+import { selectFilm, selectSimilarFilms, selectFilmReviews } from '../../store/films-slice/select';
 
 export default function FilmPage(): JSX.Element {
-  const film = useAppSelector((state) => state.film);
-  const similarFilms = useAppSelector((state) => state.similarFilms);
-  const filmReviews = useAppSelector((state) => state.filmReviews);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const film = useAppSelector(selectFilm);
+  const filmReviews = useAppSelector(selectFilmReviews);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const dispatch = useAppDispatch();
   const params = useParams();
   const id = params.id;
+  const similarFilms = useAppSelector(selectSimilarFilms);
 
   useEffect(() => {
     if (!id) {

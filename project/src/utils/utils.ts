@@ -30,8 +30,8 @@ export const getReviewDateTime = (data: string): string => dayjs(data).format('Y
 export const getGenres = (filmList: Film[]): string[] =>
   [...new Set(filmList.map((film) => film.genre))];
 
-export const isAuthorized = (authorizationStatus: AuthorizationStatus): boolean =>
-  authorizationStatus === AuthorizationStatus.Unknown;
+export const isAuthorizationStatusDefined = (authorizationStatus: AuthorizationStatus): boolean =>
+  authorizationStatus !== AuthorizationStatus.Unknown;
 
 export const filterSimilarMovies = (data: Film[], id: string): Film[] =>
   data.slice(0, MAX_GENRE_FILTER_COUNT).filter((movie) => String(movie.id) !== id);

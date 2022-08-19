@@ -11,7 +11,7 @@ import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
-import { isAuthorized } from '../../utils/utils';
+import { isAuthorizationStatusDefined } from '../../utils/utils';
 import browserHistory from '../../browser-history';
 import { selectAuthorizationStatus } from '../../store/auth-slice/select';
 import { selectIsLoadingPromo } from '../../store/promo-slice/select';
@@ -22,7 +22,7 @@ function App (): JSX.Element {
   const isLoadingPromo = useAppSelector(selectIsLoadingPromo);
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
-  if (isAuthorized(authorizationStatus) || isLoadingFilms || isLoadingPromo) {
+  if (!isAuthorizationStatusDefined(authorizationStatus) || isLoadingFilms || isLoadingPromo) {
     return (
       <Loader />
     );

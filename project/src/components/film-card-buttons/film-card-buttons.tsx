@@ -18,7 +18,12 @@ function FilmCardButtons({ film }: FilmCardButtonsProps): JSX.Element {
 
   const handleClick = (): void => {
     setAddToMyList((prevState) => !prevState);
-    isAddedToMyList ? setMyListCount(myListCount - 1) : setMyListCount(myListCount + 1);
+    if (isAddedToMyList) {
+      setMyListCount(myListCount - 1);
+    }
+    else {
+      setMyListCount(myListCount + 1);
+    }
   };
 
   const handleNavigateClick = (): void => {

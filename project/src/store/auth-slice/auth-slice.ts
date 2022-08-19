@@ -7,13 +7,13 @@ import { getUserDataAction, loginAction, logoutAction } from '../api-actions';
 type AuthSliceTypes = {
   authorizationStatus: AuthorizationStatus;
   userData: UserData | null;
-  loginError: string | null;
+  loginError: string;
 }
 
 const initialState: AuthSliceTypes = {
   authorizationStatus: AuthorizationStatus.Unknown,
   userData: null,
-  loginError: null,
+  loginError: '',
 };
 
 export const authSlice = createSlice({
@@ -21,7 +21,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     clearLoginError: (state) => {
-      state.loginError = null;
+      state.loginError = '';
     },
   },
   extraReducers(builder) {
@@ -36,7 +36,7 @@ export const authSlice = createSlice({
       .addCase(loginAction.fulfilled, (state, action) => {
         state.authorizationStatus = AuthorizationStatus.Auth;
         state.userData = action.payload;
-        state.loginError = null;
+        state.loginError = '';
       })
       .addCase(loginAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
@@ -45,7 +45,7 @@ export const authSlice = createSlice({
       .addCase(logoutAction.fulfilled, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
         state.userData = null;
-        state.loginError = null;
+        state.loginError = '';
       });
   },
 });

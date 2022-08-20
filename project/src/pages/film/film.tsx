@@ -1,22 +1,19 @@
 import Logo from '../../components/logo/logo';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { fetchSimilarFilmsAction, fetchFilmAction, fetchFilmReviewsAction } from '../../store/api-actions';
 import NotFound from '../not-found/not-found';
-import { AppRoute, AuthorizationStatus } from '../../constants';
 import FilmsList from '../../components/films-list/films-list';
 import FilmTabs from '../../components/film-tabs.tsx/film-tabs';
 import UserBlock from '../../components/user-block/user-block';
 import FilmCardButtons from '../../components/film-card-buttons/film-card-buttons';
-import { selectAuthorizationStatus } from '../../store/auth-slice/select';
 import { selectFilm, selectSimilarFilms, selectFilmReviews } from '../../store/films-slice/select';
 
 export default function FilmPage(): JSX.Element {
   const film = useAppSelector(selectFilm);
   const filmReviews = useAppSelector(selectFilmReviews);
-  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const dispatch = useAppDispatch();
   const params = useParams();
   const id = params.id;
@@ -63,20 +60,8 @@ export default function FilmPage(): JSX.Element {
                 <span className="film-card__year">{film.released}</span>
               </p>
 
-              <div className="film-card__buttons">
+              <FilmCardButtons film={film}/>
 
-                <FilmCardButtons film={film}/>
-
-                {authorizationStatus === AuthorizationStatus.Auth &&
-                  (
-                    <Link
-                      className="btn film-card__button"
-                      to={AppRoute.AddReview}
-                    >
-                  Add review
-                    </Link>
-                  )}
-              </div>
             </div>
           </div>
         </div>

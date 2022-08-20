@@ -1426,7 +1426,8 @@ background: #ffffff; }
   display: flex;
   align-items: center;
   margin-left: auto;
-  list-style-type: none; }
+  list-style-type: none;
+  min-height: 63px; }
 
 .user-block__item:not(:last-child) {
   margin-right: 15px;

@@ -50,9 +50,8 @@ export default function PromoFilm(): JSX.Element {
               </span>
             </p>
 
-            <div className="film-card__buttons">
-              {promoFilm && <FilmCardButtons film={promoFilm}/>}
-            </div>
+            {promoFilm && <FilmCardButtons film={promoFilm}/>}
+
           </div>
         </div>
       </div>

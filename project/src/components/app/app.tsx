@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
-import { AppRoute } from '../../constants';
-import { useAppSelector } from '../../hooks';
+import { AppRoute} from '../../constants';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import Loader from '../../pages/loader/loader';
 import HistoryRouter from '../history-route/history-route';
 import Main from '../../pages/main/main';
@@ -11,13 +11,18 @@ import AddReview from '../../pages/add-review/add-review';
 import Player from '../../pages/player/player';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
-import { isAuthorized } from '../../utils/utils';
+import { isAuthorizationStatusDefined } from '../../utils/utils';
 import browserHistory from '../../browser-history';
+import { selectAuthorizationStatus } from '../../store/auth-slice/select';
+import { selectIsLoadingPromo } from '../../store/promo-slice/select';
+import { selectIsLoadingFilms } from '../../store/films-slice/select';
 
 function App (): JSX.Element {
-  const {authorizationStatus, isDataLoading} = useAppSelector((state) => state);
+  const isLoadingFilms = useAppSelector(selectIsLoadingFilms);
+  const isLoadingPromo = useAppSelector(selectIsLoadingPromo);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
-  if (isAuthorized(authorizationStatus) || isDataLoading) {
+  if (!isAuthorizationStatusDefined(authorizationStatus) || isLoadingFilms || isLoadingPromo) {
     return (
       <Loader />
     );

@@ -27,6 +27,12 @@ export enum APIRoute {
   Comments = '/comments'
 }
 
+export enum SliceName {
+  Auth = 'AUTH',
+  Promo = 'PROMO',
+  Films = 'FILMS',
+}
+
 export const FILMS_SHOWN_COUNT = 8;
 
 export const BACKEND_URL = 'https://10.react.pages.academy/wtw';

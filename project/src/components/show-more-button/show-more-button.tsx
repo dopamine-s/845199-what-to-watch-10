@@ -1,7 +1,8 @@
-import { useAppDispatch } from '../../hooks';
-import { showMoreFilms } from '../../store/actions';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { showMoreFilms } from '../../store/films-slice/films-slice';
+import { memo } from 'react';
 
-export default function ShowMoreButton(): JSX.Element {
+function ShowMoreButton(): JSX.Element {
   const dispatch = useAppDispatch();
 
   return (
@@ -16,3 +17,5 @@ export default function ShowMoreButton(): JSX.Element {
     </div>
   );
 }
+
+export default memo(ShowMoreButton);

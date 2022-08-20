@@ -1,14 +1,16 @@
 import { Link } from 'react-router-dom';
 import { getGenres } from '../../utils/utils';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { setSelectedGenre, clearSelectedGenre } from '../../store/actions';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
+import { setSelectedGenre, clearSelectedGenre } from '../../store/films-slice/films-slice';
+import { selectFilms, selectActiveGenre } from '../../store/films-slice/select';
 
 const MAX_GENRES_COUNT = 9;
 
 export default function GenreList(): JSX.Element {
   const dispatch = useAppDispatch();
-  const allMovies = useAppSelector((state) => state.films);
-  const selectedGenre = useAppSelector((state) => state.selectedGenre);
+  const allMovies = useAppSelector(selectFilms);
+  const selectedGenre = useAppSelector(selectActiveGenre);
   const genres = getGenres(allMovies);
 
   return (

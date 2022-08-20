@@ -1,13 +1,14 @@
 import Logo from '../../components/logo/logo';
 import AddReviewForm from '../../components/add-review/add-review-form';
 import { Link, useParams } from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import NotFound from '../not-found/not-found';
 import { AppRoute } from '../../constants';
 import UserBlock from '../../components/user-block/user-block';
+import { selectFilms } from '../../store/films-slice/select';
 
 export default function AddReview(): JSX.Element {
-  const allFilms = useAppSelector((state) => state.films);
+  const allFilms = useAppSelector(selectFilms);
   const params = useParams();
   const id = params.id;
   const film = allFilms.find((movie) => String(movie.id) === id);

@@ -1,10 +1,11 @@
 import Logo from '../../components/logo/logo';
 import FilmsList from '../../components/films-list/films-list';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import UserBlock from '../../components/user-block/user-block';
+import { selectFilms } from '../../store/films-slice/select';
 
 export default function MyList(): JSX.Element {
-  const allFilms = useAppSelector((state) => state.films);
+  const allFilms = useAppSelector(selectFilms);
   const favoriteFilms = allFilms.filter((item) => item.isFavorite);
 
   return (

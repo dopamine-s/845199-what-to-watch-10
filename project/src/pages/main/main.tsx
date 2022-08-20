@@ -1,31 +1,20 @@
+import { useState, useEffect } from 'react';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
+import { Film } from '../../types/films';
+import { clearSelectedGenre, resetFilmsShownCount } from '../../store/films-slice/films-slice';
+import { selectFilms, selectActiveGenre, selectFilmsShownCount } from '../../store/films-slice/select';
+import PromoFilm from '../../components/promo-film/promo-film';
+import Logo from '../../components/logo/logo';
 import GenreList from '../../components/genre-list/genre-list';
 import FilmsList from '../../components/films-list/films-list';
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { clearSelectedGenre, resetFilmsShownCount } from '../../store/actions';
-import Logo from '../../components/logo/logo';
-import { Film } from '../../types/films';
-import { AppRoute } from '../../constants';
-import UserBlock from '../../components/user-block/user-block';
 
 export default function Main(): JSX.Element {
-  const allFilms = useAppSelector((state) => state.films);
-  const promoFilm = useAppSelector((state) => state.promoFilm);
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [isAddedToMyList, setAddToMyList] = useState(false);
+  const allFilms = useAppSelector(selectFilms);
   const [filmsByGenre, setFilmsByGenre] = useState<Film[]>([]);
-  const favoriteFilms = allFilms.filter((item) => item.isFavorite);
-  const [myListCount, setMyListCount] = useState(favoriteFilms.length);
-  const selectedGenre = useAppSelector((state) => state.selectedGenre);
-
-  const filmsCount = useAppSelector((state) => state.filmsShownCount);
-
-  const handleClick = ():void => {
-    setAddToMyList((prevState) => !prevState);
-    isAddedToMyList ? setMyListCount(myListCount - 1) : setMyListCount(myListCount + 1);
-  };
+  const selectedGenre = useAppSelector(selectActiveGenre);
+  const filmsCount = useAppSelector(selectFilmsShownCount);
 
   useEffect(() => {
     dispatch(clearSelectedGenre());
@@ -46,83 +35,7 @@ export default function Main(): JSX.Element {
 
   return (
     <>
-      <section className="film-card">
-        <div className="film-card__bg">
-          <img
-            src={promoFilm?.backgroundImage}
-            alt={promoFilm?.name}
-          />
-        </div>
-
-        <h1 className="visually-hidden">WTW</h1>
-
-        <header className="page-header film-card__head">
-
-          <Logo light={false} />
-
-          <UserBlock />
-
-        </header>
-
-        <div className="film-card__wrap">
-          <div className="film-card__info">
-            <div className="film-card__poster">
-              <img
-                src={promoFilm?.posterImage}
-                alt={promoFilm?.name}
-                width="218"
-                height="327"
-              />
-            </div>
-
-            <div className="film-card__desc">
-              <h2 className="film-card__title">
-                {promoFilm?.name}
-              </h2>
-              <p className="film-card__meta">
-                <span className="film-card__genre">
-                  {promoFilm?.genre}
-                </span>
-                <span className="film-card__year">
-                  {promoFilm?.released}
-                </span>
-              </p>
-
-              <div className="film-card__buttons">
-                <button
-                  onClick={() => navigate(`${AppRoute.Player}/${promoFilm?.id}`)}
-                  className="btn btn--play film-card__button"
-                  type="button"
-                >
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button
-                  className="btn btn--list film-card__button"
-                  type="button"
-                  onClick={handleClick}
-                >
-                  {isAddedToMyList ?
-                    (
-                      <svg viewBox="0 0 18 14" width="18" height="14">
-                        <use xlinkHref="#in-list"></use>
-                      </svg>
-                    ) :
-                    (
-                      <svg viewBox="0 0 19 20" width="19" height="20">
-                        <use xlinkHref="#add"></use>
-                      </svg>
-                    )}
-                  <span>My list</span>
-                  <span className="film-card__count">{myListCount}</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PromoFilm />
 
       <div className="page-content">
         <section className="catalog">

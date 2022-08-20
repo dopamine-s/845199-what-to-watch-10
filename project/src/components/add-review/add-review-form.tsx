@@ -1,8 +1,10 @@
 import { Fragment, useState, FormEvent } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { sendNewReviewAction } from '../../store/api-actions';
 import { NewReview } from '../../types/reviews';
+import { selectIsUploadingReview } from '../../store/films-slice/select';
 
 export default function AddReviewForm() {
   const MAX_RATE = 10;
@@ -14,7 +16,7 @@ export default function AddReviewForm() {
   const dispatch = useAppDispatch();
   const params = useParams();
   const id = params.id;
-  const { isDataUploading } = useAppSelector((state) => state);
+  const isDataUploading = useAppSelector(selectIsUploadingReview);
 
   const textChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const reviewText = event.target.value;

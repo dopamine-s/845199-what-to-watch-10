@@ -1,9 +1,10 @@
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { useParams } from 'react-router-dom';
 import NotFound from '../../pages/not-found/not-found';
+import { selectFilms } from '../../store/films-slice/select';
 
 export default function NoReviews(): JSX.Element {
-  const allFilms = useAppSelector((state) => state.films);
+  const allFilms = useAppSelector(selectFilms);
   const params = useParams();
   const id = params.id;
   const film = allFilms.find((movie) => String(movie.id) === id);

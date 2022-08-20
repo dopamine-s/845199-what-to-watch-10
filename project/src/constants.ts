@@ -42,5 +42,3 @@ export const REQUEST_TIMEOUT = 5000;
 export const MAX_GENRE_FILTER_COUNT = 4;
 
 export const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
-
-export const TIMEOUT_SHOW_ERROR = 10000;

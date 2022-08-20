@@ -74,13 +74,9 @@ export const sendNewReviewAction = createAsyncThunk<NewReview, NewReview, {
 }>(
   'films/sendNewReview',
   async ({ id, comment, rating }, { dispatch, extra: api }) => {
-    try {
-      const { data } = await api.post<NewReview>(`${APIRoute.Comments}/${id}`, { comment, rating });
-      dispatch(redirectToRoute(`${AppRoute.Film}/${id}`));
-      return data;
-    } catch {
-      // dispatch(setReviewUploadingStatus(false));
-    }
+    const { data } = await api.post<NewReview>(`${APIRoute.Comments}/${id}`, { comment, rating });
+    dispatch(redirectToRoute(`${AppRoute.Film}/${id}`));
+    return data;
   },
 );
 
@@ -90,12 +86,8 @@ export const getUserDataAction = createAsyncThunk<UserData, void, {
 }>(
   'auth/checkAuth',
   async (_arg, { extra: api }) => {
-    try {
-      const { data } = await api.get(APIRoute.Login);
-      return data;
-    } catch {
-      // dispatch(setAuthorizationStatus(AuthorizationStatus.NoAuth));
-    }
+    const { data } = await api.get(APIRoute.Login);
+    return data;
   },
 );
 
@@ -109,7 +101,7 @@ export const clearLoginErrorAction = createAsyncThunk(
   }
 );
 
-export const loginAction = createAsyncThunk<UserData, AuthorizationData, {
+export const loginAction = createAsyncThunk<void, AuthorizationData, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance

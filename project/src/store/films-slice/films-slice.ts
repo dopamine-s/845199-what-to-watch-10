@@ -77,7 +77,7 @@ export const filmsSlice = createSlice({
         state.newReview = action.payload;
         state.isDataUploading = false;
       })
-      .addCase(sendNewReviewAction.rejected, (state, action) => {
+      .addCase(sendNewReviewAction.rejected, (state) => {
         state.newReview = null;
         state.isDataUploading = false;
       });

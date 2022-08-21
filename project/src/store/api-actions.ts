@@ -8,9 +8,8 @@ import { UserData } from '../types/user-data';
 import { redirectToRoute } from './actions';
 import { saveToken, dropToken } from '../services/token';
 import { clearLoginError } from '../store/auth-slice/auth-slice';
-import { APIRoute, AppRoute, TIMEOUT_SHOW_ERROR } from '../constants';
+import { APIRoute, AppRoute } from '../constants';
 import { filterSimilarMovies } from '../utils/utils';
-import { store } from '../store/index';
 
 export const fetchFilmsAction = createAsyncThunk<Film[], undefined, {
   state: State,
@@ -91,31 +90,18 @@ export const getUserDataAction = createAsyncThunk<UserData, void, {
   },
 );
 
-export const clearLoginErrorAction = createAsyncThunk(
-  'auth/clearLoginError',
-  () => {
-    setTimeout(
-      () => store.dispatch(clearLoginError()),
-      TIMEOUT_SHOW_ERROR
-    );
-  }
-);
-
-export const loginAction = createAsyncThunk<void, AuthorizationData, {
+export const loginAction = createAsyncThunk<UserData | null, AuthorizationData, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
 }>(
   'auth/login',
   async ({ login: email, password }, { dispatch, extra: api }) => {
-    try {
-      const { data } = await api.post<UserData>(APIRoute.Login, { email, password });
-      saveToken(data.token);
-      dispatch(clearLoginError());
-    } catch {
-      clearLoginErrorAction();
-    }
-  },
+    const { data } = await api.post<UserData>(APIRoute.Login, { email, password });
+    saveToken(data.token);
+    dispatch(clearLoginError());
+    return data;
+  }
 );
 
 export const logoutAction = createAsyncThunk<void, undefined, {

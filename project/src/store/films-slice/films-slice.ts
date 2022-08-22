@@ -18,7 +18,8 @@ type FilmsSliceState = {
   similarFilms: Film[];
   filmReviews: FilmReview[];
   filmsShownCount: number;
-  isDataLoading: boolean;
+  isFilmsDataLoading: boolean;
+  isFilmDataLoading: boolean;
   isDataUploading: boolean;
   newReview: NewReview | null;
 }
@@ -30,7 +31,8 @@ const initialState: FilmsSliceState = {
   similarFilms: [],
   filmReviews: [],
   filmsShownCount: FILMS_SHOWN_COUNT,
-  isDataLoading: false,
+  isFilmsDataLoading: false,
+  isFilmDataLoading: false,
   isDataUploading: false,
   newReview: null,
 };
@@ -55,14 +57,18 @@ export const filmsSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchFilmsAction.pending, (state) => {
-        state.isDataLoading = true;
+        state.isFilmsDataLoading = true;
       })
       .addCase(fetchFilmsAction.fulfilled, (state, action) => {
         state.films = action.payload;
-        state.isDataLoading = false;
+        state.isFilmsDataLoading = false;
+      })
+      .addCase(fetchFilmAction.pending, (state) => {
+        state.isFilmDataLoading = true;
       })
       .addCase(fetchFilmAction.fulfilled, (state, action) => {
         state.film = action.payload;
+        state.isFilmDataLoading = false;
       })
       .addCase(fetchSimilarFilmsAction.fulfilled, (state, action) => {
         state.similarFilms = action.payload;

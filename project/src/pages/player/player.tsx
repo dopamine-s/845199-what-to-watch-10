@@ -1,7 +1,18 @@
+import { CSSProperties, useRef, useState } from 'react';
+import ClipLoader from 'react-spinners/ClipLoader';
 import NotFound from '../not-found/not-found';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { selectFilms } from '../../store/films-slice/select';
+import { FILM_LOADER_COLOR } from '../../constants';
+
+const cssOverride: CSSProperties = {
+  display: 'block',
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+};
 
 export default function Player(): JSX.Element {
   const allFilms = useAppSelector(selectFilms);
@@ -9,6 +20,33 @@ export default function Player(): JSX.Element {
   const navigate = useNavigate();
   const id = params.id;
   const film = allFilms.find((movie) => String(movie.id) === id);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onPlayerClick = () => {
+    if (videoRef.current === null) {
+      return;
+    }
+
+    if (!isPlaying) {
+      setIsPlaying(true);
+      videoRef.current.play();
+      return;
+    }
+
+    setIsPlaying(false);
+    videoRef.current.pause();
+  };
+
+  const onToggleFullScreenModeClick = () => {
+    const elem = document.documentElement;
+    if (!document.fullscreenElement) {
+      elem.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  };
 
   if (!film) {
     return (
@@ -18,10 +56,25 @@ export default function Player(): JSX.Element {
 
   return (
     <div className="player">
+      <ClipLoader
+        cssOverride={cssOverride}
+        color={FILM_LOADER_COLOR}
+        loading={isLoading}
+        size={100}
+      />
+
       <video
         src={film.videoLink}
+        ref={videoRef}
         className="player__video"
         poster={film.previewImage}
+        autoPlay={false}
+        onLoadStart={() => {
+          setIsLoading(true);
+        }}
+        onLoadedData={() => {
+          setIsLoading(false);
+        }}
       >
       </video>
 
@@ -34,9 +87,17 @@ export default function Player(): JSX.Element {
       </button>
 
       <div className="player__controls">
+
         <div className="player__controls-row">
+
           <div className="player__time">
-            <progress className="player__progress" value="30" max="100"></progress>
+            <progress
+              className="player__progress"
+              value="30"
+              max="100"
+            >
+            </progress>
+
             <div className="player__toggler"
               style={{
                 left: '30%',
@@ -44,26 +105,45 @@ export default function Player(): JSX.Element {
             >
               Toggler
             </div>
+
           </div>
+
           <div className="player__time-value">1:30:29</div>
+
         </div>
 
         <div className="player__controls-row">
-          <button type="button" className="player__play">
+
+          <button
+            type="button"
+            className="player__play"
+            onClick={onPlayerClick}
+          >
             <svg viewBox="0 0 19 19" width="19" height="19">
-              <use xlinkHref="#play-s"></use>
+              {
+                isPlaying
+                  ? <use xlinkHref="#pause"></use>
+                  : <use xlinkHref="#play-s"></use>
+              }
             </svg>
             <span>Play</span>
           </button>
+
           <div className="player__name">{film.name}</div>
 
-          <button type="button" className="player__full-screen">
+          <button
+            type="button"
+            className="player__full-screen"
+            onClick={onToggleFullScreenModeClick}
+          >
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"></use>
             </svg>
             <span>Full screen</span>
           </button>
+
         </div>
+
       </div>
     </div>
   );

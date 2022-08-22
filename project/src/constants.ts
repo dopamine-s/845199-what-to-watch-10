@@ -41,4 +41,6 @@ export const REQUEST_TIMEOUT = 5000;
 
 export const MAX_GENRE_FILTER_COUNT = 4;
 
+export const FILM_LOADER_COLOR = '#eee5b5';
+
 export const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;

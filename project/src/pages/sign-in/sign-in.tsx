@@ -3,7 +3,7 @@ import { useRef, useState, FormEvent } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { loginAction } from '../../store/api-actions';
+import { loginAction, fetchFavoriteFilmsAction } from '../../store/api-actions';
 import { AuthorizationData } from '../../types/auth-data';
 import { AppRoute, AuthorizationStatus } from '../../constants';
 import { isEmailValid } from '../../utils/utils';
@@ -30,6 +30,8 @@ export default function SignIn(): JSX.Element {
           login,
           password,
         })as AuthorizationData));
+
+        dispatch(fetchFavoriteFilmsAction());
 
       } else if (!isEmailValid(loginRef.current.value)) {
         setEmailStatus(false);

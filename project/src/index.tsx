@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import App from './components/app/app';
-import { fetchFilmsAction, fetchPromoFilmAction } from './store/api-actions';
+import { fetchFilmsAction, fetchPromoFilmAction, getUserDataAction } from './store/api-actions';
 import { ToastContainer } from 'react-toastify';
-import { getUserDataAction } from './store/api-actions';
 import 'react-toastify/dist/ReactToastify.css';
 
 store.dispatch(getUserDataAction());

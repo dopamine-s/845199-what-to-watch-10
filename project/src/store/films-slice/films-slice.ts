@@ -8,6 +8,7 @@ import {
   fetchSimilarFilmsAction,
   fetchFilmReviewsAction,
   sendNewReviewAction,
+  sendFavoriteFilmStatusAction
 } from '../api-actions';
 
 
@@ -86,6 +87,16 @@ export const filmsSlice = createSlice({
       .addCase(sendNewReviewAction.rejected, (state) => {
         state.newReview = null;
         state.isDataUploading = false;
+      })
+      .addCase(sendFavoriteFilmStatusAction.fulfilled, (state, action) => {
+
+        const index = state.films.findIndex((movie) => movie.id === action.payload.id);
+
+        state.films[index].isFavorite = action.payload.isFavorite;
+
+        if (state.film?.id === action.payload.id) {
+          state.film = action.payload;
+        }
       });
   },
 });

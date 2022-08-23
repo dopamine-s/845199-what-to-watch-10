@@ -24,13 +24,15 @@ export enum APIRoute {
   Promo = '/promo',
   Login = '/login',
   Logout = '/logout',
-  Comments = '/comments'
+  Comments = '/comments',
+  Favorite = '/favorite'
 }
 
 export enum SliceName {
   Auth = 'AUTH',
   Promo = 'PROMO',
   Films = 'FILMS',
+  Favorite = 'FAVORITE'
 }
 
 export const FILMS_SHOWN_COUNT = 8;

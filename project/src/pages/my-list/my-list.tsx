@@ -1,12 +1,29 @@
+import { useEffect } from 'react';
 import Logo from '../../components/logo/logo';
 import FilmsList from '../../components/films-list/films-list';
 import { useAppSelector } from '../../hooks/use-app-selector';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import UserBlock from '../../components/user-block/user-block';
-import { selectFilms } from '../../store/films-slice/select';
+import Loader from '../../pages/loader/loader';
+import { selectFavoriteFilms, selectIsLoadingFavoriteFilms } from '../../store/favorite-slice/select';
+import { fetchFavoriteFilmsAction } from '../../store/api-actions';
 
 export default function MyList(): JSX.Element {
-  const allFilms = useAppSelector(selectFilms);
-  const favoriteFilms = allFilms.filter((item) => item.isFavorite);
+  const dispatch = useAppDispatch();
+  const favoriteFilms = useAppSelector(selectFavoriteFilms);
+  const isLoadingFavoriteFilms = useAppSelector(selectIsLoadingFavoriteFilms);
+
+  useEffect(() => {
+    dispatch(fetchFavoriteFilmsAction());
+
+    // eslint-disable-next-line
+  }, []);
+
+  if (isLoadingFavoriteFilms) {
+    return (
+      <Loader />
+    );
+  }
 
   return (
     <div className="user-page">

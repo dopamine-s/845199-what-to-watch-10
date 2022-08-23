@@ -1,10 +1,11 @@
-import { CSSProperties, useRef, useState } from 'react';
+import { CSSProperties, useRef, useState, useEffect, ChangeEvent } from 'react';
 import ClipLoader from 'react-spinners/ClipLoader';
 import NotFound from '../not-found/not-found';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { selectFilms } from '../../store/films-slice/select';
 import { FILM_LOADER_COLOR } from '../../constants';
+import { getFilmTimeLeft } from '../../utils/utils';
 
 const cssOverride: CSSProperties = {
   display: 'block',
@@ -23,21 +24,43 @@ export default function Player(): JSX.Element {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [duration, setDurationTime] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
 
-  const onPlayerClick = () => {
+  useEffect(() => {
     if (videoRef.current === null) {
       return;
     }
 
-    if (!isPlaying) {
-      setIsPlaying(true);
+    if (isPlaying) {
       videoRef.current.play();
-      return;
+    } else {
+      videoRef.current.pause();
     }
 
-    setIsPlaying(false);
-    videoRef.current.pause();
+  }, [isPlaying]);
+
+  const onPlayerToggleModeClick = () => {
+    setIsPlaying(!isPlaying);
   };
+
+  const handleLoadedMetadata = (evt: React.SyntheticEvent<HTMLVideoElement>) => {
+    setDurationTime(evt.currentTarget.duration);
+    setIsPlaying(true);
+  };
+
+  const handleTimeUpdate = (evt: React.SyntheticEvent<HTMLVideoElement>) => {
+    setCurrentTime(evt.currentTarget.currentTime);
+  };
+
+  const handleSetFilmProgress = (evt: ChangeEvent<HTMLInputElement>) => {
+    const setProgressChange = Number(evt.target.value);
+    if (videoRef.current) {
+      videoRef.current.currentTime = (videoRef.current?.duration / 100) * setProgressChange;
+      setCurrentTime(setProgressChange);
+    }
+  };
+
 
   const onToggleFullScreenModeClick = () => {
     const elem = document.documentElement;
@@ -68,13 +91,20 @@ export default function Player(): JSX.Element {
         ref={videoRef}
         className="player__video"
         poster={film.previewImage}
-        autoPlay={false}
+        autoPlay
         onLoadStart={() => {
           setIsLoading(true);
         }}
         onLoadedData={() => {
           setIsLoading(false);
         }}
+        onLoadedMetadata={handleLoadedMetadata}
+        onTimeUpdate={handleTimeUpdate}
+        onEnded={() => {
+          setIsPlaying(false);
+        }}
+        onSeeking={() => setIsLoading(true)}
+        onSeeked={() => setIsLoading(false)}
       >
       </video>
 
@@ -91,24 +121,29 @@ export default function Player(): JSX.Element {
         <div className="player__controls-row">
 
           <div className="player__time">
+
             <progress
               className="player__progress"
-              value="30"
+              value={Math.floor(currentTime * 100 / duration)}
               max="100"
             >
             </progress>
 
-            <div className="player__toggler"
+            <input
+              className="player__progress player__progress--input"
               style={{
-                left: '30%',
+                left: `${currentTime * 100 / duration}%`,
               }}
-            >
-              Toggler
-            </div>
+              type="range"
+              min="0"
+              max="100"
+              value={Math.floor(currentTime * 100 / duration)}
+              onChange={(evt) => handleSetFilmProgress(evt)}
+            />
 
           </div>
 
-          <div className="player__time-value">1:30:29</div>
+          <div className="player__time-value">{`-${getFilmTimeLeft(duration - currentTime)}`}</div>
 
         </div>
 
@@ -117,7 +152,7 @@ export default function Player(): JSX.Element {
           <button
             type="button"
             className="player__play"
-            onClick={onPlayerClick}
+            onClick={onPlayerToggleModeClick}
           >
             <svg viewBox="0 0 19 19" width="19" height="19">
               {
@@ -145,6 +180,7 @@ export default function Player(): JSX.Element {
         </div>
 
       </div>
+
     </div>
   );
 }

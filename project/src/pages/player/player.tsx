@@ -4,7 +4,7 @@ import NotFound from '../not-found/not-found';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { selectFilms } from '../../store/films-slice/select';
-import { FILM_LOADER_COLOR } from '../../constants';
+import { FILM_LOADER_COLOR, FILM_LOADER_SIZE } from '../../constants';
 import { getFilmTimeLeft } from '../../utils/utils';
 
 const cssOverride: CSSProperties = {
@@ -83,7 +83,7 @@ export default function Player(): JSX.Element {
         cssOverride={cssOverride}
         color={FILM_LOADER_COLOR}
         loading={isLoading}
-        size={100}
+        size={FILM_LOADER_SIZE}
       />
 
       <video
@@ -92,17 +92,11 @@ export default function Player(): JSX.Element {
         className="player__video"
         poster={film.previewImage}
         autoPlay
-        onLoadStart={() => {
-          setIsLoading(true);
-        }}
-        onLoadedData={() => {
-          setIsLoading(false);
-        }}
+        onLoadStart={() => {setIsLoading(true);}}
+        onLoadedData={() => {setIsLoading(false);}}
         onLoadedMetadata={handleLoadedMetadata}
         onTimeUpdate={handleTimeUpdate}
-        onEnded={() => {
-          setIsPlaying(false);
-        }}
+        onEnded={() => {setIsPlaying(false);}}
         onSeeking={() => setIsLoading(true)}
         onSeeked={() => setIsLoading(false)}
       >
@@ -143,7 +137,9 @@ export default function Player(): JSX.Element {
 
           </div>
 
-          <div className="player__time-value">{`-${getFilmTimeLeft(duration - currentTime)}`}</div>
+          <div className="player__time-value">
+            {`-${getFilmTimeLeft(duration - currentTime)}`}
+          </div>
 
         </div>
 

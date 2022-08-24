@@ -19,25 +19,22 @@ function FilmCardButtons({ film }: FilmCardButtonsProps): JSX.Element {
   const dispatch = useAppDispatch();
   const params = useParams();
   const id = params.id;
-  const myListCount = favoriteFilms.length;
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
-  const [isFavoriteStatusChanged, changeFilmFavoriteStatus] = useState(false);
+  const [isFavoriteStatusChanged, setFavoriteStatusChanged] = useState(false);
 
-  const getFilmFavoriteStatus = (): number => {
-    if (favoriteFilm && favoriteFilm.isFavorite) {
-      return 0;
-    }
-    return 1;
-  };
+  const isFavorite = (): boolean => !!favoriteFilm && favoriteFilm.isFavorite;
 
   useEffect(() => {
     if (authorizationStatus === AuthorizationStatus.Auth) {
       dispatch(fetchFavoriteFilmsAction());
     }
+    if (isFavoriteStatusChanged) {
+      dispatch(fetchFavoriteFilmsAction());
+      setFavoriteStatusChanged((prevState) => !prevState);
+    }
 
     // eslint-disable-next-line
   }, [authorizationStatus, isFavoriteStatusChanged]);
-
 
   const handleClick = () => {
     if (authorizationStatus !== AuthorizationStatus.Auth) {
@@ -45,23 +42,14 @@ function FilmCardButtons({ film }: FilmCardButtonsProps): JSX.Element {
     }
     dispatch(sendFavoriteFilmStatusAction({
       id: film.id,
-      status: getFilmFavoriteStatus(),
+      status: isFavorite() ? 0 : 1,
     }));
-    changeFilmFavoriteStatus((prevState) => !prevState);
+    setFavoriteStatusChanged((prevState) => !prevState);
   };
 
   const handleNavigateClick = (): void => {
     navigate(`${AppRoute.Player}/${film?.id}`);
   };
-
-  useEffect(() => {
-    if (isFavoriteStatusChanged) {
-      dispatch(fetchFavoriteFilmsAction());
-      changeFilmFavoriteStatus((prevState) => !prevState);
-    }
-
-    // eslint-disable-next-line
-  }, [isFavoriteStatusChanged]);
 
   return (
     <div className="film-card__buttons">
@@ -80,7 +68,7 @@ function FilmCardButtons({ film }: FilmCardButtonsProps): JSX.Element {
         type="button"
         onClick={handleClick}
       >
-        {(getFilmFavoriteStatus() === 0) ?
+        {(isFavorite()) ?
           (
             <svg viewBox="0 0 18 14" width="18" height="14">
               <use xlinkHref="#in-list"></use>
@@ -92,7 +80,7 @@ function FilmCardButtons({ film }: FilmCardButtonsProps): JSX.Element {
             </svg>
           )}
         <span>My list</span>
-        <span className="film-card__count">{myListCount}</span>
+        <span className="film-card__count">{favoriteFilms.length}</span>
       </button>
       {id && authorizationStatus === AuthorizationStatus.Auth &&
         (

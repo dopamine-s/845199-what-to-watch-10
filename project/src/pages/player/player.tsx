@@ -38,7 +38,7 @@ export default function Player(): JSX.Element {
       videoRef.current.pause();
     }
 
-  }, [isPlaying]);
+  }, [isPlaying, videoRef]);
 
   const onPlayerToggleModeClick = () => {
     setIsPlaying(!isPlaying);
@@ -92,11 +92,11 @@ export default function Player(): JSX.Element {
         className="player__video"
         poster={film.previewImage}
         autoPlay
-        onLoadStart={() => {setIsLoading(true);}}
-        onLoadedData={() => {setIsLoading(false);}}
+        onLoadStart={() => setIsLoading(true)}
+        onLoadedData={() => setIsLoading(false)}
         onLoadedMetadata={handleLoadedMetadata}
         onTimeUpdate={handleTimeUpdate}
-        onEnded={() => {setIsPlaying(false);}}
+        onEnded={() => setIsPlaying(false)}
         onSeeking={() => setIsLoading(true)}
         onSeeked={() => setIsLoading(false)}
       >

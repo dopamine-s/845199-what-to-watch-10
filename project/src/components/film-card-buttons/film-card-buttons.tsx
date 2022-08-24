@@ -25,12 +25,11 @@ function FilmCardButtons({ film }: FilmCardButtonsProps): JSX.Element {
   const isFavorite = (): boolean => !!favoriteFilm && favoriteFilm.isFavorite;
 
   useEffect(() => {
-    if (authorizationStatus === AuthorizationStatus.Auth) {
-      dispatch(fetchFavoriteFilmsAction());
-    }
     if (isFavoriteStatusChanged) {
       dispatch(fetchFavoriteFilmsAction());
       setFavoriteStatusChanged((prevState) => !prevState);
+    } else if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(fetchFavoriteFilmsAction());
     }
 
     // eslint-disable-next-line

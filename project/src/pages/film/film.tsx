@@ -25,11 +25,13 @@ export default function FilmPage(): JSX.Element {
     if (!id) {
       return;
     }
-    dispatch(fetchSimilarFilmsAction(id));
-    dispatch(fetchFilmAction(id));
-    dispatch(fetchFilmReviewsAction(id));
+    if (String(film?.id) !== id ) {
+      dispatch(fetchSimilarFilmsAction(id));
+      dispatch(fetchFilmAction(id));
+      dispatch(fetchFilmReviewsAction(id));
+    }
     // eslint-disable-next-line
-  }, [id]);
+  }, [id, film?.id]);
 
   if (isLoadingFilm) {
     return (

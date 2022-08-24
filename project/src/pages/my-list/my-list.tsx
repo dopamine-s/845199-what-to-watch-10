@@ -5,19 +5,21 @@ import { useAppSelector } from '../../hooks/use-app-selector';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import UserBlock from '../../components/user-block/user-block';
 import Loader from '../../pages/loader/loader';
-import { selectFavoriteFilms, selectIsLoadingFavoriteFilms } from '../../store/favorite-slice/select';
+import { selectFavoriteFilms, selectIsLoadingFavoriteFilms, selectIsLoadedFavoriteFilms } from '../../store/favorite-slice/select';
 import { fetchFavoriteFilmsAction } from '../../store/api-actions';
 
 export default function MyList(): JSX.Element {
   const dispatch = useAppDispatch();
   const favoriteFilms = useAppSelector(selectFavoriteFilms);
   const isLoadingFavoriteFilms = useAppSelector(selectIsLoadingFavoriteFilms);
+  const isLoadedFavoriteFilms = useAppSelector(selectIsLoadedFavoriteFilms);
 
   useEffect(() => {
-    dispatch(fetchFavoriteFilmsAction());
-
+    if (!isLoadedFavoriteFilms && !isLoadingFavoriteFilms) {
+      dispatch(fetchFavoriteFilmsAction());
+    }
     // eslint-disable-next-line
-  }, []);
+  }, [isLoadedFavoriteFilms, isLoadingFavoriteFilms]);
 
   if (isLoadingFavoriteFilms) {
     return (

@@ -7,11 +7,13 @@ import { logoutAction } from '../api-actions';
 type FavoriteSliceTypes = {
   favoriteFilms: Film[];
   isFavoriteFilmsDataLoading: boolean;
+  isFavoriteFilmsDataLoaded: boolean;
 }
 
 const initialState: FavoriteSliceTypes = {
   favoriteFilms: [],
   isFavoriteFilmsDataLoading: false,
+  isFavoriteFilmsDataLoaded: false
 };
 
 export const favoriteSlice = createSlice({
@@ -26,9 +28,11 @@ export const favoriteSlice = createSlice({
       .addCase(fetchFavoriteFilmsAction.fulfilled, (state, action) => {
         state.favoriteFilms = action.payload;
         state.isFavoriteFilmsDataLoading = false;
+        state.isFavoriteFilmsDataLoaded = true;
       })
       .addCase(logoutAction.fulfilled, (state) => {
         state.favoriteFilms = [];
+        state.isFavoriteFilmsDataLoaded = false;
       });
   },
 });

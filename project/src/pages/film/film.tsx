@@ -9,7 +9,8 @@ import FilmsList from '../../components/films-list/films-list';
 import FilmTabs from '../../components/film-tabs.tsx/film-tabs';
 import UserBlock from '../../components/user-block/user-block';
 import FilmCardButtons from '../../components/film-card-buttons/film-card-buttons';
-import { selectFilm, selectSimilarFilms, selectFilmReviews } from '../../store/films-slice/select';
+import Loader from '../../pages/loader/loader';
+import { selectFilm, selectSimilarFilms, selectFilmReviews, selectIsLoadingFilm } from '../../store/films-slice/select';
 
 export default function FilmPage(): JSX.Element {
   const film = useAppSelector(selectFilm);
@@ -18,16 +19,25 @@ export default function FilmPage(): JSX.Element {
   const params = useParams();
   const id = params.id;
   const similarFilms = useAppSelector(selectSimilarFilms);
+  const isLoadingFilm = useAppSelector(selectIsLoadingFilm);
 
   useEffect(() => {
     if (!id) {
       return;
     }
-    dispatch(fetchSimilarFilmsAction(id));
-    dispatch(fetchFilmAction(id));
-    dispatch(fetchFilmReviewsAction(id));
+    if (String(film?.id) !== id ) {
+      dispatch(fetchSimilarFilmsAction(id));
+      dispatch(fetchFilmAction(id));
+      dispatch(fetchFilmReviewsAction(id));
+    }
     // eslint-disable-next-line
-  }, [id]);
+  }, [id, film?.id]);
+
+  if (isLoadingFilm) {
+    return (
+      <Loader />
+    );
+  }
 
   if (!film) {
     return (

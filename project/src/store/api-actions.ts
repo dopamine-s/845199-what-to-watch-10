@@ -2,6 +2,7 @@ import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
 import { Film } from '../types/films';
+import { FilmStatus } from '../types/film-status.js';
 import { FilmReview, NewReview } from '../types/reviews';
 import { AuthorizationData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
@@ -53,6 +54,28 @@ export const fetchSimilarFilmsAction = createAsyncThunk<Film[], string, {
     const { data } = await api.get<Film[]>(`${APIRoute.Films}/${id}/similar`);
     return filterSimilarMovies(data, id);
   },
+);
+
+export const fetchFavoriteFilmsAction = createAsyncThunk<Film[], undefined, {
+  state: State,
+  extra: AxiosInstance
+}>(
+  'favorite/fetchFavoriteFilms',
+  async (_arg, { extra: api }) => {
+    const { data } = await api.get<Film[]>(APIRoute.Favorite);
+    return (data);
+  },
+);
+
+export const sendFavoriteFilmStatusAction = createAsyncThunk<Film, FilmStatus, {
+  state: State,
+  extra: AxiosInstance
+}>(
+  'favorite/sendFavoriteFilmStatus',
+  async ({ id, status }, { extra: api }) => {
+    const { data } = await api.post<Film>(`${APIRoute.Favorite}/${id}/${status}`);
+    return data;
+  }
 );
 
 export const fetchFilmReviewsAction = createAsyncThunk<FilmReview[], string, {

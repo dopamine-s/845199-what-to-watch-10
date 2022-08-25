@@ -24,13 +24,15 @@ export enum APIRoute {
   Promo = '/promo',
   Login = '/login',
   Logout = '/logout',
-  Comments = '/comments'
+  Comments = '/comments',
+  Favorite = '/favorite'
 }
 
 export enum SliceName {
   Auth = 'AUTH',
   Promo = 'PROMO',
   Films = 'FILMS',
+  Favorite = 'FAVORITE'
 }
 
 export const FILMS_SHOWN_COUNT = 8;
@@ -40,5 +42,11 @@ export const BACKEND_URL = 'https://10.react.pages.academy/wtw';
 export const REQUEST_TIMEOUT = 5000;
 
 export const MAX_GENRE_FILTER_COUNT = 4;
+
+export const FILM_LOADER_COLOR = '#eee5b5';
+
+export const FILM_LOADER_SIZE = 100;
+
+export const SECONDS_IN_HOUR = 3600;
 
 export const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;

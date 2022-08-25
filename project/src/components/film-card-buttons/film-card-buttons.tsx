@@ -1,32 +1,48 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, Link, useParams } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/use-app-selector';
-import { selectFilms } from '../../store/films-slice/select';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { selectAuthorizationStatus } from '../../store/auth-slice/select';
 import { AppRoute, AuthorizationStatus } from '../../constants';
 import { Film } from '../../types/films';
+import { selectFavoriteFilms } from '../../store/favorite-slice/select';
+import { fetchFavoriteFilmsAction, sendFavoriteFilmStatusAction } from '../../store/api-actions';
 
 type FilmCardButtonsProps = {
   film: Film;
 }
 
 function FilmCardButtons({ film }: FilmCardButtonsProps): JSX.Element {
-  const allFilms = useAppSelector(selectFilms);
-  const favoriteFilms = allFilms.filter((item) => item.isFavorite);
+  const favoriteFilms = useAppSelector(selectFavoriteFilms);
+  const favoriteFilm = favoriteFilms.find((movie) => movie.id === film.id);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const params = useParams();
   const id = params.id;
-  const [isAddedToMyList, setAddToMyList] = useState(false);
-  const [myListCount, setMyListCount] = useState(favoriteFilms.length);
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+  const [isFavoriteStatusChanged, setFavoriteStatusChanged] = useState(false);
 
-  const handleClick = (): void => {
-    setAddToMyList((prevState) => !prevState);
-    if (isAddedToMyList) {
-      setMyListCount(myListCount - 1);
-    } else {
-      setMyListCount(myListCount + 1);
+  const isFavorite = (): boolean => !!favoriteFilm && favoriteFilm.isFavorite;
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      if (isFavoriteStatusChanged) {
+        setFavoriteStatusChanged((prevState) => !prevState);
+      }
+      dispatch(fetchFavoriteFilmsAction());
     }
+    // eslint-disable-next-line
+  }, [authorizationStatus, isFavoriteStatusChanged]);
+
+  const handleClick = () => {
+    if (authorizationStatus !== AuthorizationStatus.Auth) {
+      navigate(AppRoute.SignIn);
+    }
+    dispatch(sendFavoriteFilmStatusAction({
+      id: film.id,
+      status: isFavorite() ? 0 : 1,
+    }));
+    setFavoriteStatusChanged((prevState) => !prevState);
   };
 
   const handleNavigateClick = (): void => {
@@ -50,7 +66,7 @@ function FilmCardButtons({ film }: FilmCardButtonsProps): JSX.Element {
         type="button"
         onClick={handleClick}
       >
-        {isAddedToMyList ?
+        {(isFavorite()) ?
           (
             <svg viewBox="0 0 18 14" width="18" height="14">
               <use xlinkHref="#in-list"></use>
@@ -62,7 +78,7 @@ function FilmCardButtons({ film }: FilmCardButtonsProps): JSX.Element {
             </svg>
           )}
         <span>My list</span>
-        <span className="film-card__count">{myListCount}</span>
+        <span className="film-card__count">{favoriteFilms.length}</span>
       </button>
       {id && authorizationStatus === AuthorizationStatus.Auth &&
         (

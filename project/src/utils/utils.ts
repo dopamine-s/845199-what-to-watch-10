@@ -1,6 +1,9 @@
 import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
 import { Film } from '../types/films';
-import { AuthorizationStatus, MAX_GENRE_FILTER_COUNT, EMAIL_REGEXP } from '../constants';
+import { AuthorizationStatus, MAX_GENRE_FILTER_COUNT, EMAIL_REGEXP, SECONDS_IN_HOUR } from '../constants';
+
+dayjs.extend(duration);
 
 export const getFilmRateLevel = (filmRate: number): string => {
   if (filmRate >= 0 && filmRate <= 3) {
@@ -21,6 +24,16 @@ export const getTimeFromMins = (mins: number): string => {
   const hours = Math.trunc(mins / 60);
   const minutes = mins % 60;
   return `${hours}h ${minutes}m`;
+};
+
+export const getFilmTimeLeft = (playtime: number) => {
+  const durationTime = dayjs.duration(playtime, 'seconds');
+
+  if ((SECONDS_IN_HOUR / playtime) > 1) {
+    return durationTime.format('mm[:]ss');
+  }
+
+  return durationTime.format('H[:]mm[:]ss');
 };
 
 export const humanizeDayDate = (data: string): string => dayjs(data).format('MMMM D, YYYY');

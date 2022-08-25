@@ -34,7 +34,7 @@ function FilmCardButtons({ film }: FilmCardButtonsProps): JSX.Element {
     // eslint-disable-next-line
   }, [authorizationStatus, isFavoriteStatusChanged]);
 
-  const handleClick = () => {
+  const handleFavoriteButtonClick = () => {
     if (authorizationStatus !== AuthorizationStatus.Auth) {
       navigate(AppRoute.SignIn);
     }
@@ -45,14 +45,14 @@ function FilmCardButtons({ film }: FilmCardButtonsProps): JSX.Element {
     setFavoriteStatusChanged((prevState) => !prevState);
   };
 
-  const handleNavigateClick = (): void => {
+  const handlePlayButtonClick = (): void => {
     navigate(`${AppRoute.Player}/${film?.id}`);
   };
 
   return (
     <div className="film-card__buttons">
       <button
-        onClick={handleNavigateClick}
+        onClick={handlePlayButtonClick}
         className="btn btn--play film-card__button"
         type="button"
       >
@@ -64,7 +64,7 @@ function FilmCardButtons({ film }: FilmCardButtonsProps): JSX.Element {
       <button
         className="btn btn--list film-card__button"
         type="button"
-        onClick={handleClick}
+        onClick={handleFavoriteButtonClick}
       >
         {(isFavorite()) ?
           (

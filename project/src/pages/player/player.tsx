@@ -40,11 +40,11 @@ export default function Player(): JSX.Element {
 
   }, [isPlaying, videoRef]);
 
-  const onPlayerToggleModeClick = () => {
+  const handlePlayerTogglePlayModeClick = () => {
     setIsPlaying(!isPlaying);
   };
 
-  const handleLoadedMetadata = (evt: React.SyntheticEvent<HTMLVideoElement>) => {
+  const handleMetadataLoaded = (evt: React.SyntheticEvent<HTMLVideoElement>) => {
     setDurationTime(evt.currentTarget.duration);
     setIsPlaying(true);
   };
@@ -53,7 +53,7 @@ export default function Player(): JSX.Element {
     setCurrentTime(evt.currentTarget.currentTime);
   };
 
-  const handleSetFilmProgress = (evt: ChangeEvent<HTMLInputElement>) => {
+  const handleFilmProgressSet = (evt: ChangeEvent<HTMLInputElement>) => {
     const setProgressChange = Number(evt.target.value);
     if (videoRef.current) {
       videoRef.current.currentTime = (videoRef.current?.duration / 100) * setProgressChange;
@@ -62,7 +62,7 @@ export default function Player(): JSX.Element {
   };
 
 
-  const onToggleFullScreenModeClick = () => {
+  const handleFullScreenModeToggleClick = () => {
     const elem = document.documentElement;
     if (!document.fullscreenElement) {
       elem.requestFullscreen();
@@ -94,7 +94,7 @@ export default function Player(): JSX.Element {
         autoPlay
         onLoadStart={() => setIsLoading(true)}
         onLoadedData={() => setIsLoading(false)}
-        onLoadedMetadata={handleLoadedMetadata}
+        onLoadedMetadata={handleMetadataLoaded}
         onTimeUpdate={handleTimeUpdate}
         onEnded={() => setIsPlaying(false)}
         onSeeking={() => setIsLoading(true)}
@@ -132,7 +132,7 @@ export default function Player(): JSX.Element {
               min="0"
               max="100"
               value={Math.floor(currentTime * 100 / duration)}
-              onChange={(evt) => handleSetFilmProgress(evt)}
+              onChange={(evt) => handleFilmProgressSet(evt)}
             />
 
           </div>
@@ -148,7 +148,7 @@ export default function Player(): JSX.Element {
           <button
             type="button"
             className="player__play"
-            onClick={onPlayerToggleModeClick}
+            onClick={handlePlayerTogglePlayModeClick}
           >
             <svg viewBox="0 0 19 19" width="19" height="19">
               {
@@ -165,7 +165,7 @@ export default function Player(): JSX.Element {
           <button
             type="button"
             className="player__full-screen"
-            onClick={onToggleFullScreenModeClick}
+            onClick={handleFullScreenModeToggleClick}
           >
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"></use>

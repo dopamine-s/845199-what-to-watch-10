@@ -11,7 +11,7 @@ export default function UserBlock(): JSX.Element{
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const userData = useAppSelector(selectUserData);
 
-  const logoutHandler = () => {
+  const handleLogout = () => {
     dispatch(logoutAction());
     navigate(AppRoute.Main);
   };
@@ -36,7 +36,7 @@ export default function UserBlock(): JSX.Element{
           <li className="user-block__item">
             <div
               className="user-block__link"
-              onClick={logoutHandler}
+              onClick={handleLogout}
             >
             Sign out
             </div>

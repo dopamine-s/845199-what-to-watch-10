@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import { Film } from '../types/films';
-import { AuthorizationStatus, MAX_GENRE_FILTER_COUNT, EMAIL_REGEXP, SECONDS_IN_HOUR } from '../constants';
+import { AuthorizationStatus, MAX_GENRE_FILTER_COUNT, SECONDS_IN_HOUR, SignInRegExps } from '../constants';
 
 dayjs.extend(duration);
 
@@ -49,4 +49,5 @@ export const isAuthorizationStatusDefined = (authorizationStatus: AuthorizationS
 export const filterSimilarMovies = (data: Film[], id: string): Film[] =>
   data.slice(0, MAX_GENRE_FILTER_COUNT).filter((movie) => String(movie.id) !== id);
 
-export const isEmailValid = (value: string): boolean => EMAIL_REGEXP.test(value);
+export const isEmailValid = (value: string): boolean => SignInRegExps.Email.test(value);
+export const isPasswordValid = (value: string): boolean => SignInRegExps.Password.test(value);

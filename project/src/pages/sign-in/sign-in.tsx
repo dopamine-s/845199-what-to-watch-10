@@ -6,13 +6,14 @@ import { useAppSelector } from '../../hooks/use-app-selector';
 import { loginAction } from '../../store/api-actions';
 import { AuthorizationData } from '../../types/auth-data';
 import { AppRoute, AuthorizationStatus } from '../../constants';
-import { isEmailValid } from '../../utils/utils';
+import { isEmailValid, isPasswordValid } from '../../utils/utils';
 import { selectAuthorizationStatus, selectLoginError } from '../../store/auth-slice/select';
 
 export default function SignIn(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const [emailValidationStatus, setEmailStatus] = useState(true);
+  const [passwordValidationStatus, setPasswordStatus] = useState(true);
 
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
@@ -25,19 +26,26 @@ export default function SignIn(): JSX.Element {
       const login = loginRef.current.value;
       const password = passwordRef.current.value;
 
-      if (password !== '' && isEmailValid(loginRef.current.value)) {
-        dispatch(loginAction(({
-          login,
-          password,
-        })as AuthorizationData));
+      if (!isPasswordValid(passwordRef.current.value)) {
+        setPasswordStatus(false);
 
-      } else if (!isEmailValid(loginRef.current.value)) {
+      } else if (isPasswordValid(passwordRef.current.value)) {
+        setPasswordStatus(true);
+      }
+
+      if (!isEmailValid(loginRef.current.value)) {
         setEmailStatus(false);
 
       } else if (isEmailValid(loginRef.current.value)) {
         setEmailStatus(true);
       }
 
+      if (isPasswordValid(passwordRef.current.value) && isEmailValid(loginRef.current.value)) {
+        dispatch(loginAction(({
+          login,
+          password,
+        }) as AuthorizationData));
+      }
     }
   };
 
@@ -59,7 +67,7 @@ export default function SignIn(): JSX.Element {
           onSubmit={submitHandler}
         >
           <div className="sign-in__message">
-            {loginError ?
+            {loginError || !passwordValidationStatus ?
               (
                 <p>We can&apos;t recognize this email<br></br> and password combination. Please try again.</p>
               ) : (
@@ -84,7 +92,7 @@ export default function SignIn(): JSX.Element {
                 Email address
               </label>
             </div>
-            <div className="sign-in__field">
+            <div className={`sign-in__field ${!passwordValidationStatus ? 'sign-in__field--error' : ''}`}>
               <input
                 ref={passwordRef}
                 className="sign-in__input"

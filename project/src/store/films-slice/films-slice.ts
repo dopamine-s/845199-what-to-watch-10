@@ -20,7 +20,9 @@ type FilmsSliceState = {
   filmReviews: FilmReview[];
   filmsShownCount: number;
   isFilmsDataLoading: boolean;
+  isFilmsDataLoadingError: boolean;
   isFilmDataLoading: boolean;
+  isFilmDataLoadingError: boolean;
   isDataUploading: boolean;
   newReview: NewReview | null;
 }
@@ -33,7 +35,9 @@ const initialState: FilmsSliceState = {
   filmReviews: [],
   filmsShownCount: FILMS_SHOWN_COUNT,
   isFilmsDataLoading: false,
+  isFilmsDataLoadingError: false,
   isFilmDataLoading: false,
+  isFilmDataLoadingError: false,
   isDataUploading: false,
   newReview: null,
 };
@@ -59,17 +63,29 @@ export const filmsSlice = createSlice({
     builder
       .addCase(fetchFilmsAction.pending, (state) => {
         state.isFilmsDataLoading = true;
+        state.isFilmsDataLoadingError = false;
       })
       .addCase(fetchFilmsAction.fulfilled, (state, action) => {
         state.films = action.payload;
         state.isFilmsDataLoading = false;
+        state.isFilmsDataLoadingError = false;
+      })
+      .addCase(fetchFilmsAction.rejected, (state) => {
+        state.isFilmsDataLoading = false;
+        state.isFilmsDataLoadingError = true;
       })
       .addCase(fetchFilmAction.pending, (state) => {
         state.isFilmDataLoading = true;
+        state.isFilmDataLoadingError = false;
       })
       .addCase(fetchFilmAction.fulfilled, (state, action) => {
         state.film = action.payload;
         state.isFilmDataLoading = false;
+        state.isFilmDataLoadingError = false;
+      })
+      .addCase(fetchFilmAction.rejected, (state) => {
+        state.isFilmDataLoading = false;
+        state.isFilmDataLoadingError = true;
       })
       .addCase(fetchSimilarFilmsAction.fulfilled, (state, action) => {
         state.similarFilms = action.payload;

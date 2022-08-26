@@ -7,7 +7,11 @@ export const selectFilm = (state: State) => state[SliceName.Films].film;
 
 export const selectIsLoadingFilms = (state: State) => state[SliceName.Films].isFilmsDataLoading;
 
+export const selectIsErrorLoadingFilms = (state: State) => state[SliceName.Films].isFilmsDataLoadingError;
+
 export const selectIsLoadingFilm = (state: State) => state[SliceName.Films].isFilmDataLoading;
+
+export const selectIsErrorLoadingFilm = (state: State) => state[SliceName.Films].isFilmDataLoadingError;
 
 export const selectActiveGenre = (state: State) => state[SliceName.Films].selectedGenre;
 

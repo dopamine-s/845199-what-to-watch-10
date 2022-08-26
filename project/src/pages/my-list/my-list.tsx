@@ -5,21 +5,22 @@ import { useAppSelector } from '../../hooks/use-app-selector';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import UserBlock from '../../components/user-block/user-block';
 import Loader from '../../pages/loader/loader';
-import { selectFavoriteFilms, selectIsLoadingFavoriteFilms, selectIsLoadedFavoriteFilms } from '../../store/favorite-slice/select';
+import NoFavoriteFilms from '../../components/no-favorite-films/no-favorite-films';
+import { selectFavoriteFilms, selectIsLoadingFavoriteFilms, selectIsLoadedFavoriteFilms, selectIsErrorLoadingFavoriteFilms } from '../../store/favorite-slice/select';
 import { fetchFavoriteFilmsAction } from '../../store/api-actions';
 
 export default function MyList(): JSX.Element {
   const dispatch = useAppDispatch();
   const favoriteFilms = useAppSelector(selectFavoriteFilms);
   const isLoadingFavoriteFilms = useAppSelector(selectIsLoadingFavoriteFilms);
+  const isErrorLoadingFavoriteFilms = useAppSelector(selectIsErrorLoadingFavoriteFilms);
   const isLoadedFavoriteFilms = useAppSelector(selectIsLoadedFavoriteFilms);
 
   useEffect(() => {
-    if (!isLoadedFavoriteFilms && !isLoadingFavoriteFilms) {
-      dispatch(fetchFavoriteFilmsAction());
-    }
+    if (!isLoadedFavoriteFilms && !isErrorLoadingFavoriteFilms )
+    {dispatch(fetchFavoriteFilmsAction());}
 
-  }, [dispatch, isLoadedFavoriteFilms, isLoadingFavoriteFilms]);
+  }, [dispatch, isLoadedFavoriteFilms, isErrorLoadingFavoriteFilms]);
 
   if (isLoadingFavoriteFilms) {
     return (
@@ -45,13 +46,18 @@ export default function MyList(): JSX.Element {
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
+        {isErrorLoadingFavoriteFilms ?
+          (
+            <NoFavoriteFilms />
+          ) : (
+            <div className="catalog__films-list">
+              <FilmsList
+                films={favoriteFilms}
+                showButton={false}
+              />
+            </div>
+          )}
 
-        <div className="catalog__films-list">
-          <FilmsList
-            films={favoriteFilms}
-            showButton={false}
-          />
-        </div>
       </section>
 
       <footer className="page-footer">

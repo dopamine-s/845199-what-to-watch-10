@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { AppRoute} from '../../constants';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import Loader from '../../pages/loader/loader';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import Main from '../../pages/main/main';
 import SignIn from '../../pages/sign-in/sign-in';
 import MyList from '../../pages/my-list/my-list';
@@ -14,17 +14,26 @@ import PrivateRoute from '../private-route/private-route';
 import { isAuthorizationStatusDefined } from '../../utils/utils';
 import browserHistory from '../../browser-history';
 import { selectAuthorizationStatus } from '../../store/auth-slice/select';
-import { selectIsLoadingPromo } from '../../store/promo-slice/select';
-import { selectIsLoadingFilms } from '../../store/films-slice/select';
+import { selectIsLoadingPromo, selectIsErrorLoadingPromo } from '../../store/promo-slice/select';
+import { selectIsLoadingFilms, selectIsErrorLoadingFilms } from '../../store/films-slice/select';
+import ServerError from '../server-error/server-error';
 
 function App (): JSX.Element {
   const isLoadingFilms = useAppSelector(selectIsLoadingFilms);
+  const isErrorLoadingFilms = useAppSelector(selectIsErrorLoadingFilms);
   const isLoadingPromo = useAppSelector(selectIsLoadingPromo);
+  const isErrorLoadingPromo = useAppSelector(selectIsErrorLoadingPromo);
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
   if (!isAuthorizationStatusDefined(authorizationStatus) || isLoadingFilms || isLoadingPromo) {
     return (
       <Loader />
+    );
+  }
+
+  if (isErrorLoadingFilms || isErrorLoadingPromo) {
+    return (
+      <ServerError />
     );
   }
 

@@ -10,7 +10,7 @@ import FilmTabs from '../../components/film-tabs.tsx/film-tabs';
 import UserBlock from '../../components/user-block/user-block';
 import FilmCardButtons from '../../components/film-card-buttons/film-card-buttons';
 import Loader from '../../pages/loader/loader';
-import { selectFilm, selectSimilarFilms, selectFilmReviews, selectIsLoadingFilm } from '../../store/films-slice/select';
+import { selectFilm, selectSimilarFilms, selectFilmReviews, selectIsLoadingFilm, selectIsErrorLoadingFilm } from '../../store/films-slice/select';
 
 export default function FilmPage(): JSX.Element {
   const film = useAppSelector(selectFilm);
@@ -20,6 +20,7 @@ export default function FilmPage(): JSX.Element {
   const id = params.id;
   const similarFilms = useAppSelector(selectSimilarFilms);
   const isLoadingFilm = useAppSelector(selectIsLoadingFilm);
+  const isErrorLoadingFilm = useAppSelector(selectIsErrorLoadingFilm);
 
   useEffect(() => {
     if (!id) {
@@ -39,7 +40,7 @@ export default function FilmPage(): JSX.Element {
     );
   }
 
-  if (!film) {
+  if (!film || isErrorLoadingFilm) {
     return (
       <NotFound />
     );

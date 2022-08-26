@@ -30,8 +30,8 @@ export default function FilmPage(): JSX.Element {
       dispatch(fetchFilmAction(id));
       dispatch(fetchFilmReviewsAction(id));
     }
-    // eslint-disable-next-line
-  }, [id, film?.id]);
+
+  }, [dispatch, id, film?.id]);
 
   if (isLoadingFilm) {
     return (

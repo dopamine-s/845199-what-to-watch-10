@@ -31,8 +31,8 @@ function FilmCardButtons({ film }: FilmCardButtonsProps): JSX.Element {
       }
       dispatch(fetchFavoriteFilmsAction());
     }
-    // eslint-disable-next-line
-  }, [authorizationStatus, isFavoriteStatusChanged]);
+
+  }, [dispatch,authorizationStatus, isFavoriteStatusChanged]);
 
   const handleFavoriteButtonClick = () => {
     if (authorizationStatus !== AuthorizationStatus.Auth) {

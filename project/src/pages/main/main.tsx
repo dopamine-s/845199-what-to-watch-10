@@ -19,8 +19,8 @@ export default function Main(): JSX.Element {
   useEffect(() => {
     dispatch(clearSelectedGenre());
     dispatch(resetFilmsShownCount());
-    // eslint-disable-next-line
-  }, []);
+
+  }, [dispatch]);
 
   useEffect(() => {
     if (!selectedGenre) {
@@ -30,8 +30,8 @@ export default function Main(): JSX.Element {
       (film: Film) => film.genre.toLowerCase() === selectedGenre.toLowerCase())
     );
     dispatch(resetFilmsShownCount());
-    // eslint-disable-next-line
-  }, [selectedGenre, allFilms]);
+
+  }, [dispatch, selectedGenre, allFilms]);
 
   return (
     <>

@@ -18,8 +18,8 @@ export default function MyList(): JSX.Element {
     if (!isLoadedFavoriteFilms && !isLoadingFavoriteFilms) {
       dispatch(fetchFavoriteFilmsAction());
     }
-    // eslint-disable-next-line
-  }, [isLoadedFavoriteFilms, isLoadingFavoriteFilms]);
+
+  }, [dispatch, isLoadedFavoriteFilms, isLoadingFavoriteFilms]);
 
   if (isLoadingFavoriteFilms) {
     return (

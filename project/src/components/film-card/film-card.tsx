@@ -6,20 +6,21 @@ import VideoPlayer from '../../components/video-player/video-player';
 type FilmCardProps = {
   film: Film;
   activeFilm: number | null;
-  filmCardMouseOverHandler: (id: number) => void;
-  filmCardMouseOutHandler: () => void;
+  onFilmCardMouseOverHandler: (id: number) => void;
+  onFilmCardMouseOutHandler: () => void;
 }
 
-export default function FilmCard({ film, activeFilm, filmCardMouseOverHandler, filmCardMouseOutHandler }: FilmCardProps): JSX.Element {
+export default function FilmCard({ film, activeFilm, onFilmCardMouseOverHandler, onFilmCardMouseOutHandler }: FilmCardProps): JSX.Element {
   const { id, name, previewImage } = film;
   const navigate = useNavigate();
-  const mouseOverHandler = (): void => filmCardMouseOverHandler(id);
+  const handleMouseOver = (): void => onFilmCardMouseOverHandler(id);
+  const handleMouseOut = onFilmCardMouseOutHandler;
 
   return (
     <article className="small-film-card catalog__films-card"
       onClick={() => navigate(`${AppRoute.Film}/${id}`)}
-      onMouseOver={mouseOverHandler}
-      onMouseOut={filmCardMouseOutHandler}
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
     >
       <div className="small-film-card__image">
         {activeFilm === id ? (

@@ -11,9 +11,9 @@ type FilmsListProps = {
 function FilmsList({ films, showButton }: FilmsListProps): JSX.Element {
   const [activeFilm, setActiveFilm] = useState<number | null>(null);
 
-  const filmCardMouseOverHandler = (filmId: number): void => setActiveFilm(filmId);
+  const onFilmCardMouseOverHandler = (filmId: number): void => setActiveFilm(filmId);
 
-  const filmCardMouseOutHandler = (): void => setActiveFilm(null);
+  const onFilmCardMouseOutHandler = (): void => setActiveFilm(null);
 
   const filmCards = films.map((film) =>
     (
@@ -21,8 +21,8 @@ function FilmsList({ films, showButton }: FilmsListProps): JSX.Element {
         key={film.id}
         film={film}
         activeFilm={activeFilm}
-        filmCardMouseOverHandler={filmCardMouseOverHandler}
-        filmCardMouseOutHandler={filmCardMouseOutHandler}
+        onFilmCardMouseOverHandler={onFilmCardMouseOverHandler}
+        onFilmCardMouseOutHandler={onFilmCardMouseOutHandler}
       />
     ));
 

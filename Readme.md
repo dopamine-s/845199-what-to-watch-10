@@ -8,9 +8,9 @@
 
 ## About
 
-### Online cinema app.
+#### Online cinema app.
 
-### In addition to watching movies it allows to log in, rate movies, add reviews and edit your personal watch list.
+#### In addition to watching movies it allows to log in, rate movies, add reviews and edit your personal watch list.
 
 ---
 
